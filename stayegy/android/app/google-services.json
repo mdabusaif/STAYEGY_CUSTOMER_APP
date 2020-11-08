@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1013556627027",
+    "firebase_url": "https://stayegy-b84c4.firebaseio.com",
+    "project_id": "stayegy-b84c4",
+    "storage_bucket": "stayegy-b84c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013556627027:android:00c7c0d1b3cff089c668a6",
+        "android_client_info": {
+          "package_name": "com.stayegy.stayegy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013556627027-l0vrrr3ta1ds5nt0kj9vn3q2qm412o2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwt1YmeWewofOIntUmXOsKqXnuyKc1czg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013556627027-l0vrrr3ta1ds5nt0kj9vn3q2qm412o2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

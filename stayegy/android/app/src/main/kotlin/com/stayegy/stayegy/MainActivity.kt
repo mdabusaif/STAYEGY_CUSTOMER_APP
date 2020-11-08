@@ -1,0 +1,6 @@
+package com.stayegy.stayegy
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
