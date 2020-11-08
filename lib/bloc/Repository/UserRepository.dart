@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 class UserRepository {
   final auth.FirebaseAuth _firebaseAuth;
@@ -28,12 +27,7 @@ class UserRepository {
         await auth.PhoneAuthProvider.credential(
             verificationId: verificationId, smsCode: smsCode);
 
-    UserDetails _userDetails;
-
-    /// TODO: repair this part or remove then part
-    _firebaseAuth.signInWithCredential(authCredential).then((authResult) {
-      _userDetails = UserDetails(name: authResult.user.displayName);
-    });
+    return _firebaseAuth.signInWithCredential(authCredential);
   }
 
   Future<auth.User> getUser() async {
