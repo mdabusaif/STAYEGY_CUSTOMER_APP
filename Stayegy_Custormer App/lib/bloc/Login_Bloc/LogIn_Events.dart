@@ -15,7 +15,7 @@ class SendOtpEvent extends LogInEvent {
 class AppStartEvent extends LogInEvent {}
 
 class VerifyOtpEvent extends LogInEvent {
-  String otp;
+  final String otp;
 
   VerifyOtpEvent({this.otp});
 }
@@ -28,7 +28,7 @@ class LogInCompleteEvent extends LogInEvent {
 }
 
 class LogInExceptionEvent extends LogInEvent {
-  String message;
+  final String message;
 
   LogInExceptionEvent(this.message);
 }

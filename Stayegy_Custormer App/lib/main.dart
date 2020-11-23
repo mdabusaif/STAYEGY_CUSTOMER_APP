@@ -7,6 +7,7 @@ import 'package:stayegy/UI/login_page.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
+import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
@@ -16,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final UserRepository userRepository = UserRepository();
+  final UserDetails userDetails = UserDetails();
   runApp(
     RepositoryProvider.value(
       value: userRepository,
@@ -27,7 +29,8 @@ void main() async {
                     ..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
           BlocProvider<LogInBloc>(
-              create: (context) => LogInBloc(userRepository: userRepository)),
+              create: (context) => LogInBloc(
+                  userRepository: userRepository, userDetails: userDetails)),
         ],
         child: MyApp(),
       ),

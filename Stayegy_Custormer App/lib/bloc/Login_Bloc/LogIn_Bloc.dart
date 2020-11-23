@@ -5,16 +5,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy/bloc/Repository/UserRepository.dart';
+import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final UserRepository _userRepository;
+  final UserDetails _userDetails;
   StreamSubscription subscription;
 
   String verID = "";
 
-  LogInBloc({UserRepository userRepository})
+  LogInBloc({UserRepository userRepository, UserDetails userDetails})
       : assert(userRepository != null),
         _userRepository = userRepository,
+        _userDetails = userDetails,
         super(InitialLogInState());
 
   @override
@@ -34,10 +37,15 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     } else if (event is VerifyOtpEvent) {
       yield LoadingState();
       try {
-        UserCredential userCredential =
+        UserCredential _userCredential;
+        _userCredential =
             await _userRepository.verifyAndLogin(verID, event.otp);
-        if (userCredential.user != null) {
-          yield LogInCompleteState(userCredential.user);
+        final bool isRegistered = await _userRepository.checkForRegistration(
+            _userDetails, _userCredential.user.uid);
+        if (_userCredential.user != null && !isRegistered) {
+          yield RegistrationNeededState(_userCredential.user);
+        } else if (_userCredential.user != null && isRegistered) {
+          yield LogInCompleteState(_userCredential.user);
         } else {
           yield OtpExceptionState(message: "Invalid otp!");
         }

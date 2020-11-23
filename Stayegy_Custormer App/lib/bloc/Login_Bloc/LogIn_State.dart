@@ -39,6 +39,19 @@ class LogInCompleteState extends LogInState {
   List<Object> get props => [_fireBaseUser];
 }
 
+class RegistrationNeededState extends LogInState {
+  final auth.User _firebaseUser;
+
+  RegistrationNeededState(this._firebaseUser);
+
+  auth.User gerUser() {
+    return _firebaseUser;
+  }
+
+  @override
+  List<Object> get props => [_firebaseUser];
+}
+
 class ExceptionState extends LogInState {
   final String message;
 

@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 class UserRepository {
   final auth.FirebaseAuth _firebaseAuth;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   UserRepository({auth.FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
@@ -34,6 +37,18 @@ class UserRepository {
     auth.User user = await _firebaseAuth.currentUser;
 
     return user;
+  }
+
+  Future<bool> checkForRegistration(UserDetails user, String userId) async {
+    final String uid = userId;
+    final documentReference = await db.collection("users").doc(userId).get();
+
+    if (documentReference.exists) {
+      return true;
+    } else {
+      await documentReference.reference.set(user.toJason());
+      return false;
+    }
   }
 
   Future<void> logOut() async {

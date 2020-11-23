@@ -1,22 +1,22 @@
-import 'dart:html';
-
-import 'package:equatable/equatable.dart';
-
-class UserDetails extends Equatable {
+class UserDetails {
   final String name;
   final String email;
   final String phoneNumber;
   final String gender;
-  final Url avatarPicURL;
+  final String avatarPicURL;
 
   UserDetails(
-      {this.name,
-      this.phoneNumber,
-      this.gender,
-      this.avatarPicURL,
-      this.email});
+      {this.name = "",
+      this.phoneNumber = "",
+      this.gender = "",
+      this.avatarPicURL = "",
+      this.email = ""});
 
-  @override
-  List<Object> get props =>
-      [this.name, this.phoneNumber, this.gender, this.avatarPicURL, this.email];
+  Map<String, dynamic> toJason() => {
+        'name': name,
+        'phoneNumber': phoneNumber,
+        'gender': gender,
+        'avatarPicURL': avatarPicURL,
+        'email': email,
+      };
 }
