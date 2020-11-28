@@ -86,7 +86,7 @@ class _login_pageState extends State<login_page> {
                             ],
                             onChanged: (value) {
                               formBloc.add(
-                                  phoneNumberCheckEvent(phoneNumber: value));
+                                  PhoneNumberCheckEvent(phoneNumber: value));
                               _phoneNumber = value;
                             },
 
@@ -107,16 +107,16 @@ class _login_pageState extends State<login_page> {
                           builder: (context, state) {
                             return Container(
                               //color: Colors.black87,
-                              color: state is phoneNumberNotCheckedState
+                              color: state is PhoneNumberNotCheckedState
                                   ? Colors.black12
-                                  : state is phoneNumberCheckedState
+                                  : state is PhoneNumberCheckedState
                                       ? Colors.black87
                                       : Colors.black12,
                               margin: EdgeInsets.only(left: 25),
                               child: FlatButton(
                                 onPressed: () {
                                   print('Pressed!');
-                                  if (state is phoneNumberCheckedState) {
+                                  if (state is PhoneNumberCheckedState) {
                                     logInBloc.add(
                                       SendOtpEvent(
                                           phoNo: _counntryCode + _phoneNumber),
@@ -129,9 +129,9 @@ class _login_pageState extends State<login_page> {
                                 },
                                 child: Image(
                                   image: AssetImage(state
-                                          is phoneNumberNotCheckedState
+                                          is PhoneNumberNotCheckedState
                                       ? 'images/arrow button default.png'
-                                      : state is phoneNumberCheckedState
+                                      : state is PhoneNumberCheckedState
                                           ? 'images/arrow button submit.png'
                                           : 'images/arrow button default.png'),
                                 ),

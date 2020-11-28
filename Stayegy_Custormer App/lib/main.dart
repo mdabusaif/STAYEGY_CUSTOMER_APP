@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
             return SplashPage();
           } else if (state is Unauthenticated) {
             return login_page();
+            // return login_cprofile();
           } else if (state is Authenticated) {
             return home_page();
           } else {

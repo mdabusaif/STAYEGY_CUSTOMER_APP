@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/UI/login_cprofile.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy/container/bottom_button.dart';
+import 'package:stayegy/container/loading_Overlay.dart';
 
 class login_otp extends StatefulWidget {
   @override
@@ -63,7 +65,12 @@ class _login_otpState extends State<login_otp> {
               );
             } else if (state is LogInCompleteState) {
               _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
+            } else if (state is RegistrationNeededState) {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (_) => login_cprofile()));
+            } else if (state is LoadingState) {
+              LoadingOverlay().build(context);
             }
           },
           child: Container(

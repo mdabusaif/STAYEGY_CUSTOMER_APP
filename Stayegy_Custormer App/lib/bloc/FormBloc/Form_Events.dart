@@ -5,14 +5,17 @@ abstract class FormEvents extends Equatable {
   List<Object> get props => [];
 }
 
-class phoneNumberCheckEvent extends FormEvents {
+class PhoneNumberCheckEvent extends FormEvents {
   final String phoneNumber;
 
-  phoneNumberCheckEvent({this.phoneNumber});
+  PhoneNumberCheckEvent({this.phoneNumber});
 }
 
-class zeroRemovalEvent extends FormEvents {
-  final String phoneNumber;
+class NameAndEmailValidationCheckEvent extends FormEvents {
+  final String email;
+  final String name;
 
-  zeroRemovalEvent({this.phoneNumber});
+  NameAndEmailValidationCheckEvent({this.name, this.email});
 }
+
+class GetImageEvent extends FormEvents {}

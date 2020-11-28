@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class FormStates extends Equatable {
   @override
@@ -7,15 +8,29 @@ abstract class FormStates extends Equatable {
 
 class InitialState extends FormStates {}
 
-class phoneNumberCheckedState extends FormStates {}
+class PhoneNumberCheckedState extends FormStates {}
 
-class phoneNumberNotCheckedState extends FormStates {}
+class PhoneNumberNotCheckedState extends FormStates {}
 
-class zeroCheckedState extends FormStates {
-  String phoneNumber;
+class NameFieldValidState extends FormStates {}
 
-  zeroCheckedState(this.phoneNumber);
+class NameFieldEmptyState extends FormStates {}
+
+class EmailFieldValidState extends FormStates {}
+
+class EmailFieldNotValidState extends FormStates {}
+
+class EmailFieldEmptyState extends FormStates {}
+
+class RegFormCanBeSubmittedState extends FormStates {}
+
+class ImagePickedState extends FormStates {
+  final pickedFile;
+
+  ImagePickedState({@required this.pickedFile});
 
   @override
-  List<Object> get props => [phoneNumber];
+  List<Object> get props => [pickedFile];
 }
+
+class ImagePickedFailedState extends FormStates {}

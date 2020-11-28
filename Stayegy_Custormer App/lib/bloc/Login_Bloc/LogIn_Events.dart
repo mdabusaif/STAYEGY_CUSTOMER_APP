@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -7,7 +9,7 @@ abstract class LogInEvent extends Equatable {
 }
 
 class SendOtpEvent extends LogInEvent {
-  String phoNo;
+  final String phoNo;
 
   SendOtpEvent({this.phoNo});
 }
@@ -31,4 +33,13 @@ class LogInExceptionEvent extends LogInEvent {
   final String message;
 
   LogInExceptionEvent(this.message);
+}
+
+class UploadDetailsEvent extends LogInEvent {
+  final String name;
+  final String email;
+  final String gender;
+  final File image;
+
+  UploadDetailsEvent({this.name, this.email, this.gender, this.image});
 }

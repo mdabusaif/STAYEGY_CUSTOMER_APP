@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 class UserRepository {
   final auth.FirebaseAuth _firebaseAuth;
   FirebaseFirestore db = FirebaseFirestore.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   UserRepository({auth.FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
@@ -46,9 +51,38 @@ class UserRepository {
     if (documentReference.exists) {
       return true;
     } else {
+      user.uid = uid;
       await documentReference.reference.set(user.toJason());
       return false;
     }
+  }
+
+  Future<void> uploadUserDetails(
+      {UserDetails user,
+      String name,
+      String email,
+      String phoneNumber,
+      String gender,
+      File image}) async {
+    //String picUrl = await uploadPictureAndGetUrl(image);
+    String picUrl = "";
+    user.valueSetter(
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        gender: gender,
+        picUrl: picUrl);
+
+    final documentReference = await db.collection("users").doc(user.uid).get();
+    await documentReference.reference.set(user.toJason());
+  }
+
+  Future<String> uploadPictureAndGetUrl(File image) async {
+    var snapshot = await storage
+        .ref()
+        .child('userPhotos/${basename(image.path)}}')
+        .putFile(image);
+    return await snapshot.ref.getDownloadURL();
   }
 
   Future<void> logOut() async {

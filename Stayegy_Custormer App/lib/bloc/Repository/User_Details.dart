@@ -1,22 +1,37 @@
 class UserDetails {
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String gender;
-  final String avatarPicURL;
+  String uid;
+  String name;
+  String email;
+  String phoneNumber;
+  String gender;
+  String picURL;
+
+  void valueSetter(
+      {String name,
+      String email,
+      String phoneNumber,
+      String gender,
+      String picUrl}) {
+    this.name = name;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.gender = gender;
+    this.picURL = picUrl;
+  }
 
   UserDetails(
       {this.name = "",
       this.phoneNumber = "",
       this.gender = "",
-      this.avatarPicURL = "",
+      this.picURL = "",
       this.email = ""});
 
   Map<String, dynamic> toJason() => {
+        'uid': uid,
         'name': name,
         'phoneNumber': phoneNumber,
         'gender': gender,
-        'avatarPicURL': avatarPicURL,
+        'avatarPicURL': picURL,
         'email': email,
       };
 }

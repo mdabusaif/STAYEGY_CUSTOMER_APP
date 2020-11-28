@@ -75,7 +75,7 @@ class _home_pageState extends State<home_page> {
             delegate: SliverChildBuilderDelegate(
               (context, index) => ListTile(
                 selected: true,
-                title: card_model(),
+                title: CardModel(),
               ),
               childCount: 20,
             ),

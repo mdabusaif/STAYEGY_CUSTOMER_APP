@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:stayegy/UI/details_page.dart';
 import 'package:stayegy/container/slider.dart';
 
-class card_model extends StatelessWidget {
-  const card_model({
+class CardModel extends StatelessWidget {
+  const CardModel({
     Key key,
   }) : super(key: key);
 

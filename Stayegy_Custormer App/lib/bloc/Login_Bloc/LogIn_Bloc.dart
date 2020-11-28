@@ -11,6 +11,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final UserRepository _userRepository;
   final UserDetails _userDetails;
   StreamSubscription subscription;
+  UserCredential _userCredential;
 
   String verID = "";
 
@@ -23,7 +24,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   @override
   Stream<LogInState> mapEventToState(LogInEvent event) async* {
     if (event is SendOtpEvent) {
-      yield LoadingState();
+      //yield LoadingState();
 
       subscription = sendOtp(event.phoNo).listen((event) {
         add(event);
@@ -37,13 +38,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     } else if (event is VerifyOtpEvent) {
       yield LoadingState();
       try {
-        UserCredential _userCredential;
         _userCredential =
             await _userRepository.verifyAndLogin(verID, event.otp);
         final bool isRegistered = await _userRepository.checkForRegistration(
             _userDetails, _userCredential.user.uid);
         if (_userCredential.user != null && !isRegistered) {
-          yield RegistrationNeededState(_userCredential.user);
+          yield RegistrationNeededState();
         } else if (_userCredential.user != null && isRegistered) {
           yield LogInCompleteState(_userCredential.user);
         } else {
@@ -53,6 +53,16 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         yield OtpExceptionState(message: 'Invalid otp!');
         print(e);
       }
+    } else if (event is UploadDetailsEvent) {
+      yield LoadingState();
+      await _userRepository.uploadUserDetails(
+          user: _userDetails,
+          name: event.name,
+          email: event.email,
+          phoneNumber: _userCredential.user.phoneNumber,
+          gender: event.gender,
+          image: null);
+      yield LogInCompleteState(_userCredential.user);
     }
   }
 
