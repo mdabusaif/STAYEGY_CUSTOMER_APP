@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +12,7 @@ import 'package:stayegy/bloc/FormBloc/Form_States.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
+import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:stayegy/container/loading_Overlay.dart';
 
@@ -22,6 +25,7 @@ class _login_cprofileState extends State<login_cprofile> {
   String _name = "";
   String _email = "";
   String _gender = "MALE";
+  File _image;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +66,19 @@ class _login_cprofileState extends State<login_cprofile> {
             BlocListener<FormBloc, FormStates>(listener: (context, state) {
               if (state is RegFormCanBeSubmittedState) {
                 logInBloc.add(UploadDetailsEvent(
-                    name: _name, email: _email, gender: _gender, image: null));
+                    name: _name,
+                    email: _email,
+                    gender: _gender,
+                    image: _image));
+              } else if (state is ImagePickedFailedState) {
+                SnackBarBuilder().buildSnackBar(context,
+                    message: 'Failed to load image.', color: Colors.red);
+              } else if (state is ImagePickedState) {
+                _image = File(state.pickedFile.path);
               }
             }),
             BlocListener<LogInBloc, LogInState>(listener: (context, state) {
-              if (state is LogInCompleteState) {
+              if (state is RegistrationCompleteState) {
                 _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
                 Navigator.popUntil(context, (route) => route.isFirst);
               } else if (state is LoadingState) {
@@ -90,29 +102,44 @@ class _login_cprofileState extends State<login_cprofile> {
                           height: 10.0,
                         ),
                         Center(
-                          child: Container(
-                            ///Todo: Take photo from gallery
-                            child: Stack(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  radius: 50.0,
-                                  child: Container(
-                                    height: 150,
-                                    padding: EdgeInsets.only(top: 13),
-                                    child: Image.asset('images/avater.png'),
+                          child: GestureDetector(
+                            onTap: () {
+                              print('Upload Button pressed!');
+                              formBloc.add(GetImageEvent());
+                            },
+                            child: Container(
+                              ///Todo: Take photo from gallery
+                              child: Stack(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    radius: 50.0,
+                                    child: state is ImagePickedState
+                                        ? ClipOval(
+                                            child: Image.file(
+                                              File(state.pickedFile.path),
+                                              fit: BoxFit.cover,
+                                              width: 100,
+                                            ),
+                                          )
+                                        : Container(
+                                            padding: EdgeInsets.only(top: 15),
+                                            child: Image.asset(
+                                              'images/avater.png',
+                                            ),
+                                          ),
                                   ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 3,
-                                  child: Icon(
-                                    Icons.add_a_photo,
-                                    color: Colors.black,
-                                    size: 20,
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 3,
+                                    child: Icon(
+                                      Icons.add_a_photo,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

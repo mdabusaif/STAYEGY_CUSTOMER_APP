@@ -8,6 +8,7 @@ import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
+import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:stayegy/container/loading_Overlay.dart';
 
@@ -54,15 +55,9 @@ class _login_otpState extends State<login_otp> {
               } else if (state is OtpExceptionState) {
                 _message = state.message;
               }
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text(_message), Icon(Icons.error)],
-                  ),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              Navigator.pop(context);
+              SnackBarBuilder()
+                  .buildSnackBar(context, message: _message, color: Colors.red);
             } else if (state is LogInCompleteState) {
               _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
               Navigator.popUntil(context, (route) => route.isFirst);

@@ -64,8 +64,14 @@ class UserRepository {
       String phoneNumber,
       String gender,
       File image}) async {
-    //String picUrl = await uploadPictureAndGetUrl(image);
-    String picUrl = "";
+    String picUrl;
+
+    if (image != null) {
+      picUrl = await uploadPictureAndGetUrl(image);
+    } else {
+      picUrl = "";
+    }
+
     user.valueSetter(
         name: name,
         email: email,

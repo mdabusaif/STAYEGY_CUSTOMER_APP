@@ -24,7 +24,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   @override
   Stream<LogInState> mapEventToState(LogInEvent event) async* {
     if (event is SendOtpEvent) {
-      //yield LoadingState();
+      yield LoadingState();
 
       subscription = sendOtp(event.phoNo).listen((event) {
         add(event);
@@ -61,8 +61,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
           email: event.email,
           phoneNumber: _userCredential.user.phoneNumber,
           gender: event.gender,
-          image: null);
-      yield LogInCompleteState(_userCredential.user);
+          image: event.image);
+      yield RegistrationCompleteState(_userCredential.user);
     }
   }
 
