@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:stayegy_host/bottom_button.dart';
+
+import 'file:///D:/Stayegy/STAYEGY_DEVELOPMENT/stayegy_host/lib/container/bottom_button.dart';
 
 class otp_page extends StatefulWidget {
   @override
@@ -20,11 +21,11 @@ class _otp_pageState extends State<otp_page> {
         children: [
           Container(
             alignment: Alignment.topCenter,
-            padding: const EdgeInsets.fromLTRB(90, 200, 70, 0),
+            padding: const EdgeInsets.fromLTRB(90, 150, 70, 0),
             child: Image.asset('images/stayegy host logo.png'),
           ),
           SizedBox(
-            height: 80,
+            height: 130,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),

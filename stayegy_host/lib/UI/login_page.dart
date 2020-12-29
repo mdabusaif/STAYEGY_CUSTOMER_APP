@@ -34,7 +34,7 @@ class _login_pageState extends State<login_page> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.grey,
+                      color: Color(0xffd7d7d7),
                       width: 1.5,
                     ),
                   ),
@@ -42,23 +42,23 @@ class _login_pageState extends State<login_page> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Container(
                           child: Image.asset(
                             'images/BD Flag.png',
-                            scale: 100,
+                            scale: 140,
                           ),
                         ),
                       ),
                       VerticalDivider(
-                        color: Colors.blueGrey,
-                        thickness: 2,
+                        color: Color(0xffd7d7d7),
+                        thickness: 1,
                         width: 2,
                         indent: 8,
                         endIndent: 8,
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 10,
                         child: Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 10),
@@ -83,9 +83,10 @@ class _login_pageState extends State<login_page> {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
+                        flex: 3,
                         child: Container(
-                          color: Colors.grey,
+                          color: Color(0xffd7d7d7),
+                          //color: Colors.black,
                           margin: EdgeInsets.only(left: 15),
                           child: GestureDetector(
                             child: Image.asset(
