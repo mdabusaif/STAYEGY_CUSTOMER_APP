@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stayegy/Models/card_model.dart';
 import 'package:stayegy/UI/appdrawer.dart';
 import 'package:stayegy/UI/notification_page.dart';
 
@@ -71,15 +70,75 @@ class _home_pageState extends State<home_page> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                selected: true,
-                title: CardModel(),
-              ),
-              childCount: 20,
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Container(
+                  // height: MediaQuery.of(context).size.height,
+                  height: 90,
+                  width: MediaQuery.of(context).size.width,
+                  //color: Colors.red,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: 10,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 15, top: 10),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: CircleAvatar(
+                                      radius: 25,
+                                      backgroundImage: AssetImage(
+                                          'images/Notification bell.png'),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(top: 5),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Dhaka',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  //color: Colors.green,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Welcome To Stayegy!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 50,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
+
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) => ListTile(
+          //       selected: true,
+          //       title: CardModel(),
+          //     ),
+          //     childCount: 20,
+          //   ),
+          // ),
         ],
       ),
     );

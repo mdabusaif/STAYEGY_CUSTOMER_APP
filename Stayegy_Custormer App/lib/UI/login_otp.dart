@@ -99,9 +99,9 @@ class _login_otpState extends State<login_otp> {
                         text: 'SUBMIT',
                         disabled: false,
                         onTap: () {
+                          print(_otpCode);
                           _loginBloc.add(VerifyOtpEvent(otp: _otpCode));
                           FocusScope.of(context).unfocus();
-                          print("hi");
                         },
                       ),
                       Text(
