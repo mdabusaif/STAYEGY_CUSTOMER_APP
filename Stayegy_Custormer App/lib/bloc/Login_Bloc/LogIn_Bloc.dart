@@ -4,8 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
-import 'package:stayegy/bloc/Repository/UserRepository.dart';
-import 'package:stayegy/bloc/Repository/User_Details.dart';
+
+import '../Repository/User/UserRepository.dart';
+import '../Repository/User/User_Details.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final UserRepository _userRepository;

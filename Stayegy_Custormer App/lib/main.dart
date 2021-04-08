@@ -7,11 +7,11 @@ import 'package:stayegy/UI/login_page.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
-import 'package:stayegy/bloc/Repository/User_Details.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
-import 'bloc/Repository/UserRepository.dart';
+import 'bloc/Repository/User/UserRepository.dart';
+import 'bloc/Repository/User/User_Details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

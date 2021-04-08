@@ -4,9 +4,18 @@ import 'package:stayegy/UI/details_page.dart';
 import 'package:stayegy/container/slider.dart';
 
 class CardModel extends StatelessWidget {
-  const CardModel({
-    Key key,
-  }) : super(key: key);
+  final String hid;
+  final String name;
+  final String address;
+  final String price;
+  final Map images;
+
+  CardModel(
+      {@required this.hid,
+      @required this.name,
+      @required this.address,
+      @required this.price,
+      @required this.images});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +44,7 @@ class CardModel extends StatelessWidget {
                   child: ImageSliderDemo(
                     fit: BoxFit.cover,
                     aspectRatio: 16 / 9,
+                    images: images.values.toList(),
                   ),
                   // child: Container(
                   //   color: Colors.grey,
@@ -51,7 +61,8 @@ class CardModel extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Text(
-                        'STAYEGY 7350 Hotel Rajsthan',
+                        // 'STAYEGY 7350 Hotel Rajsthan',
+                        '$hid $name',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -60,7 +71,8 @@ class CardModel extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        'Puraton Bus Stand, Faridpur',
+                        // 'Puraton Bus Stand, Faridpur',
+                        '$address',
                         style: TextStyle(
                           color: Colors.black54,
                         ),
@@ -73,7 +85,8 @@ class CardModel extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: <Widget>[
                           Text(
-                            '৳ 400',
+                            // '৳ 400',
+                            '৳ $price',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

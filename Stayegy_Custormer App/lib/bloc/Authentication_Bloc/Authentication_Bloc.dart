@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
-import 'package:stayegy/bloc/Repository/UserRepository.dart';
-import 'package:stayegy/bloc/Repository/User_Details.dart';
+
+import '../Repository/User/UserRepository.dart';
+import '../Repository/User/User_Details.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {

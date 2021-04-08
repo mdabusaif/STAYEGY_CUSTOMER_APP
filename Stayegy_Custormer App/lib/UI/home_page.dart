@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stayegy/UI/SearchCity.dart';
+import 'package:stayegy/UI/SearchResult.dart';
 import 'package:stayegy/UI/appdrawer.dart';
 import 'package:stayegy/UI/notification_page.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 
 class home_page extends StatefulWidget {
   @override
@@ -48,23 +51,27 @@ class _home_pageState extends State<home_page> {
             floating: true,
             pinned: false,
             automaticallyImplyLeading: false,
-            title: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: Colors.white,
-                ),
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(left: 15),
-                alignment: Alignment.centerLeft,
-                //color: Colors.white,
-                child: Text(
-                  'Search for Hotel, City or Location',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+            title: GestureDetector(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => ShowSearchResult())),
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    color: Colors.white,
+                  ),
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(left: 15),
+                  alignment: Alignment.centerLeft,
+                  //color: Colors.white,
+                  child: Text(
+                    'Search for Hotel, City or Location',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
@@ -100,7 +107,7 @@ class _home_pageState extends State<home_page> {
                                     padding: EdgeInsets.only(top: 5),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Dhaka',
+                                      '${cityList[index]}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(),
                                     ),
