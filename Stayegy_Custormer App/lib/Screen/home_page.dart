@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stayegy/UI/SearchCity.dart';
-import 'package:stayegy/UI/SearchResult.dart';
-import 'package:stayegy/UI/appdrawer.dart';
-import 'package:stayegy/UI/notification_page.dart';
+import 'package:stayegy/Screen/SearchCity.dart';
+import 'package:stayegy/Screen/SearchResult.dart';
+import 'package:stayegy/Screen/appdrawer.dart';
+import 'package:stayegy/Screen/notification_page.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 
 class home_page extends StatefulWidget {
@@ -53,7 +53,7 @@ class _home_pageState extends State<home_page> {
             automaticallyImplyLeading: false,
             title: GestureDetector(
               onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ShowSearchResult())),
+                  context, MaterialPageRoute(builder: (_) => SearchCity())),
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(

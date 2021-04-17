@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stayegy/UI/Splash_Page.dart';
-import 'package:stayegy/UI/home_page.dart';
-import 'package:stayegy/UI/login_page.dart';
+import 'package:stayegy/Screen/Splash_Page.dart';
+import 'package:stayegy/Screen/home_page.dart';
+import 'package:stayegy/Screen/login_page.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
@@ -18,6 +20,7 @@ void main() async {
   await Firebase.initializeApp();
   final UserRepository userRepository = UserRepository();
   final UserDetails userDetails = UserDetails();
+  final HotelRepository hotelRepository = HotelRepository();
   runApp(
     RepositoryProvider.value(
       value: userRepository,
@@ -31,6 +34,9 @@ void main() async {
           BlocProvider<LogInBloc>(
               create: (context) => LogInBloc(
                   userRepository: userRepository, userDetails: userDetails)),
+          BlocProvider<LoadingblocBloc>(
+              create: (context) =>
+                  LoadingblocBloc(hotelRepository: hotelRepository)),
         ],
         child: MyApp(),
       ),

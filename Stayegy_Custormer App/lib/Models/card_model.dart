@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stayegy/UI/details_page.dart';
+import 'package:stayegy/Screen/details_page.dart';
 import 'package:stayegy/container/slider.dart';
 
 class CardModel extends StatelessWidget {
@@ -82,7 +82,7 @@ class CardModel extends StatelessWidget {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        //crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: <Widget>[
                           Text(
                             // '৳ 400',

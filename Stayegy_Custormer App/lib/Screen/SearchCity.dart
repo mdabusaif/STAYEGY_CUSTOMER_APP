@@ -1,5 +1,8 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/Screen/SearchResult.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 
@@ -29,12 +32,22 @@ class _SearchCityState extends State<SearchCity> {
                   crossAxisSpacing: 5,
                   crossAxisCount: 1,
                   onItemFound: (String text, int index) {
-                    return Container(
-                      //height: 50,
-                      color: Colors.white70,
-                      child: ListTile(
-                        title: Text(text),
-                        //isThreeLine: true,
+                    return GestureDetector(
+                      onTap: () async {
+                        BlocProvider.of<LoadingblocBloc>(context)
+                            .add(SearchStartEvent());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => ShowSearchResult()));
+                      },
+                      child: Container(
+                        //height: 50,
+                        color: Colors.white70,
+                        child: ListTile(
+                          title: Text(text),
+                          //isThreeLine: true,
+                        ),
                       ),
                     );
                   },

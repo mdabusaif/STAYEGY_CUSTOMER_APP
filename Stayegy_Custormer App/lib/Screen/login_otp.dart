@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stayegy/UI/login_cprofile.dart';
+import 'package:stayegy/Screen/login_cprofile.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
@@ -65,7 +65,7 @@ class _login_otpState extends State<login_otp> {
               Navigator.push(context,
                   CupertinoPageRoute(builder: (_) => login_cprofile()));
             } else if (state is LoadingState) {
-              LoadingOverlay().build(context);
+              LoadingOverlay().buildOverlay(context);
             }
           },
           child: Container(
