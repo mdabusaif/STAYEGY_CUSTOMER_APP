@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import 'file:///D:/Stayegy/STAYEGY_DEVELOPMENT/stayegy_host/lib/container/bottom_button.dart';
+import 'package:stayegy_host/container/bottom_button.dart';
 
 class otp_page extends StatefulWidget {
   @override
@@ -15,7 +15,6 @@ class _otp_pageState extends State<otp_page> {
   String otp;
   @override
   Widget build(BuildContext context) {
-    TextEditingController otp_getter = new TextEditingController();
     return Scaffold(
       body: Column(
         children: [

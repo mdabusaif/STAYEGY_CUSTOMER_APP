@@ -32,15 +32,14 @@ class UserRepository {
 
   Future<auth.UserCredential> verifyAndLogin(
       String verificationId, String smsCode) async {
-    auth.AuthCredential authCredential =
-        await auth.PhoneAuthProvider.credential(
-            verificationId: verificationId, smsCode: smsCode);
+    auth.AuthCredential authCredential = auth.PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: smsCode);
 
     return _firebaseAuth.signInWithCredential(authCredential);
   }
 
   Future<auth.User> getUser() async {
-    auth.User user = await _firebaseAuth.currentUser;
+    auth.User user = _firebaseAuth.currentUser;
 
     return user;
   }
