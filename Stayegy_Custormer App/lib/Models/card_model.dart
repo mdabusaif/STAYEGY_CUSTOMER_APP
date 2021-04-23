@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/Screen/details_page.dart';
+
 import 'package:stayegy/container/slider.dart';
 
 class CardModel extends StatelessWidget {
@@ -30,7 +31,7 @@ class CardModel extends StatelessWidget {
           print('Card Pressed!');
           Navigator.push(
             context,
-            CupertinoPageRoute(builder: (context) => details_page()),
+            CupertinoPageRoute(builder: (context) => DetailsPage()),
           );
         },
         child: Container(
