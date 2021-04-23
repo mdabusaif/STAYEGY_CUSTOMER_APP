@@ -5,4 +5,11 @@ abstract class LoadingblocEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SearchStartEvent extends LoadingblocEvent {}
+class SearchStartEvent extends LoadingblocEvent {
+  final String cityName;
+
+  SearchStartEvent({@required this.cityName});
+
+  @override
+  List<Object> get props => [cityName];
+}

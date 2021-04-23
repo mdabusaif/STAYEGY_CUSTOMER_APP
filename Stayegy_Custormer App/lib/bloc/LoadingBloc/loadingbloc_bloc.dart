@@ -22,7 +22,7 @@ class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
   @override
   Stream<LoadingblocState> mapEventToState(LoadingblocEvent event) async* {
     if (event is SearchStartEvent) {
-      yield* _mapSearchStartEventToState(event);
+      yield* _mapSearchStartEventToState(event, event.cityName);
     }
   }
 
@@ -45,10 +45,10 @@ class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
   }
 
   Stream<LoadingblocState> _mapSearchStartEventToState(
-      LoadingblocEvent event) async* {
+      LoadingblocEvent event, String cityName) async* {
     List<Hotel> _loadedHotels;
     _loadedHotels = null;
-    _loadedHotels = await _hotelRepository.getSearchedList();
+    _loadedHotels = await _hotelRepository.getSearchedList(cityName: cityName);
     yield SearchCompleteState(_loadedHotels);
   }
 }

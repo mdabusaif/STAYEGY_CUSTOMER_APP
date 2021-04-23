@@ -1,4 +1,5 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
@@ -31,11 +32,22 @@ class _SearchCityState extends State<SearchCity> {
                   mainAxisSpacing: 5,
                   crossAxisSpacing: 5,
                   crossAxisCount: 1,
+                  icon: IconButton(
+                    iconSize: 5,
+                    onPressed: () {
+                      Navigator.popUntil(context, (route) => route.isFirst);
+                    },
+                    icon: Icon(
+                      CupertinoIcons.back,
+                      color: Color(0xff191919),
+                      size: 30,
+                    ),
+                  ),
                   onItemFound: (String text, int index) {
                     return GestureDetector(
                       onTap: () async {
-                        BlocProvider.of<LoadingblocBloc>(context)
-                            .add(SearchStartEvent());
+                        BlocProvider.of<LoadingblocBloc>(context).add(
+                            SearchStartEvent(cityName: text.toLowerCase()));
                         Navigator.push(
                             context,
                             MaterialPageRoute(

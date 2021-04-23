@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
@@ -43,7 +44,7 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                       padding: EdgeInsets.only(right: 15),
                       iconSize: 10,
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.popUntil(context, (route) => route.isFirst);
                       },
                       icon: Icon(
                         CupertinoIcons.back,
@@ -53,10 +54,12 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                       ),
                     ),
                     title: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => ShowSearchResult())),
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => SearchCity()),
+                            (route) => route.isFirst);
+                      },
                       child: Center(
                         child: Container(
                           decoration: BoxDecoration(

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
 import 'package:stayegy/Screen/appdrawer.dart';
 import 'package:stayegy/Screen/notification_page.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 
 class home_page extends StatefulWidget {
@@ -92,27 +94,41 @@ class _home_pageState extends State<home_page> {
                           itemCount: 10,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 10),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: CircleAvatar(
-                                      radius: 25,
-                                      backgroundImage: AssetImage(
-                                          'images/Notification bell.png'),
+                            return GestureDetector(
+                              onTap: () {
+                                BlocProvider.of<LoadingblocBloc>(context).add(
+                                    SearchStartEvent(
+                                        cityName: cityList[index]
+                                            .toString()
+                                            .toLowerCase()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ShowSearchResult()));
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 10),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      child: CircleAvatar(
+                                        radius: 25,
+                                        backgroundImage: AssetImage(
+                                            'images/Notification bell.png'),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(top: 5),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '${cityList[index]}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        '${cityList[index]}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },
