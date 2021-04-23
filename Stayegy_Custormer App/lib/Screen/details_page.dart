@@ -282,7 +282,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                               .all(
                                                                           8.0),
                                                                   child: Text(
-                                                                      
                                                                       'Rooms',
                                                                       style: GoogleFonts.roboto(
                                                                           fontSize:
