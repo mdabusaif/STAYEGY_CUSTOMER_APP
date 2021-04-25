@@ -2,7 +2,9 @@ class Hotel {
   String hid;
   String name;
   String address;
-  String price;
+  int price;
+  int discountedPrice;
+  List facilities;
   Map images;
 
   Hotel({
@@ -10,6 +12,8 @@ class Hotel {
     this.name,
     this.address,
     this.price,
+    this.discountedPrice,
+    this.facilities,
     this.images,
   });
 
@@ -18,6 +22,8 @@ class Hotel {
         'name': name,
         'address': address,
         'price': price,
+        'discountedPrice': discountedPrice,
+        'facilities': facilities,
         'images': images,
       };
 
@@ -26,6 +32,8 @@ class Hotel {
     name = hotelMap["name"];
     address = hotelMap["address"];
     price = hotelMap["price"];
+    discountedPrice = hotelMap["discountedPrice"];
+    facilities = hotelMap["facilities"];
     images = hotelMap["images"];
   }
 }

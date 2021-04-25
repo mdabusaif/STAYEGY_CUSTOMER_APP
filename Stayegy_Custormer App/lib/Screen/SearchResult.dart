@@ -88,11 +88,7 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                       (context, index) => ListTile(
                         selected: true,
                         title: CardModel(
-                          hid: _hotelList[index].hid,
-                          name: _hotelList[index].name,
-                          address: _hotelList[index].address,
-                          price: _hotelList[index].price,
-                          images: _hotelList[index].images,
+                          hotel: _hotelList[index],
                         ),
                       ),
                       childCount: _hotelList.length,

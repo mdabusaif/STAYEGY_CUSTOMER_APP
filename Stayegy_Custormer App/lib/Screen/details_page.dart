@@ -1,14 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
+import 'package:intl/intl.dart';
+import 'package:stayegy/container/slider.dart';
 
 class DetailsPage extends StatefulWidget {
+  final Hotel hotelInt;
+
+  DetailsPage({@required this.hotelInt});
+
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  _DetailsPageState createState() => _DetailsPageState(hotel: hotelInt);
 }
 
 class _DetailsPageState extends State<DetailsPage> {
   String valueChoose;
+
+  final Hotel hotel;
+
+  _DetailsPageState({@required this.hotel});
 
   DateTimeRange timeRange = DateTimeRange(
       start: DateTime.now(), end: DateTime.now().add(Duration(days: 1)));
@@ -31,28 +43,6 @@ class _DetailsPageState extends State<DetailsPage> {
     print(picked);
   }
 
-  List listItem0 = [
-    "1",
-    "2",
-    "3",
-  ];
-  List listItem = [
-    "Single ",
-    "Double",
-    "Semi Double",
-  ];
-  List listItem1 = [
-    "Free wifi",
-    "Power backup",
-    "Refrigerator",
-    "TV",
-    "CCTV camera",
-    "In-house Restaurant",
-    "Ac",
-    "Parking facility",
-    "Geyser",
-    "Parking facility",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +58,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   color: Colors.grey,
                   height: 500,
                   width: double.infinity,
+                  //todo: Imageslider for showing images
+                  // child: ImageSliderDemo(
+                  //     fit: BoxFit.cover,
+                  //     aspectRatio: 1,
+                  //     images: hotel.images.values.toList()),
                 ),
                 leading: IconButton(
                   padding: EdgeInsets.only(right: 10),
@@ -98,7 +93,8 @@ class _DetailsPageState extends State<DetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Text(
-                                'STAYEGY 2483 HOTEL RADISSON',
+                                // 'STAYEGY 2483 HOTEL RADISSON',
+                                '${hotel.hid} ${hotel.name}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -108,7 +104,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 height: 5,
                               ),
                               Text(
-                                'New Bus stand, Goalchamot, Faridpur',
+                                '${hotel.address}',
                                 style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 13,
@@ -152,10 +148,11 @@ class _DetailsPageState extends State<DetailsPage> {
                                         dateTimeRangePicker();
                                       },
                                       child: Text(
-                                        '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
+                                        // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
+                                        '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          fontSize: 13,
                                         ),
                                       ),
                                     ),
@@ -170,7 +167,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                         "Room",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          fontSize: 13,
                                         ),
                                       ),
                                       onTap: () {
@@ -237,7 +234,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                         newValue;
                                                                   });
                                                                 },
-                                                                items: listItem0
+                                                                items: noOfRoomList
                                                                     .map(
                                                                         (valueItem) {
                                                                   return DropdownMenuItem(
@@ -307,7 +304,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                         newValue;
                                                                   });
                                                                 },
-                                                                items: listItem0
+                                                                items: noOfRoomList
                                                                     .map(
                                                                         (valueItem) {
                                                                   return DropdownMenuItem(
@@ -379,8 +376,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                     newValue;
                                                               });
                                                             },
-                                                            items: listItem.map(
-                                                                (valueItem) {
+                                                            items: roomTypeList
+                                                                .map(
+                                                                    (valueItem) {
                                                               return DropdownMenuItem(
                                                                 value:
                                                                     valueItem,
@@ -474,10 +472,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                   childAspectRatio: 4,
                                   crossAxisCount: 3,
                                   shrinkWrap: true,
-                                  children:
-                                      List.generate(listItem1.length, (index) {
+                                  children: List.generate(
+                                      hotel.facilities.length, (index) {
                                     return Text(
-                                      '${listItem1[index]}',
+                                      '${hotel.facilities[index]}',
                                       style: TextStyle(
                                         fontSize: 12,
                                       ),
@@ -524,14 +522,14 @@ class _DetailsPageState extends State<DetailsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    '৳800',
+                                    '৳${hotel.discountedPrice} ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    '100৳',
+                                    '৳${hotel.price}',
                                     style: TextStyle(
                                       fontSize: 20,
                                       decoration: TextDecoration.lineThrough,

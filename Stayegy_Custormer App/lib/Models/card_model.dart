@@ -1,22 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/Screen/details_page.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 
 import 'package:stayegy/container/slider.dart';
 
 class CardModel extends StatelessWidget {
-  final String hid;
-  final String name;
-  final String address;
-  final String price;
-  final Map images;
+  final Hotel hotel;
 
-  CardModel(
-      {@required this.hid,
-      @required this.name,
-      @required this.address,
-      @required this.price,
-      @required this.images});
+  CardModel({@required this.hotel});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +23,10 @@ class CardModel extends StatelessWidget {
           print('Card Pressed!');
           Navigator.push(
             context,
-            CupertinoPageRoute(builder: (context) => DetailsPage()),
+            CupertinoPageRoute(
+                builder: (context) => DetailsPage(
+                      hotelInt: hotel,
+                    )),
           );
         },
         child: Container(
@@ -42,14 +37,15 @@ class CardModel extends StatelessWidget {
                 flex: 4,
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-                  child: ImageSliderDemo(
-                    fit: BoxFit.cover,
-                    aspectRatio: 16 / 9,
-                    images: images.values.toList(),
-                  ),
-                  // child: Container(
-                  //   color: Colors.grey,
+                  //todo: imageslider to show images
+                  // child: ImageSliderDemo(
+                  //   fit: BoxFit.cover,
+                  //   aspectRatio: 16 / 9,
+                  //   images: hotel.images.values.toList(),
                   // ),
+                  child: Container(
+                    color: Colors.grey,
+                  ),
                 ),
               ),
               Expanded(
@@ -63,7 +59,7 @@ class CardModel extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         // 'STAYEGY 7350 Hotel Rajsthan',
-                        '$hid $name',
+                        '${hotel.hid} ${hotel.name}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -73,7 +69,7 @@ class CardModel extends StatelessWidget {
                       ),
                       Text(
                         // 'Puraton Bus Stand, Faridpur',
-                        '$address',
+                        '${hotel.address}',
                         style: TextStyle(
                           color: Colors.black54,
                         ),
@@ -87,7 +83,7 @@ class CardModel extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             // '৳ 400',
-                            '৳ $price',
+                            '৳ ${hotel.discountedPrice}',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -97,7 +93,7 @@ class CardModel extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            '500',
+                            '৳ ${hotel.price}',
                             style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: Colors.grey,
@@ -107,7 +103,7 @@ class CardModel extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            '20% OFF',
+                            '${(((hotel.price - hotel.discountedPrice) / hotel.price) * 100).toInt()}% OFF',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.red,
