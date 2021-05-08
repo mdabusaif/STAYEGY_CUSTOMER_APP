@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:intl/intl.dart';
+import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/slider.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -564,18 +565,66 @@ class _DetailsPageState extends State<DetailsPage> {
                         width: 120,
                       ),
                       GestureDetector(
-                        onTap: null,
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                insetPadding:
+                                    EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                title: Center(
+                                  child: Text(
+                                    'Rules To Maintain',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                content: Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                actions: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 0, right: 0),
+                                    child: GestureDetector(
+                                        child: Container(
+                                          height: 50,
+                                          width: double.infinity,
+                                          color: Colors.black,
+                                          alignment: Alignment.center,
+                                          child: GradientCreate(
+                                            child: Text(
+                                              "CONFIRM",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          // your code
+                                        }),
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        },
                         child: Container(
                           height: 40,
                           width: MediaQuery.of(context).size.width / 3,
                           alignment: Alignment.center,
                           color: Colors.black,
-                          child: Text(
-                            'Book Now',
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          child: GradientCreate(
+                            child: Text(
+                              'Book Now',
+                              style: GoogleFonts.roboto(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
