@@ -402,6 +402,18 @@ class _DetailsPageState extends State<DetailsPage> {
                                                           ),
                                                         ),
                                                       ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Center(
+                                                        child: Text(
+                                                          'Age less than 5 will not considered as a person',
+                                                          style: TextStyle(
+                                                              fontSize: 8,
+                                                              color:
+                                                                  Colors.grey),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -412,22 +424,21 @@ class _DetailsPageState extends State<DetailsPage> {
                                                             left: 0, right: 0),
                                                     child: GestureDetector(
                                                         child: Container(
-                                                          height: 50,
-                                                          width: 300,
-                                                          color: Colors.black,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Text(
-                                                            "CONFIRM",
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                            height: 50,
+                                                            width: 300,
+                                                            color: Colors.black,
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              "CONFIRM",
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            )),
                                                         onTap: () {
                                                           // your code
                                                         }),
