@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/Screen/bookingConfirm_page.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:intl/intl.dart';
@@ -604,6 +605,11 @@ class _DetailsPageState extends State<DetailsPage> {
                                           ),
                                         ),
                                         onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (_) =>
+                                                      BookingConfirmPage()));
                                           // your code
                                         }),
                                   )
