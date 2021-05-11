@@ -9,6 +9,7 @@ class BookingConfirmPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: InkWell(
           onTap: () => Navigator.pop(context),
@@ -29,7 +30,7 @@ class BookingConfirmPage extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 //Information part start
@@ -137,27 +138,27 @@ class BookingConfirmPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Single | Non Ac',
-                                  style: TextStyle(fontSize: 12, height: 2)),
+                                  style: TextStyle(fontSize: 14, height: 2)),
                               Text('500',
-                                  style: TextStyle(fontSize: 12, height: 2)),
+                                  style: TextStyle(fontSize: 14, height: 2)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Semi-Double | Ac',
-                                  style: TextStyle(fontSize: 12, height: 3)),
+                                  style: TextStyle(fontSize: 14, height: 3)),
                               Text('800',
-                                  style: TextStyle(fontSize: 12, height: 3)),
+                                  style: TextStyle(fontSize: 14, height: 3)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Double | Ac',
-                                  style: TextStyle(fontSize: 12, height: 3)),
+                                  style: TextStyle(fontSize: 14, height: 3)),
                               Text('1000',
-                                  style: TextStyle(fontSize: 12, height: 3)),
+                                  style: TextStyle(fontSize: 14, height: 3)),
                             ],
                           ),
                         ],
@@ -167,7 +168,7 @@ class BookingConfirmPage extends StatelessWidget {
                       height: 20,
                     ),
                     Container(
-                      color: Colors.white,
+                      color: Color(0xffefefef),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -272,26 +273,33 @@ class BookingConfirmPage extends StatelessWidget {
                                     Text('Total',
                                         style: TextStyle(
                                             fontSize: 10,
-                                            height: 0.5,
+                                            //height: 0.5,
                                             color: Color(0xff6b6b6b))),
                                     Text('৳2000',
                                         style: TextStyle(
                                             fontSize: 10,
-                                            height: 0.5,
+                                            //height: 0.5,
                                             color: Color(0xff6b6b6b))),
                                   ],
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.local_offer_rounded,
-                                      size: 14,
-                                      color: Colors.red,
+                                    Container(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Icon(
+                                        Icons.local_offer_rounded,
+                                        size: 14,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
                                     ),
                                     Text(
                                       'ADD PROMO',
                                       style: TextStyle(
-                                          fontSize: 8,
+                                          fontSize: 10,
                                           height: 3,
                                           color: Colors.red),
                                     )
@@ -312,16 +320,12 @@ class BookingConfirmPage extends StatelessWidget {
             bottom: 0,
             right: 1,
             left: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(
-                  children: <Widget>[
-                    BottomButton(text: 'CONFIRM', disabled: false, onTap: () {})
-                  ],
-                ),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
               ),
+              child:
+                  BottomButton(text: 'CONFIRM', disabled: false, onTap: () {}),
             ),
           ),
         ],
