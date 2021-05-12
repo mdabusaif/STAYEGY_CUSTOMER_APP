@@ -91,45 +91,42 @@ class BookingConfirmPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          color: Colors.black,
-                          size: 7,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Check In Date 14th Feb 2021',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          color: Colors.red,
-                          size: 7,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Check Out Date 16th Feb 2021',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
                       height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'images/dot.png',
+                          scale: 11,
+                          fit: BoxFit.fill,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Check In Date 14th Feb 2021',
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Check Out Date 16th Feb 2021',
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
                       child: Column(
