@@ -105,7 +105,7 @@ class BookingConfirmPage extends StatelessWidget {
                         ),
                         Text(
                           'Check In Date 14th Feb 2021',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
@@ -124,7 +124,7 @@ class BookingConfirmPage extends StatelessWidget {
                         ),
                         Text(
                           'Check Out Date 16th Feb 2021',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
@@ -182,12 +182,12 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('Total',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                     Text('Payment Method',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                   ],
@@ -198,10 +198,10 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('৳2000',
                                         style: TextStyle(
-                                            fontSize: 16, height: 1.5)),
+                                            fontSize: 18, height: 1.5)),
                                     Text('Pay at Hotel',
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 12,
                                           height: 0.5,
                                         )),
                                   ],
@@ -209,7 +209,7 @@ class BookingConfirmPage extends StatelessWidget {
                                 Text(
                                   'Payment Breakdown',
                                   style: TextStyle(
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     height: 4,
                                     color: Color(0xFFA1A1A1),
                                   ),
@@ -220,12 +220,12 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('Subtitle',
                                         style: GoogleFonts.roboto(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                     Text('2300',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                   ],
@@ -236,12 +236,12 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('Discount',
                                         style: GoogleFonts.roboto(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                     Text('-300',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                   ],
@@ -252,12 +252,12 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('Promo',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                     Text('-0',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             height: 2,
                                             color: Color(0xff6b6b6b))),
                                   ],
@@ -272,12 +272,12 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text('Total',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             //height: 0.5,
                                             color: Color(0xff6b6b6b))),
                                     Text('৳2000',
                                         style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             //height: 0.5,
                                             color: Color(0xff6b6b6b))),
                                   ],
@@ -299,7 +299,7 @@ class BookingConfirmPage extends StatelessWidget {
                                     Text(
                                       'ADD PROMO',
                                       style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 12,
                                           height: 3,
                                           color: Colors.red),
                                     )
