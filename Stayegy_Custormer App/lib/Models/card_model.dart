@@ -83,7 +83,7 @@ class CardModel extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             // '৳ 400',
-                            '৳ ${hotel.discountedPrice}',
+                            '৳ ${hotel.discountedPrice["Single | Non AC"]}',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class CardModel extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            '৳ ${hotel.price}',
+                            '৳ ${hotel.price["Single | Non AC"]}',
                             style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: Colors.grey,
@@ -103,7 +103,7 @@ class CardModel extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            '${(((hotel.price - hotel.discountedPrice) / hotel.price) * 100).toInt()}% OFF',
+                            '${(((hotel.price["Single | Non AC"] - hotel.discountedPrice["Single | Non AC"]) / hotel.price["Single | Non AC"]) * 100).toInt()}% OFF',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.red,

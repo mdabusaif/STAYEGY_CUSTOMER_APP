@@ -535,14 +535,14 @@ class _DetailsPageState extends State<DetailsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    '৳${hotel.discountedPrice} ',
+                                    '৳${hotel.discountedPrice["Single | Non AC"]} ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    '৳${hotel.price}',
+                                    '৳${hotel.price["Single | Non AC"]}',
                                     style: TextStyle(
                                       fontSize: 20,
                                       decoration: TextDecoration.lineThrough,

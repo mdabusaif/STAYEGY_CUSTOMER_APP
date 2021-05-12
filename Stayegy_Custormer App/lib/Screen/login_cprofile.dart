@@ -193,8 +193,8 @@ class _login_cprofileState extends State<login_cprofile> {
                               errorText: state is EmailFieldEmptyState
                                   ? 'This field can not be empty!'
                                   : state is EmailFieldNotValidState
-                                  ? 'Email format is not valid!'
-                                  : null,
+                                      ? 'Email format is not valid!'
+                                      : null,
                             ),
                           ),
                         ),

@@ -2,8 +2,8 @@ class Hotel {
   String hid;
   String name;
   String address;
-  int price;
-  int discountedPrice;
+  Map price;
+  Map discountedPrice;
   List facilities;
   Map images;
 
