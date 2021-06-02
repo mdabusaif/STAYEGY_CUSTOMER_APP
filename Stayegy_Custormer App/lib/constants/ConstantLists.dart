@@ -34,15 +34,3 @@ List roomTypeList = [
   "Double",
   "Semi Double",
 ];
-List facilitiesList = [
-  "Free wifi",
-  "Power backup",
-  "Refrigerator",
-  "TV",
-  "CCTV camera",
-  "In-house Restaurant",
-  "Ac",
-  "Parking facility",
-  "Geyser",
-  "Parking facility",
-];
