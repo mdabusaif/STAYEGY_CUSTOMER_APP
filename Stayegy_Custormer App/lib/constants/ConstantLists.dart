@@ -24,10 +24,10 @@ List<String> cityList = [
   "Sirajgonj",
 ];
 
-List noOfRoomList = [
-  "1",
-  "2",
-  "3",
+List<int> noOfRoomList = [
+  1,
+  2,
+  3,
 ];
 List roomTypeList = [
   "Single ",
