@@ -187,63 +187,67 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: <Widget>[
-                                                        Row(
-                                                          children: [
-                                                            Container(
-                                                              decoration: BoxDecoration(color: Color(0xffefefef)),
-                                                              child: DropdownButtonHideUnderline(
-                                                                child: DropdownButton(
-                                                                  hint: Padding(
-                                                                    padding: const EdgeInsets.all(8.0),
-                                                                    child: Text(
-                                                                      'Number of Rooms',
-                                                                      style: GoogleFonts.roboto(fontSize: 15),
-                                                                    ),
-                                                                  ),
-                                                                  dropdownColor: Colors.black,
-                                                                  isExpanded: false,
-                                                                  style: TextStyle(
-                                                                    color: Colors.black,
-                                                                    fontSize: 22,
-                                                                  ),
-                                                                  value: valueChoose,
-                                                                  onChanged: (newValue) {
-                                                                    setState(() {
-                                                                      valueChoose = newValue;
-                                                                    });
-                                                                    print("valuechoose $valueChoose");
-                                                                  },
-                                                                  items: noOfRoomList.map((valueItem) {
-                                                                    return DropdownMenuItem(
-                                                                      value: valueItem,
-                                                                      child: Center(
-                                                                        child: Text(
-                                                                          valueItem.toString(),
-                                                                          style: GoogleFonts.roboto(
-                                                                            fontSize: 15,
-                                                                            fontWeight: FontWeight.normal,
-                                                                            color: Color(0xffefefef),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }).toList(),
+                                                        Container(
+                                                          width: double.infinity,
+                                                          decoration: BoxDecoration(
+                                                            color: Color(0xffefefef),
+                                                          ),
+                                                          child: DropdownButtonHideUnderline(
+                                                            child: DropdownButton(
+                                                              hint: Padding(
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Text(
+                                                                  'Number of Rooms',
+                                                                  style: GoogleFonts.roboto(fontSize: 15),
                                                                 ),
                                                               ),
+                                                              dropdownColor: Colors.black,
+                                                              isExpanded: false,
+                                                              style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 22,
+                                                              ),
+                                                              value: valueChoose,
+                                                              onChanged: (newValue) {
+                                                                setState(() {
+                                                                  valueChoose = newValue;
+                                                                });
+                                                                print("valuechoose $valueChoose");
+                                                              },
+                                                              items: noOfRoomList.map((valueItem) {
+                                                                return DropdownMenuItem(
+                                                                  value: valueItem,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      valueItem.toString(),
+                                                                      style: GoogleFonts.roboto(
+                                                                        fontSize: 15,
+                                                                        fontWeight: FontWeight.normal,
+                                                                        color: Color(0xffefefef),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }).toList(),
                                                             ),
-                                                          ],
+                                                          ),
                                                         ),
                                                         SizedBox(
                                                           height: 10,
                                                         ),
-                                                        ListView.builder(
-                                                          itemCount: valueChoose,
-                                                          itemBuilder: (context, index) {
-                                                            return ListTile(
-                                                              title: Flexible(
-                                                                child: Container(
-                                                                  // alignment: Alignment.bottomLeft,
-                                                                  // padding: new EdgeInsets.fromLTRB(60, 0, 0, 0),
+                                                        Container(
+                                                          height: 200,
+                                                          // width: MediaQuery.of(context).size.width,
+                                                          width: double.maxFinite,
+                                                          alignment: Alignment.centerLeft,
+                                                          child: ListView.builder(
+                                                            shrinkWrap: true,
+                                                            itemCount: valueChoose,
+                                                            itemBuilder: (context, index) {
+                                                              return ListTile(
+                                                                title: Container(
+                                                                  //alignment: Alignment.bottomLeft,
+                                                                  //padding: new EdgeInsets.fromLTRB(60, 0, 0, 0),
                                                                   decoration: BoxDecoration(color: Color(0xffefefef)),
                                                                   child: DropdownButtonHideUnderline(
                                                                     child: DropdownButton(
@@ -284,9 +288,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            );
-                                                          },
+                                                              );
+                                                            },
+                                                          ),
                                                         ),
                                                         SizedBox(
                                                           height: 10,
