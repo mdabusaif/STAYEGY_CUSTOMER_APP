@@ -25,15 +25,18 @@ class _DetailsPageState extends State<DetailsPage> {
 
   _DetailsPageState({@required this.hotel});
 
-  DateTimeRange timeRange = DateTimeRange(start: DateTime.now(), end: DateTime.now().add(Duration(days: 1)));
+  DateTimeRange timeRange = DateTimeRange(
+      start: DateTime.now(), end: DateTime.now().add(Duration(days: 1)));
 
   dateTimeRangePicker() async {
     DateTimeRange picked = await showDateRangePicker(
       context: context,
-      firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      firstDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 1),
       initialDateRange: DateTimeRange(
-        end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
+        end: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
         start: DateTime.now(),
       ),
     );
@@ -139,7 +142,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                 color: Colors.black,
                                 height: 50,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     GestureDetector(
@@ -173,57 +177,88 @@ class _DetailsPageState extends State<DetailsPage> {
                                         showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return StatefulBuilder(builder: (context, setState) {
+                                              return StatefulBuilder(
+                                                  builder: (context, setState) {
                                                 return AlertDialog(
-                                                  buttonPadding: EdgeInsets.only(left: 0),
+                                                  buttonPadding:
+                                                      EdgeInsets.only(left: 0),
                                                   scrollable: true,
                                                   title: Center(
                                                     child: Text(
                                                       'ROOM SELECTION',
-                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                   content: Form(
                                                     child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: <Widget>[
                                                         Container(
-                                                          width: double.infinity,
-                                                          decoration: BoxDecoration(
-                                                            color: Color(0xffefefef),
+                                                          width:
+                                                              double.infinity,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Color(
+                                                                0xffefefef),
                                                           ),
-                                                          child: DropdownButtonHideUnderline(
-                                                            child: DropdownButton(
+                                                          child:
+                                                              DropdownButtonHideUnderline(
+                                                            child:
+                                                                DropdownButton(
                                                               hint: Padding(
-                                                                padding: const EdgeInsets.all(8.0),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
                                                                 child: Text(
                                                                   'Number of Rooms',
-                                                                  style: GoogleFonts.roboto(fontSize: 15),
+                                                                  style: GoogleFonts
+                                                                      .roboto(
+                                                                          fontSize:
+                                                                              15),
                                                                 ),
                                                               ),
-                                                              dropdownColor: Colors.black,
+                                                              dropdownColor:
+                                                                  Colors.black,
                                                               isExpanded: false,
                                                               style: TextStyle(
-                                                                color: Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontSize: 22,
                                                               ),
-                                                              value: valueChoose,
-                                                              onChanged: (newValue) {
+                                                              value:
+                                                                  valueChoose,
+                                                              onChanged:
+                                                                  (newValue) {
                                                                 setState(() {
-                                                                  valueChoose = newValue;
+                                                                  valueChoose =
+                                                                      newValue;
                                                                 });
-                                                                print("valuechoose $valueChoose");
+                                                                print(
+                                                                    "valuechoose $valueChoose");
                                                               },
-                                                              items: noOfRoomList.map((valueItem) {
+                                                              items: noOfRoomList
+                                                                  .map(
+                                                                      (valueItem) {
                                                                 return DropdownMenuItem(
-                                                                  value: valueItem,
+                                                                  value:
+                                                                      valueItem,
                                                                   child: Center(
                                                                     child: Text(
-                                                                      valueItem.toString(),
-                                                                      style: GoogleFonts.roboto(
-                                                                        fontSize: 15,
-                                                                        fontWeight: FontWeight.normal,
-                                                                        color: Color(0xffefefef),
+                                                                      valueItem
+                                                                          .toString(),
+                                                                      style: GoogleFonts
+                                                                          .roboto(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                        color: Color(
+                                                                            0xffefefef),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -238,48 +273,80 @@ class _DetailsPageState extends State<DetailsPage> {
                                                         Container(
                                                           height: 200,
                                                           // width: MediaQuery.of(context).size.width,
-                                                          width: double.maxFinite,
-                                                          alignment: Alignment.centerLeft,
-                                                          child: ListView.builder(
+                                                          width:
+                                                              double.maxFinite,
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          child:
+                                                              ListView.builder(
                                                             shrinkWrap: true,
-                                                            itemCount: valueChoose,
-                                                            itemBuilder: (context, index) {
+                                                            itemCount:
+                                                                valueChoose,
+                                                            itemBuilder:
+                                                                (context,
+                                                                    index) {
                                                               return ListTile(
-                                                                title: Container(
+                                                                title:
+                                                                    Container(
                                                                   //alignment: Alignment.bottomLeft,
                                                                   //padding: new EdgeInsets.fromLTRB(60, 0, 0, 0),
-                                                                  decoration: BoxDecoration(color: Color(0xffefefef)),
-                                                                  child: DropdownButtonHideUnderline(
-                                                                    child: DropdownButton(
-                                                                      hint: Padding(
-                                                                        padding: const EdgeInsets.all(8.0),
-                                                                        child: Text(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color:
+                                                                              Color(0xFF120808)),
+                                                                  child:
+                                                                      DropdownButtonHideUnderline(
+                                                                    child:
+                                                                        DropdownButton(
+                                                                      hint:
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            Text(
                                                                           'Select Room Type',
-                                                                          style: GoogleFonts.roboto(fontSize: 15),
+                                                                          style:
+                                                                              GoogleFonts.roboto(fontSize: 15),
                                                                         ),
                                                                       ),
-                                                                      dropdownColor: Colors.black,
-                                                                      isExpanded: false,
-                                                                      style: TextStyle(
-                                                                        color: Colors.black,
-                                                                        fontSize: 22,
+                                                                      dropdownColor:
+                                                                          Colors
+                                                                              .black,
+                                                                      isExpanded:
+                                                                          false,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            22,
                                                                       ),
-                                                                      value: valueOfRoomType,
-                                                                      onChanged: (newValue) {
-                                                                        setState(() {
-                                                                          valueOfRoomType = newValue;
+                                                                      value:
+                                                                          valueOfRoomType,
+                                                                      onChanged:
+                                                                          (newValue) {
+                                                                        setState(
+                                                                            () {
+                                                                          valueOfRoomType =
+                                                                              newValue;
                                                                         });
                                                                       },
-                                                                      items: roomTypeList.map((valueItem) {
+                                                                      items: roomTypeList
+                                                                          .map(
+                                                                              (valueItem) {
                                                                         return DropdownMenuItem(
-                                                                          value: valueItem,
-                                                                          child: Center(
-                                                                            child: Text(
+                                                                          value:
                                                                               valueItem,
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                Text(
+                                                                              valueItem,
+                                                                              textAlign: TextAlign.center,
                                                                               style: GoogleFonts.roboto(
                                                                                 fontSize: 15,
                                                                                 fontWeight: FontWeight.normal,
-                                                                                color: Color(0xffefefef),
+                                                                                color: Color(0xFFC2BBBB),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -298,7 +365,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                                         Center(
                                                           child: Text(
                                                             'Age less than 5 will not considered as a person',
-                                                            style: TextStyle(fontSize: 8, color: Colors.grey),
+                                                            style: TextStyle(
+                                                                fontSize: 8,
+                                                                color: Colors
+                                                                    .grey),
                                                           ),
                                                         ),
                                                       ],
@@ -306,18 +376,28 @@ class _DetailsPageState extends State<DetailsPage> {
                                                   ),
                                                   actions: [
                                                     Padding(
-                                                      padding: const EdgeInsets.only(left: 0, right: 0),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 0,
+                                                              right: 0),
                                                       child: GestureDetector(
                                                           child: Container(
                                                               height: 50,
                                                               width: 300,
-                                                              color: Colors.black,
-                                                              alignment: Alignment.center,
+                                                              color:
+                                                                  Colors.black,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
                                                               child: Text(
                                                                 "CONFIRM",
-                                                                style: TextStyle(
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white,
                                                                 ),
                                                               )),
                                                           onTap: () {
@@ -355,7 +435,8 @@ class _DetailsPageState extends State<DetailsPage> {
                             LimitedBox(
                               maxHeight: 400,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 0, bottom: 2, left: 0, right: 10),
+                                padding: EdgeInsets.only(
+                                    top: 0, bottom: 2, left: 0, right: 10),
                                 child: GridView.count(
                                   primary: false,
                                   padding: EdgeInsets.only(
@@ -364,7 +445,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                   childAspectRatio: 4,
                                   crossAxisCount: 3,
                                   shrinkWrap: true,
-                                  children: List.generate(hotel.facilities.length, (index) {
+                                  children: List.generate(
+                                      hotel.facilities.length, (index) {
                                     return Text(
                                       '${hotel.facilities[index]}',
                                       style: TextStyle(
@@ -449,11 +531,13 @@ class _DetailsPageState extends State<DetailsPage> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                insetPadding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                insetPadding:
+                                    EdgeInsets.fromLTRB(10, 20, 10, 20),
                                 title: Center(
                                   child: Text(
                                     'Rules To Maintain',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 content: Container(
@@ -462,7 +546,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                 ),
                                 actions: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 0, right: 0),
+                                    padding: const EdgeInsets.only(
+                                        left: 0, right: 0),
                                     child: GestureDetector(
                                         child: Container(
                                           height: 50,
@@ -480,7 +565,11 @@ class _DetailsPageState extends State<DetailsPage> {
                                           ),
                                         ),
                                         onTap: () {
-                                          Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingConfirmPage()));
+                                          Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (_) =>
+                                                      BookingConfirmPage()));
                                           // your code
                                         }),
                                   )
