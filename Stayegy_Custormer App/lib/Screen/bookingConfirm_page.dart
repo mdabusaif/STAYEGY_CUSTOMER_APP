@@ -138,36 +138,70 @@ class BookingConfirmPage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Single | Non Ac',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        'images/one_box.png',
+                                        scale: 16,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text('Single | Non Ac',
+                                          style: TextStyle(
+                                              fontSize: 14, height: 2)),
+                                    ],
+                                  ),
                                   Text('500',
                                       style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                          TextStyle(fontSize: 14, height: 2)),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Semi-Double | Ac',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        'images/one_box.png',
+                                        scale: 16,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text('Semi-Double | Ac',
+                                          style: TextStyle(
+                                              fontSize: 14, height: 2)),
+                                    ],
+                                  ),
                                   Text('800',
                                       style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                          TextStyle(fontSize: 14, height: 2)),
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Double | Ac',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        'images/one_box.png',
+                                        scale: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text('Double | Ac',
+                                          style: TextStyle(
+                                              fontSize: 14, height: 2)),
+                                    ],
+                                  ),
                                   Text('1000',
                                       style:
-                                          TextStyle(fontSize: 14, height: 3)),
+                                          TextStyle(fontSize: 14, height: 2)),
                                 ],
                               ),
                             ],
