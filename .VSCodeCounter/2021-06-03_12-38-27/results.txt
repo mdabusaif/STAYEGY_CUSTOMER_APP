@@ -1,0 +1,76 @@
+Date : 2021-06-03 12:38:27
+Directory : c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib
+Total : 40 files,  3480 codes, 79 comments, 276 blanks, all 3835 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         40 |      3,480 |         79 |        276 |      3,835 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                             |         40 |      3,480 |         79 |        276 |      3,835 |
+| Models                                                                                                        |          1 |        109 |         11 |          5 |        125 |
+| Screen                                                                                                        |         14 |      2,376 |         64 |         67 |      2,507 |
+| bloc                                                                                                          |         16 |        662 |          0 |        170 |        832 |
+| bloc\Authentication_Bloc                                                                                      |          3 |         87 |          0 |         25 |        112 |
+| bloc\FormBloc                                                                                                 |          3 |        127 |          0 |         38 |        165 |
+| bloc\LoadingBloc                                                                                              |          3 |         72 |          0 |         22 |         94 |
+| bloc\Login_Bloc                                                                                               |          3 |        196 |          0 |         50 |        246 |
+| bloc\Repository                                                                                               |          4 |        180 |          0 |         35 |        215 |
+| bloc\Repository\Hotels                                                                                        |          2 |         64 |          0 |         13 |         77 |
+| bloc\Repository\User                                                                                          |          2 |        116 |          0 |         22 |        138 |
+| constants                                                                                                     |          1 |         35 |          0 |          2 |         37 |
+| container                                                                                                     |          7 |        231 |          1 |         28 |        260 |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                      | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Models\card_model.dart                              | Dart     |        109 |         11 |          5 |        125 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\SearchCity.dart                              | Dart     |         78 |          2 |          4 |         84 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\SearchResult.dart                            | Dart     |        102 |          2 |          6 |        110 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\Splash_Page.dart                             | Dart     |         10 |          0 |          2 |         12 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\accountDetails_Page.dart                     | Dart     |        258 |         23 |          6 |        287 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\appdrawer.dart                               | Dart     |        105 |          0 |          2 |        107 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\bookingConfirm_page.dart                     | Dart     |        375 |          4 |          3 |        382 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\details_page.dart                            | Dart     |        525 |         11 |         12 |        548 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\history_save_page.dart                       | Dart     |         68 |          0 |          3 |         71 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\home_page.dart                               | Dart     |        153 |         13 |          4 |        170 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\login_cprofile.dart                          | Dart     |        281 |          5 |          7 |        293 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\login_otp.dart                               | Dart     |        119 |          0 |          5 |        124 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\login_page.dart                              | Dart     |        143 |          4 |          7 |        154 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\notification_page.dart                       | Dart     |         68 |          0 |          3 |         71 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\Screen\thankyou_page.dart                           | Dart     |         91 |          0 |          3 |         94 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Authentication_Bloc\Authentication_Bloc.dart   | Dart     |         48 |          0 |          8 |         56 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Authentication_Bloc\Authentication_Events.dart | Dart     |         27 |          0 |         10 |         37 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Authentication_Bloc\Authentication_States.dart | Dart     |         12 |          0 |          7 |         19 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\FormBloc\Form_Bloc.dart                        | Dart     |         81 |          0 |         12 |         93 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\FormBloc\Form_Events.dart                      | Dart     |         24 |          0 |         11 |         35 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\FormBloc\Form_States.dart                      | Dart     |         22 |          0 |         15 |         37 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\LoadingBloc\loadingbloc_bloc.dart              | Dart     |         45 |          0 |         10 |         55 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\LoadingBloc\loadingbloc_event.dart             | Dart     |         11 |          0 |          5 |         16 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\LoadingBloc\loadingbloc_state.dart             | Dart     |         16 |          0 |          7 |         23 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Login_Bloc\LogIn_Bloc.dart                     | Dart     |        111 |          0 |         15 |        126 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Login_Bloc\LogIn_Events.dart                   | Dart     |         32 |          0 |         14 |         46 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Login_Bloc\LogIn_State.dart                    | Dart     |         53 |          0 |         21 |         74 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Repository\Hotels\HotelDetails.dart            | Dart     |         36 |          0 |          4 |         40 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Repository\Hotels\HotelRepositoy.dart          | Dart     |         28 |          0 |          9 |         37 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Repository\User\UserRepository.dart            | Dart     |         82 |          0 |         18 |        100 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\bloc\Repository\User\User_Details.dart              | Dart     |         34 |          0 |          4 |         38 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\constants\ConstantLists.dart                        | Dart     |         35 |          0 |          2 |         37 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\SnackBar.dart                             | Dart     |         14 |          0 |          2 |         16 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\bottom_button.dart                        | Dart     |         32 |          0 |          4 |         36 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\drawer_Data.dart                          | Dart     |         39 |          0 |          4 |         43 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\gradient_creation.dart                    | Dart     |         16 |          1 |          5 |         22 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\gradient_text.dart                        | Dart     |         24 |          0 |          4 |         28 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\loading_Overlay.dart                      | Dart     |         27 |          0 |          3 |         30 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\container\slider.dart                               | Dart     |         79 |          0 |          6 |         85 |
+| c:\STAYEGY\STAYEGY_CUSTOMER_APP\Stayegy_Custormer App\lib\main.dart                                           | Dart     |         67 |          3 |          4 |         74 |
+| Total                                                                                                         |          |      3,480 |         79 |        276 |      3,835 |
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

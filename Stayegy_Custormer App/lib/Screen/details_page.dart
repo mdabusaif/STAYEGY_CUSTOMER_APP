@@ -5,6 +5,7 @@ import 'package:stayegy/Screen/bookingConfirm_page.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:intl/intl.dart';
+import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/slider.dart';
 
@@ -23,6 +24,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
   int totalPrice;
   int totalDiscountedPrice;
+
+  bool isConfirmed = false;
 
   final Hotel hotel;
 
@@ -345,7 +348,57 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                 ),
                                                               )),
                                                           onTap: () {
-                                                            // your code
+                                                            switch (valueChoose) {
+                                                              case 1:
+                                                                if (roomType1 != null) {
+                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1];
+                                                                  totalPrice = hotel.price[roomType1];
+                                                                  isConfirmed = true;
+                                                                } else {
+                                                                  SnackBarBuilder().buildSnackBar(
+                                                                    context,
+                                                                    message: "Room Type Not Selected!",
+                                                                    color: Colors.red,
+                                                                  );
+                                                                }
+                                                                break;
+                                                              case 2:
+                                                                if (roomType1 != null && roomType2 != null) {
+                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2];
+                                                                  totalPrice = hotel.price[roomType1] + hotel.price[roomType2];
+                                                                  isConfirmed = true;
+                                                                } else {
+                                                                  SnackBarBuilder().buildSnackBar(
+                                                                    context,
+                                                                    message: "Room Type Not Selected!",
+                                                                    color: Colors.red,
+                                                                  );
+                                                                }
+                                                                break;
+                                                              case 3:
+                                                                if (roomType1 != null && roomType2 != null && roomType3 != null) {
+                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2] + hotel.discountedPrice[roomType3];
+                                                                  totalPrice = hotel.price[roomType1] + hotel.price[roomType2] + hotel.price[roomType3];
+                                                                  isConfirmed = true;
+                                                                } else {
+                                                                  SnackBarBuilder().buildSnackBar(
+                                                                    context,
+                                                                    message: "Room Type Not Selected!",
+                                                                    color: Colors.red,
+                                                                  );
+                                                                }
+                                                                break;
+                                                              default:
+                                                                SnackBarBuilder().buildSnackBar(
+                                                                  context,
+                                                                  message: "Room Selection Error!",
+                                                                  color: Colors.red,
+                                                                );
+                                                            }
+
+                                                            if (isConfirmed) {
+                                                              Navigator.pop(context);
+                                                            }
                                                           }),
                                                     )
                                                   ],
@@ -424,7 +477,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -437,14 +490,14 @@ class _DetailsPageState extends State<DetailsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    '৳${hotel.discountedPrice["Single | Non AC"]} ',
+                                    totalDiscountedPrice == null || totalDiscountedPrice == 0 ? '৳${hotel.discountedPrice["Single | Non AC"]} ' : '৳$totalDiscountedPrice ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    '৳${hotel.price["Single | Non AC"]}',
+                                    totalPrice == null || totalPrice == 0 ? '৳${hotel.price["Single | Non AC"]}' : '৳$totalPrice ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       decoration: TextDecoration.lineThrough,
@@ -464,9 +517,9 @@ class _DetailsPageState extends State<DetailsPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 120,
-                      ),
+                      // SizedBox(
+                      //   width: 120,
+                      // ),
                       GestureDetector(
                         onTap: () {
                           showDialog(
