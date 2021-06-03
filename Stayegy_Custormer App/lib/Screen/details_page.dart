@@ -18,7 +18,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int valueChoose = 1;
+  int valueChoose;
   String valueOfRoomType;
 
   int totalPrice;
@@ -188,23 +188,24 @@ class _DetailsPageState extends State<DetailsPage> {
                                                   ),
                                                   content: Form(
                                                     child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
                                                       children: <Widget>[
                                                         Container(
                                                           width: double.infinity,
-                                                          decoration: BoxDecoration(
-                                                            color: Color(0xffefefef),
-                                                          ),
+                                                          color: Color(0xffefefef),
                                                           child: DropdownButtonHideUnderline(
                                                             child: DropdownButton(
                                                               hint: Padding(
                                                                 padding: const EdgeInsets.all(8.0),
                                                                 child: Text(
                                                                   'Number of Rooms',
-                                                                  style: GoogleFonts.roboto(fontSize: 15),
+                                                                  style: GoogleFonts.roboto(
+                                                                    fontSize: 15,
+                                                                    color: Colors.black54,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                              dropdownColor: Colors.black,
+                                                              dropdownColor: Color(0xffefefef),
                                                               isExpanded: false,
                                                               style: TextStyle(
                                                                 color: Colors.black,
@@ -219,13 +220,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                                               items: noOfRoomList.map((valueItem) {
                                                                 return DropdownMenuItem(
                                                                   value: valueItem,
-                                                                  child: Center(
+                                                                  child: Container(
+                                                                    alignment: Alignment.centerRight,
+                                                                    width: 150,
                                                                     child: Text(
                                                                       valueItem.toString(),
+                                                                      textAlign: TextAlign.center,
                                                                       style: GoogleFonts.roboto(
-                                                                        fontSize: 15,
+                                                                        fontSize: 17,
                                                                         fontWeight: FontWeight.normal,
-                                                                        color: Color(0xffefefef),
+                                                                        color: Colors.black54,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -244,23 +248,23 @@ class _DetailsPageState extends State<DetailsPage> {
                                                           alignment: Alignment.centerLeft,
                                                           child: ListView.builder(
                                                             shrinkWrap: true,
-                                                            itemCount: valueChoose,
+                                                            itemCount: valueChoose == null ? 0 : valueChoose,
                                                             itemBuilder: (context, index) {
                                                               return ListTile(
                                                                 title: Container(
-                                                                  //alignment: Alignment.bottomLeft,
-                                                                  //padding: new EdgeInsets.fromLTRB(60, 0, 0, 0),
-                                                                  decoration: BoxDecoration(color: Color(0xFF120808)),
+                                                                  width: double.infinity,
+                                                                  color: Color(0xffefefef),
                                                                   child: DropdownButtonHideUnderline(
                                                                     child: DropdownButton(
                                                                       hint: Padding(
                                                                         padding: const EdgeInsets.all(8.0),
                                                                         child: Text(
                                                                           'Select Room Type',
+                                                                          textAlign: TextAlign.center,
                                                                           style: GoogleFonts.roboto(fontSize: 15),
                                                                         ),
                                                                       ),
-                                                                      dropdownColor: Colors.black,
+                                                                      dropdownColor: Color(0xffefefef),
                                                                       isExpanded: false,
                                                                       style: TextStyle(
                                                                         color: Colors.black,
@@ -275,14 +279,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                       items: hotel.discountedPrice.keys.map((valueItem) {
                                                                         return DropdownMenuItem(
                                                                           value: valueItem,
-                                                                          child: Center(
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            width: 220,
                                                                             child: Text(
                                                                               valueItem,
                                                                               textAlign: TextAlign.center,
                                                                               style: GoogleFonts.roboto(
                                                                                 fontSize: 15,
                                                                                 fontWeight: FontWeight.normal,
-                                                                                color: Color(0xFFC2BBBB),
+                                                                                color: Colors.black54,
                                                                               ),
                                                                             ),
                                                                           ),
@@ -301,7 +307,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                         Center(
                                                           child: Text(
                                                             'Age less than 5 will not considered as a person',
-                                                            style: TextStyle(fontSize: 8, color: Colors.grey),
+                                                            style: TextStyle(fontSize: 13, color: Colors.grey),
                                                           ),
                                                         ),
                                                       ],
@@ -313,7 +319,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                       child: GestureDetector(
                                                           child: Container(
                                                               height: 50,
-                                                              width: 300,
+                                                              width: double.maxFinite,
                                                               color: Colors.black,
                                                               alignment: Alignment.center,
                                                               child: Text(
