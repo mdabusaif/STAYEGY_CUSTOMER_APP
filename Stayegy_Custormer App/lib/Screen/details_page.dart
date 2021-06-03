@@ -19,7 +19,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int valueChoose;
-  String valueOfRoomType;
+  String roomType1, roomType2, roomType3;
 
   int totalPrice;
   int totalDiscountedPrice;
@@ -270,25 +270,40 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                         color: Colors.black,
                                                                         fontSize: 22,
                                                                       ),
-                                                                      value: valueOfRoomType,
+                                                                      value: index == 0
+                                                                          ? roomType1
+                                                                          : index == 1
+                                                                              ? roomType2
+                                                                              : roomType3,
                                                                       onChanged: (newValue) {
                                                                         setState(() {
-                                                                          valueOfRoomType = newValue;
+                                                                          if (index == 0) {
+                                                                            roomType1 = newValue;
+                                                                          } else if (index == 1) {
+                                                                            roomType2 = newValue;
+                                                                          } else if (index == 2) {
+                                                                            roomType3 = newValue;
+                                                                          }
                                                                         });
                                                                       },
                                                                       items: hotel.discountedPrice.keys.map((valueItem) {
                                                                         return DropdownMenuItem(
                                                                           value: valueItem,
-                                                                          child: Container(
-                                                                            alignment: Alignment.center,
-                                                                            width: 220,
-                                                                            child: Text(
-                                                                              valueItem,
-                                                                              textAlign: TextAlign.center,
-                                                                              style: GoogleFonts.roboto(
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.normal,
-                                                                                color: Colors.black54,
+                                                                          child: Center(
+                                                                            child: LimitedBox(
+                                                                              maxWidth: 200,
+                                                                              child: Container(
+                                                                                width: double.maxFinite,
+                                                                                alignment: Alignment.center,
+                                                                                child: Text(
+                                                                                  valueItem,
+                                                                                  textAlign: TextAlign.center,
+                                                                                  style: GoogleFonts.roboto(
+                                                                                    fontSize: 15,
+                                                                                    fontWeight: FontWeight.normal,
+                                                                                    color: Colors.black54,
+                                                                                  ),
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -307,7 +322,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                         Center(
                                                           child: Text(
                                                             'Age less than 5 will not considered as a person',
-                                                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                                                            style: TextStyle(fontSize: 12, color: Colors.grey),
                                                           ),
                                                         ),
                                                       ],
