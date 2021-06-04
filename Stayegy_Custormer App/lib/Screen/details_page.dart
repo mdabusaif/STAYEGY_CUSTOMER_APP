@@ -404,7 +404,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                                   ],
                                                 );
                                               });
-                                            });
+                                            }).then((_) => setState(() {
+                                              totalDiscountedPrice = totalDiscountedPrice;
+                                              totalPrice = totalPrice;
+                                            }));
                                       },
                                     ),
                                   ],
