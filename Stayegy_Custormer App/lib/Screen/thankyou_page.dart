@@ -1,5 +1,10 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/container/bottom_button.dart';
+import 'package:stayegy/container/gradient_creation.dart';
+import 'package:stayegy/container/gradient_text.dart';
 
 class ThankYouPage extends StatelessWidget {
   const ThankYouPage({Key key}) : super(key: key);
@@ -7,68 +12,60 @@ class ThankYouPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: MediaQuery.of(context).size.height,
+        width: double.maxFinite,
         child: Stack(
           children: [
             SingleChildScrollView(
               child: Container(
-                child: Column(
+                color: Color(0xFF020101),
+                height: MediaQuery.of(context).size.height,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Image.asset(
-                          'images/thank you page vector 2.png',
-                          scale: 12,
-                        ),
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 60,
-                            ),
-                            Image.asset(
-                              'images/thank you page vector 1.png',
-                              scale: 12,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Image.asset(
-                              'images/thank you page vector 3.png',
-                              scale: 12,
-                            ),
-                          ],
-                        )
-                      ],
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Image.asset(
+                        'images/left gradient.png',
+                        scale: 13,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
+                        Image.asset(
+                          'images/thank you.png',
+                          scale: 14,
+                          fit: BoxFit.fill,
+                        ),
+                        Text('Your order has been placed',
+                            style: TextStyle(
+                                height: 8, color: Colors.white, fontSize: 16)),
+                        Row(
                           children: [
-                            Text('Your booking has been placed ',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xff6b6b6b),
-                                    height: 2)),
-                            Text('Booking ID: #FFCSO4',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xff6b6b6b),
-                                    height: 2)),
+                            Text('Booking ID:',
+                                style:
+                                    TextStyle(height: 1, color: Colors.white)),
+                            GradientCreate(
+                              child: Text('#FFCSO4',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
                           ],
                         ),
                       ],
-                    )
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'images/right gradient.png',
+                        scale: 13,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -77,12 +74,19 @@ class ThankYouPage extends StatelessWidget {
               bottom: 10,
               left: 0,
               right: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
+              child: Align(
+                alignment: FractionalOffset.bottomRight,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  child: BottomButton(
+                      text: 'Back To Home',
+                      disabled: true,
+                      onTap: () {
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      }),
                 ),
-                child: BottomButton(
-                    text: 'Back To Home', disabled: false, onTap: () {}),
               ),
             ),
           ],

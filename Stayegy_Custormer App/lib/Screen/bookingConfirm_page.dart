@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/Screen/thankyou_page.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 
@@ -370,8 +372,13 @@ class BookingConfirmPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child:
-                  BottomButton(text: 'CONFIRM', disabled: false, onTap: () {}),
+              child: BottomButton(
+                  text: 'CONFIRM',
+                  disabled: false,
+                  onTap: () {
+                    Navigator.push(context,
+                        CupertinoPageRoute(builder: (_) => ThankYouPage()));
+                  }),
             ),
           ),
         ],
