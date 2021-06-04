@@ -137,55 +137,51 @@ class BookingConfirmPage extends StatelessWidget {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Image.asset(
                                         'images/one_box.png',
-                                        scale: 16,
+                                        scale: 10,
                                         fit: BoxFit.fill,
                                       ),
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text('Single | Non Ac',
-                                          style: TextStyle(
-                                              fontSize: 14, height: 2)),
+                                      Text('Single | Non Ac', style: TextStyle(fontSize: 14, height: 1)),
                                     ],
                                   ),
-                                  Text('500',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 2)),
+                                  Text('500', style: TextStyle(fontSize: 14, height: 1)),
                                 ],
                               ),
+                              SizedBox(
+                                height: 5,
+                              ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Image.asset(
                                         'images/one_box.png',
-                                        scale: 16,
+                                        scale: 10,
                                         fit: BoxFit.fill,
                                       ),
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text('Semi-Double | Ac',
-                                          style: TextStyle(
-                                              fontSize: 14, height: 2)),
+                                      Text('Semi-Double | Ac', style: TextStyle(fontSize: 14, height: 1)),
                                     ],
                                   ),
-                                  Text('800',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 2)),
+                                  Text('800', style: TextStyle(fontSize: 14, height: 1)),
                                 ],
                               ),
+                              SizedBox(
+                                height: 5,
+                              ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -196,14 +192,10 @@ class BookingConfirmPage extends StatelessWidget {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text('Double | Ac',
-                                          style: TextStyle(
-                                              fontSize: 14, height: 2)),
+                                      Text('Double | Ac', style: TextStyle(fontSize: 14, height: 1)),
                                     ],
                                   ),
-                                  Text('1000',
-                                      style:
-                                          TextStyle(fontSize: 14, height: 2)),
+                                  Text('1000', style: TextStyle(fontSize: 14, height: 1)),
                                 ],
                               ),
                             ],
@@ -222,28 +214,16 @@ class BookingConfirmPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Total',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
-                                        Text('Payment Method',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
+                                        Text('Total', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('Payment Method', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('৳ 2000',
-                                            style: TextStyle(
-                                                fontSize: 22, height: 1.5)),
+                                        Text('৳ 2000', style: TextStyle(fontSize: 22, height: 1.5)),
                                         Text('Pay at Hotel',
                                             style: TextStyle(
                                               fontSize: 12,
@@ -260,51 +240,24 @@ class BookingConfirmPage extends StatelessWidget {
                                       ),
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Subtitle',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
-                                        Text('2300',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
+                                        Text('Subtitle', style: GoogleFonts.roboto(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('2300', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Discount',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
-                                        Text('-300',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
+                                        Text('Discount', style: GoogleFonts.roboto(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('-300', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Promo',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
-                                        Text('-0',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                height: 2,
-                                                color: Color(0xff6b6b6b))),
+                                        Text('Promo', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('-0', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Divider(
@@ -312,8 +265,7 @@ class BookingConfirmPage extends StatelessWidget {
                                       thickness: 1,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Total',
                                             style: TextStyle(
@@ -328,8 +280,7 @@ class BookingConfirmPage extends StatelessWidget {
                                       ],
                                     ),
                                     Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(top: 10),
@@ -344,10 +295,7 @@ class BookingConfirmPage extends StatelessWidget {
                                         ),
                                         Text(
                                           'ADD PROMO',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              height: 3,
-                                              color: Colors.red),
+                                          style: TextStyle(fontSize: 12, height: 3, color: Colors.red),
                                         )
                                       ],
                                     ),
@@ -376,8 +324,7 @@ class BookingConfirmPage extends StatelessWidget {
                   text: 'CONFIRM',
                   disabled: false,
                   onTap: () {
-                    Navigator.push(context,
-                        CupertinoPageRoute(builder: (_) => ThankYouPage()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => ThankYouPage()));
                   }),
             ),
           ),
