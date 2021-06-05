@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/container/bottom_button.dart';
+import 'package:stayegy/container/custom_bottom_button.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/gradient_text.dart';
 
@@ -84,12 +85,16 @@ class ThankYouPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 20,
                   ),
-                  child: BottomButton(
-                      text: 'Back To Home',
-                      disabled: true,
-                      onTap: () {
-                        Navigator.popUntil(context, (route) => route.isFirst);
-                      }),
+                  child: GradientCreate(
+                    child: CustomBottomButton(
+                        text: 'Back To Home',
+                        disabled: false,
+                        activeColor: Colors.transparent,
+                        textActiveColor: Colors.white,
+                        onTap: () {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                        }),
+                  ),
                 ),
               ),
             ),
