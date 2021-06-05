@@ -34,14 +34,6 @@ class ThankYouPage extends StatelessWidget {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Image.asset(
-                      'images/right gradient.png',
-                      scale: 13,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -75,27 +67,45 @@ class ThankYouPage extends StatelessWidget {
                 ],
               ),
             ),
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: Align(
-                alignment: FractionalOffset.bottomRight,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: GradientCreate(
-                    child: CustomBottomButton(
-                        text: 'Back To Home',
-                        disabled: false,
-                        activeColor: Colors.transparent,
-                        textActiveColor: Colors.white,
-                        onTap: () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
-                        }),
+            SafeArea(
+              child: Positioned(
+                bottom: 10,
+                left: 0,
+                right: 0,
+                child: Align(
+                  alignment: FractionalOffset.bottomRight,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    child: GradientCreate(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                        ),
+                        child: CustomBottomButton(
+                            fontSize: 18,
+                            height: 40,
+                            text: 'Back To Home',
+                            disabled: false,
+                            activeColor: Colors.transparent,
+                            textActiveColor: Colors.white,
+                            onTap: () {
+                              Navigator.popUntil(context, (route) => route.isFirst);
+                            }),
+                      ),
+                    ),
                   ),
                 ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                'images/right gradient.png',
+                scale: 13,
+                fit: BoxFit.fill,
               ),
             ),
           ],

@@ -10,6 +10,10 @@ class CustomBottomButton extends StatelessWidget {
     this.disabledColor,
     this.textActiveColor,
     this.textDisabledColor,
+    this.margin,
+    this.padding,
+    this.height,
+    this.fontSize,
   });
 
   final bool disabled;
@@ -19,6 +23,10 @@ class CustomBottomButton extends StatelessWidget {
   Color activeColor = Color(0xff191919);
   Color textDisabledColor = Colors.black;
   Color textActiveColor = Colors.redAccent;
+  EdgeInsets margin = EdgeInsets.only(top: 10, bottom: 10);
+  EdgeInsets padding = EdgeInsets.only(top: 13, bottom: 13);
+  final double height;
+  double fontSize = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +35,14 @@ class CustomBottomButton extends StatelessWidget {
       child: Container(
         color: disabled == true ? disabledColor : activeColor,
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(top: 10, bottom: 10),
-        padding: EdgeInsets.only(top: 13, bottom: 13),
+        height: height,
+        margin: margin,
+        padding: padding,
         alignment: Alignment.center,
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 25,
+            fontSize: fontSize,
             fontWeight: FontWeight.bold,
             color: disabled == true ? textDisabledColor : textActiveColor,
           ),
