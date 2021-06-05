@@ -15,59 +15,63 @@ class ThankYouPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        width: double.maxFinite,
+        width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            SingleChildScrollView(
-              child: Container(
-                color: Color(0xFF020101),
-                height: MediaQuery.of(context).size.height,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Image.asset(
-                        'images/left gradient.png',
-                        scale: 13,
-                        fit: BoxFit.fill,
+            Container(
+              color: Color(0xFF020101),
+              height: MediaQuery.of(context).size.height,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      'images/left gradient.png',
+                      scale: 13,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      'images/right gradient.png',
+                      scale: 13,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/thank you.png',
+                    scale: 14,
+                    fit: BoxFit.fill,
+                  ),
+                  Text(
+                    'Your order has been placed',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 8,
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Booking ID:', textAlign: TextAlign.center, style: TextStyle(height: 1, color: Colors.white)),
+                      GradientCreate(
+                        child: Text('#FFCSO4', textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
                       ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/thank you.png',
-                          scale: 14,
-                          fit: BoxFit.fill,
-                        ),
-                        Text('Your order has been placed',
-                            style: TextStyle(
-                                height: 8, color: Colors.white, fontSize: 16)),
-                        Row(
-                          children: [
-                            Text('Booking ID:',
-                                style:
-                                    TextStyle(height: 1, color: Colors.white)),
-                            GradientCreate(
-                              child: Text('#FFCSO4',
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Image.asset(
-                        'images/right gradient.png',
-                        scale: 13,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Positioned(
