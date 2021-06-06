@@ -4,10 +4,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/thankyou_page.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:stayegy/container/gradient_creation.dart';
+import 'package:intl/intl.dart';
 
 class BookingConfirmPage extends StatelessWidget {
+  BookingConfirmPage({
+    @required this.bookingDetails,
+  });
+
+  final BookingDetails bookingDetails;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +62,7 @@ class BookingConfirmPage extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Mr. XYZ, ',
+                                  text: '${bookingDetails.userName}, ',
                                   style: TextStyle(
                                     //fontWeight: FontWeight.bold,
                                     color: Color(0xff191919),
@@ -75,18 +83,18 @@ class BookingConfirmPage extends StatelessWidget {
                               size: 15,
                             ),
                             SizedBox(
-                              width: 20,
+                              width: 15,
                             ),
                             RichText(
                               text: TextSpan(
                                 text: 'Selected Hotel ',
                                 style: TextStyle(
                                   color: Color(0xff6b6b6b),
-                                  fontSize: 11,
+                                  fontSize: 12,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: 'STAYEGY007 Hotel Rajsthan',
+                                      text: '${bookingDetails.hid} ${bookingDetails.hotelName}',
                                       style: TextStyle(
                                         color: Color(0xff191919),
                                       )),
@@ -112,7 +120,7 @@ class BookingConfirmPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Check In Date 14th Feb 2021',
+                                  'Check In Date   ${DateFormat.yMMMMd().format(bookingDetails.dateRange['startDate'])}',
                                   style: TextStyle(
                                     fontSize: 12,
                                   ),
@@ -121,7 +129,7 @@ class BookingConfirmPage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Text(
-                                  'Check Out Date 16th Feb 2021',
+                                  'Check Out Date   ${DateFormat.yMMMMd().format(bookingDetails.dateRange['endDate'])}',
                                   style: TextStyle(
                                     fontSize: 12,
                                   ),
@@ -131,74 +139,41 @@ class BookingConfirmPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 30,
                         ),
-                        Container(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/one_box.png',
-                                        scale: 10,
-                                        fit: BoxFit.fill,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text('Single | Non Ac', style: TextStyle(fontSize: 14, height: 1)),
-                                    ],
-                                  ),
-                                  Text('500', style: TextStyle(fontSize: 14, height: 1)),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/one_box.png',
-                                        scale: 10,
-                                        fit: BoxFit.fill,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text('Semi-Double | Ac', style: TextStyle(fontSize: 14, height: 1)),
-                                    ],
-                                  ),
-                                  Text('800', style: TextStyle(fontSize: 14, height: 1)),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/one_box.png',
-                                        scale: 10,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text('Double | Ac', style: TextStyle(fontSize: 14, height: 1)),
-                                    ],
-                                  ),
-                                  Text('1000', style: TextStyle(fontSize: 14, height: 1)),
-                                ],
-                              ),
-                            ],
+                        LimitedBox(
+                          // height: 150,
+                          // width: double.maxFinite,
+                          // alignment: Alignment.centerLeft,
+                          maxHeight: 150,
+                          maxWidth: double.maxFinite,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: bookingDetails.selectedRooms.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          'images/one_box.png',
+                                          scale: 10,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text('${bookingDetails.selectedRooms[index]}', style: TextStyle(fontSize: 14, height: 1)),
+                                      ],
+                                    ),
+                                    Text('${bookingDetails.roomsPrice[index]}', style: TextStyle(fontSize: 14, height: 1)),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                         SizedBox(
@@ -223,7 +198,7 @@ class BookingConfirmPage extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('৳ 2000', style: TextStyle(fontSize: 22, height: 1.5)),
+                                        Text('৳ ${bookingDetails.totalDiscountedPrice}', style: TextStyle(fontSize: 22, height: 1.5)),
                                         Text('Pay at Hotel',
                                             style: TextStyle(
                                               fontSize: 12,
@@ -242,15 +217,15 @@ class BookingConfirmPage extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Subtitle', style: GoogleFonts.roboto(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
-                                        Text('2300', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('Subtotal', style: GoogleFonts.roboto(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('${bookingDetails.totalPrice}', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Discount', style: GoogleFonts.roboto(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
-                                        Text('-300', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
+                                        Text('${bookingDetails.totalDiscountedPrice - bookingDetails.totalPrice}', style: TextStyle(fontSize: 12, height: 2, color: Color(0xff6b6b6b))),
                                       ],
                                     ),
                                     Row(
@@ -272,7 +247,7 @@ class BookingConfirmPage extends StatelessWidget {
                                                 fontSize: 12,
                                                 //height: 0.5,
                                                 color: Color(0xff6b6b6b))),
-                                        Text('৳2000',
+                                        Text('৳${bookingDetails.totalDiscountedPrice}',
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 //height: 0.5,
@@ -324,7 +299,7 @@ class BookingConfirmPage extends StatelessWidget {
                   text: 'CONFIRM',
                   disabled: false,
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => ThankYouPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => ThankYouPage()));
                   }),
             ),
           ),

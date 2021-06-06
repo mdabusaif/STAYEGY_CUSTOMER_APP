@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/bookingConfirm_page.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:intl/intl.dart';
@@ -19,13 +20,17 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int valueChoose;
+  int noOfRooms;
   String roomType1, roomType2, roomType3;
 
   int totalPrice;
   int totalDiscountedPrice;
 
   bool isConfirmed = false;
+
+  List<String> selectedRooms = [];
+  List<int> roomsDiscountedPrice = [];
+  List<int> roomsPrice = [];
 
   final Hotel hotel;
 
@@ -154,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       },
                                       child: Text(
                                         // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
-                                        '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
+                                        timeRange == null ? '${DateFormat('dd-MM-yy').format(DateTime.now())}  -  ${DateFormat('dd-MM-yy').format(DateTime.now().add(Duration(days: 1)))}' : '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -214,10 +219,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                 color: Colors.black,
                                                                 fontSize: 22,
                                                               ),
-                                                              value: valueChoose,
+                                                              value: noOfRooms,
                                                               onChanged: (newValue) {
                                                                 setState(() {
-                                                                  valueChoose = newValue;
+                                                                  noOfRooms = newValue;
                                                                 });
                                                               },
                                                               items: noOfRoomList.map((valueItem) {
@@ -246,12 +251,11 @@ class _DetailsPageState extends State<DetailsPage> {
                                                         ),
                                                         Container(
                                                           height: 200,
-                                                          // width: MediaQuery.of(context).size.width,
                                                           width: double.maxFinite,
                                                           alignment: Alignment.centerLeft,
                                                           child: ListView.builder(
                                                             shrinkWrap: true,
-                                                            itemCount: valueChoose == null ? 0 : valueChoose,
+                                                            itemCount: noOfRooms == null ? 0 : noOfRooms,
                                                             itemBuilder: (context, index) {
                                                               return ListTile(
                                                                 title: Container(
@@ -348,11 +352,17 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                 ),
                                                               )),
                                                           onTap: () {
-                                                            switch (valueChoose) {
+                                                            switch (noOfRooms) {
                                                               case 1:
                                                                 if (roomType1 != null) {
+                                                                  selectedRooms = [];
+                                                                  roomsDiscountedPrice = [];
+                                                                  roomsPrice = [];
                                                                   totalDiscountedPrice = hotel.discountedPrice[roomType1];
                                                                   totalPrice = hotel.price[roomType1];
+                                                                  selectedRooms.add(roomType1);
+                                                                  roomsDiscountedPrice.add(hotel.discountedPrice[roomType1]);
+                                                                  roomsPrice.add(hotel.price[roomType1]);
                                                                   isConfirmed = true;
                                                                 } else {
                                                                   SnackBarBuilder().buildSnackBar(
@@ -364,8 +374,20 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                 break;
                                                               case 2:
                                                                 if (roomType1 != null && roomType2 != null) {
+                                                                  selectedRooms = [];
+                                                                  roomsDiscountedPrice = [];
+                                                                  roomsPrice = [];
                                                                   totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2];
                                                                   totalPrice = hotel.price[roomType1] + hotel.price[roomType2];
+                                                                  selectedRooms.addAll([roomType1, roomType2]);
+                                                                  roomsDiscountedPrice.addAll([
+                                                                    hotel.discountedPrice[roomType1],
+                                                                    hotel.discountedPrice[roomType2],
+                                                                  ]);
+                                                                  roomsPrice.addAll([
+                                                                    hotel.price[roomType1],
+                                                                    hotel.price[roomType2],
+                                                                  ]);
                                                                   isConfirmed = true;
                                                                 } else {
                                                                   SnackBarBuilder().buildSnackBar(
@@ -377,8 +399,22 @@ class _DetailsPageState extends State<DetailsPage> {
                                                                 break;
                                                               case 3:
                                                                 if (roomType1 != null && roomType2 != null && roomType3 != null) {
+                                                                  selectedRooms = [];
+                                                                  roomsDiscountedPrice = [];
+                                                                  roomsPrice = [];
                                                                   totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2] + hotel.discountedPrice[roomType3];
                                                                   totalPrice = hotel.price[roomType1] + hotel.price[roomType2] + hotel.price[roomType3];
+                                                                  selectedRooms.addAll([roomType1, roomType2, roomType3]);
+                                                                  roomsDiscountedPrice.addAll([
+                                                                    hotel.discountedPrice[roomType1],
+                                                                    hotel.discountedPrice[roomType2],
+                                                                    hotel.discountedPrice[roomType3],
+                                                                  ]);
+                                                                  roomsPrice.addAll([
+                                                                    hotel.price[roomType1],
+                                                                    hotel.price[roomType2],
+                                                                    hotel.price[roomType3],
+                                                                  ]);
                                                                   isConfirmed = true;
                                                                 } else {
                                                                   SnackBarBuilder().buildSnackBar(
@@ -525,49 +561,85 @@ class _DetailsPageState extends State<DetailsPage> {
                       // ),
                       GestureDetector(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                insetPadding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                                title: Center(
-                                  child: Text(
-                                    'Rules To Maintain',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                          if (isConfirmed == true) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  insetPadding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                  title: Center(
+                                    child: Text(
+                                      'Rules To Maintain',
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                                content: Container(
-                                  height: MediaQuery.of(context).size.height,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                actions: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 0, right: 0),
-                                    child: GestureDetector(
-                                        child: Container(
-                                          height: 50,
-                                          width: double.infinity,
-                                          color: Colors.black,
-                                          alignment: Alignment.center,
-                                          child: GradientCreate(
-                                            child: Text(
-                                              "CONFIRM",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
+                                  content: Container(
+                                    height: MediaQuery.of(context).size.height,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                  actions: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 0, right: 0),
+                                      child: GestureDetector(
+                                          child: Container(
+                                            height: 50,
+                                            width: double.infinity,
+                                            color: Colors.black,
+                                            alignment: Alignment.center,
+                                            child: GradientCreate(
+                                              child: Text(
+                                                "CONFIRM",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        onTap: () {
-                                          Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingConfirmPage()));
-                                          // your code
-                                        }),
-                                  )
-                                ],
-                              );
-                            },
-                          );
+                                          onTap: () {
+                                            Map<String, DateTime> selectedDate;
+
+                                            if (timeRange == null) {
+                                              selectedDate = {"startDate": DateTime.now(), "endDate": DateTime.now().add(Duration(days: 1))};
+                                            } else {
+                                              selectedDate = {"startDate": timeRange.start, "endDate": timeRange.end};
+                                            }
+
+                                            print(selectedDate);
+
+                                            BookingDetails bookingDetails = BookingDetails(
+                                              hid: hotel.hid,
+                                              hotelName: hotel.name,
+                                              userName: "Mr XYZ",
+                                              roomsDiscountedPrice: roomsDiscountedPrice,
+                                              roomsPrice: roomsPrice,
+                                              totalDiscountedPrice: totalDiscountedPrice,
+                                              totalPrice: totalPrice,
+                                              dateRange: selectedDate,
+                                              selectedRooms: selectedRooms,
+                                            );
+
+                                            Navigator.push(
+                                                context,
+                                                CupertinoPageRoute(
+                                                    builder: (_) => BookingConfirmPage(
+                                                          bookingDetails: bookingDetails,
+                                                        )));
+                                            // your code
+                                          }),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            SnackBarBuilder().buildSnackBar(
+                              context,
+                              message: "Select Room Please!",
+                              color: Colors.yellow,
+                              textColor: Colors.black87,
+                            );
+                          }
                         },
                         child: Container(
                           height: 40,
