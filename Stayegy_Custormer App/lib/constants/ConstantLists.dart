@@ -29,8 +29,3 @@ List<int> noOfRoomList = [
   2,
   3,
 ];
-List roomTypeList = [
-  "Single ",
-  "Double",
-  "Semi Double",
-];
