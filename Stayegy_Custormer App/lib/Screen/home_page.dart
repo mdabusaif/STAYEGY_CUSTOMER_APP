@@ -38,8 +38,7 @@ class _home_pageState extends State<home_page> {
           FlatButton(
             padding: EdgeInsets.all(17),
             minWidth: 1,
-            onPressed: () => Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => notification_page())),
+            onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => notification_page())),
             child: Image.asset('images/Notification bell.png'),
           ),
         ],
@@ -54,8 +53,7 @@ class _home_pageState extends State<home_page> {
             pinned: false,
             automaticallyImplyLeading: false,
             title: GestureDetector(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => SearchCity())),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchCity())),
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -96,26 +94,17 @@ class _home_pageState extends State<home_page> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                BlocProvider.of<LoadingblocBloc>(context).add(
-                                    SearchStartEvent(
-                                        cityName: cityList[index]
-                                            .toString()
-                                            .toLowerCase()));
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => ShowSearchResult()));
+                                BlocProvider.of<LoadingblocBloc>(context).add(SearchStartEvent(cityName: cityList[index].toString().toLowerCase()));
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => ShowSearchResult()));
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, top: 10),
+                                padding: const EdgeInsets.only(left: 15, top: 10),
                                 child: Column(
                                   children: [
                                     Container(
                                       child: CircleAvatar(
                                         radius: 25,
-                                        backgroundImage: AssetImage(
-                                            'images/Notification bell.png'),
+                                        backgroundImage: AssetImage('images/Notification bell.png'),
                                       ),
                                     ),
                                     Container(

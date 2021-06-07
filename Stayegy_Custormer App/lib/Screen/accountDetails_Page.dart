@@ -59,54 +59,54 @@ class AccountDetailsPage extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      print('Upload Button pressed!');
-                      formBloc.add(GetImageEvent());
-                    },
-                    child: Container(
-                      ///Todo: Take photo from gallery
-                      child: Stack(
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundColor: Colors.black,
-                            radius: 50.0,
-                            child: state is ImagePickedState
-                                ? ClipOval(
-                                    child: Image.file(
-                                      File(state.pickedFile.path),
-                                      fit: BoxFit.cover,
-                                      width: 100,
-                                    ),
-                                  )
-                                : Container(
-                                    padding: EdgeInsets.only(top: 15),
-                                    child: Image.asset(
-                                      'images/avater.png',
-                                    ),
-                                  ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 3,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  accountDetailsText('photoChange', '', context, formBloc: formBloc),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     print('Upload Button pressed!');
+                  //     accountDetailsText('photoChange', '', context, formBloc: formBloc);
+                  //   },
+                  //   child: Container(
+                  //     ///Todo: Take photo from gallery
+                  //     child: Stack(
+                  //       children: <Widget>[
+                  //         CircleAvatar(
+                  //           backgroundColor: Colors.black,
+                  //           radius: 50.0,
+                  //           child: state is ImagePickedState
+                  //               ? ClipOval(
+                  //                   child: Image.file(
+                  //                     File(state.pickedFile.path),
+                  //                     fit: BoxFit.cover,
+                  //                     width: 100,
+                  //                   ),
+                  //                 )
+                  //               : Container(
+                  //                   padding: EdgeInsets.only(top: 15),
+                  //                   child: Image.asset(
+                  //                     'images/avater.png',
+                  //                   ),
+                  //                 ),
+                  //         ),
+                  //         // Positioned(
+                  //         //   bottom: 0,
+                  //         //   right: 3,
+                  //         //   child: Icon(
+                  //         //     Icons.add_a_photo,
+                  //         //     color: Colors.black,
+                  //         //     size: 20,
+                  //         //   ),
+                  //         // ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: EdgeInsets.only(top: 50),
                     child: accountDetailsText('Full Name', 'Mr. XYZ', context),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: accountDetailsText(
-                        'Email', 'stayegy@outlook.com', context),
+                    child: accountDetailsText('Email', 'stayegy@outlook.com', context),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 30),
@@ -123,23 +123,11 @@ class AccountDetailsPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Radio(
-                                  activeColor: Color(0xff191919),
-                                  value: 'MALE',
-                                  groupValue: _gender,
-                                  onChanged: (value) {}),
+                              Radio(activeColor: Color(0xff191919), value: 'MALE', groupValue: _gender, onChanged: (value) {}),
                               Text('MALE'),
-                              Radio(
-                                  activeColor: Color(0xff191919),
-                                  value: 'FEMALE',
-                                  groupValue: _gender,
-                                  onChanged: (value) {}),
+                              Radio(activeColor: Color(0xff191919), value: 'FEMALE', groupValue: _gender, onChanged: (value) {}),
                               Text('FEMALE'),
-                              Radio(
-                                  activeColor: Color(0xff191919),
-                                  value: 'OTHER',
-                                  groupValue: _gender,
-                                  onChanged: (value) {}),
+                              Radio(activeColor: Color(0xff191919), value: 'OTHER', groupValue: _gender, onChanged: (value) {}),
                               Text('OTHER'),
                             ],
                           ),
@@ -156,18 +144,19 @@ class AccountDetailsPage extends StatelessWidget {
     );
   }
 
-  Column accountDetailsText(
-      String titletxt, String fieldtxt, BuildContext context) {
+  Column accountDetailsText(String titletxt, String fieldtxt, BuildContext context, {FormBloc formBloc = null, File imageFile = null}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          titletxt,
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        titletxt != 'photoChange'
+            ? Text(
+                titletxt,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Container(),
         SizedBox(
           height: 5,
         ),
@@ -181,17 +170,14 @@ class AccountDetailsPage extends StatelessWidget {
                   children: [
                     titletxt == 'Full Name'
                         ? Padding(
-                            padding: const EdgeInsets.only(
-                                top: 30, left: 20, right: 20),
+                            padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                             child: TextField(
                               inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[a-zA-Z .]')),
+                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z .]')),
                               ],
                               onChanged: (value) => _name = value,
                               decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 20, 0, 10),
+                                contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 10),
                                 labelText: 'Full Name',
                                 hintText: 'ENTER YOUR FULL NAME',
                                 // enabledBorder: OutlineInputBorder(
@@ -209,14 +195,12 @@ class AccountDetailsPage extends StatelessWidget {
                           )
                         : titletxt == 'Email'
                             ? Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 30, left: 20, right: 20),
+                                padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                                 child: TextField(
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: (value) => _email = value,
                                   decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.fromLTRB(0, 20, 0, 10),
+                                    contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 10),
                                     labelText: 'Email',
                                     hintText: 'ENTER YOUR EMAIL ADDRESS',
                                     // enabledBorder: OutlineInputBorder(
@@ -234,10 +218,57 @@ class AccountDetailsPage extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            : Container(),
+                            : titletxt == 'photoChange'
+                                ? BlocBuilder<FormBloc, FormStates>(builder: (context, state) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(30.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          print('Upload Button pressed!');
+                                          formBloc.add(GetImageEvent());
+                                        },
+                                        child: Container(
+                                          ///Todo: Take photo from gallery
+                                          child: Stack(
+                                            children: <Widget>[
+                                              CircleAvatar(
+                                                backgroundColor: Colors.black,
+                                                radius: 100.0,
+                                                child: state is ImagePickedState
+                                                    ? ClipOval(
+                                                        child: Image.file(
+                                                          File(state.pickedFile.path),
+                                                          fit: BoxFit.cover,
+                                                          width: 100,
+                                                        ),
+                                                      )
+                                                    : Container(
+                                                        padding: EdgeInsets.only(
+                                                          top: 15,
+                                                        ),
+                                                        child: Image.asset(
+                                                          'images/avater.png',
+                                                        ),
+                                                      ),
+                                              ),
+                                              Positioned(
+                                                bottom: 0,
+                                                right: 3,
+                                                child: Icon(
+                                                  Icons.add_a_photo,
+                                                  color: Colors.black,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  })
+                                : Container(),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
                       child: Column(
                         children: <Widget>[
                           BottomButton(
@@ -256,29 +287,64 @@ class AccountDetailsPage extends StatelessWidget {
               ),
             );
           },
-          child: Container(
-            color: Colors.transparent,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      fieldtxt,
-                      style: TextStyle(color: Color(0xff6b6b6b)),
-                    ),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
+          child: titletxt == 'photoChange'
+              ? Container(
+                  ///Todo: Take photo from gallery
+                  child: Stack(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.black,
+                        radius: 50.0,
+                        child: imageFile != null
+                            ? ClipOval(
+                                child: Image.file(
+                                  imageFile,
+                                  fit: BoxFit.cover,
+                                  width: 100,
+                                ),
+                              )
+                            : Container(
+                                padding: EdgeInsets.only(top: 15),
+                                child: Image.asset(
+                                  'images/avater.png',
+                                ),
+                              ),
+                      ),
+                      // Positioned(
+                      //   bottom: 0,
+                      //   right: 3,
+                      //   child: Icon(
+                      //     Icons.add_a_photo,
+                      //     color: Colors.black,
+                      //     size: 20,
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                )
+              : Container(
+                  color: Colors.transparent,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            fieldtxt,
+                            style: TextStyle(color: Color(0xff6b6b6b)),
+                          ),
+                          Icon(Icons.arrow_forward_ios),
+                        ],
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
                 ),
-                Divider(
-                  height: 20,
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-          ),
         ),
       ],
     );
