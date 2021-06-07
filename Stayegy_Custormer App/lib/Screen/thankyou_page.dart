@@ -20,7 +20,7 @@ class ThankYouPage extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              color: Color(0xFF020101),
+              color: Color(0xFF191919),
               height: MediaQuery.of(context).size.height,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
