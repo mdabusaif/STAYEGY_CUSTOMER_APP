@@ -63,47 +63,7 @@ class AccountDetailsPage extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
-                        accountDetailsText('photoChange', '', context, formBloc: formBloc),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     print('Upload Button pressed!');
-                        //     accountDetailsText('photoChange', '', context, formBloc: formBloc);
-                        //   },
-                        //   child: Container(
-                        //     ///Todo: Take photo from gallery
-                        //     child: Stack(
-                        //       children: <Widget>[
-                        //         CircleAvatar(
-                        //           backgroundColor: Colors.black,
-                        //           radius: 50.0,
-                        //           child: state is ImagePickedState
-                        //               ? ClipOval(
-                        //                   child: Image.file(
-                        //                     File(state.pickedFile.path),
-                        //                     fit: BoxFit.cover,
-                        //                     width: 100,
-                        //                   ),
-                        //                 )
-                        //               : Container(
-                        //                   padding: EdgeInsets.only(top: 15),
-                        //                   child: Image.asset(
-                        //                     'images/avater.png',
-                        //                   ),
-                        //                 ),
-                        //         ),
-                        //         // Positioned(
-                        //         //   bottom: 0,
-                        //         //   right: 3,
-                        //         //   child: Icon(
-                        //         //     Icons.add_a_photo,
-                        //         //     color: Colors.black,
-                        //         //     size: 20,
-                        //         //   ),
-                        //         // ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+                        accountDetailsText('photoChange', '', context, formBloc: formBloc, imageFile: state.image),
                         Padding(
                           padding: EdgeInsets.only(top: 50),
                           child: accountDetailsText('Full Name', state.name != null ? state.name : 'Mr. XYZ', context),
@@ -151,7 +111,7 @@ class AccountDetailsPage extends StatelessWidget {
     );
   }
 
-  Column accountDetailsText(String titletxt, String fieldtxt, BuildContext context, {FormBloc formBloc = null, File imageFile = null}) {
+  Column accountDetailsText(String titletxt, String fieldtxt, BuildContext context, {FormBloc formBloc = null, String imageFile = null}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -296,7 +256,7 @@ class AccountDetailsPage extends StatelessWidget {
           },
           child: titletxt == 'photoChange'
               ? Container(
-                  ///Todo: Take photo from gallery
+                  // show photo of the user
                   child: Stack(
                     children: <Widget>[
                       CircleAvatar(
@@ -304,7 +264,7 @@ class AccountDetailsPage extends StatelessWidget {
                         radius: 50.0,
                         child: imageFile != null
                             ? ClipOval(
-                                child: Image.file(
+                                child: Image.network(
                                   imageFile,
                                   fit: BoxFit.cover,
                                   width: 100,
