@@ -8,7 +8,10 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Events.dart';
 import 'package:stayegy/bloc/FormBloc/Form_States.dart';
+import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
+import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy/container/bottom_button.dart';
+import 'package:stayegy/container/loading_Overlay.dart';
 
 class AccountDetailsPage extends StatelessWidget {
   String _name = "";
@@ -51,92 +54,96 @@ class AccountDetailsPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.only(left: 15, right: 15),
           child: SingleChildScrollView(
-            child: BlocBuilder<FormBloc, FormStates>(builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  accountDetailsText('photoChange', '', context, formBloc: formBloc),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     print('Upload Button pressed!');
-                  //     accountDetailsText('photoChange', '', context, formBloc: formBloc);
-                  //   },
-                  //   child: Container(
-                  //     ///Todo: Take photo from gallery
-                  //     child: Stack(
-                  //       children: <Widget>[
-                  //         CircleAvatar(
-                  //           backgroundColor: Colors.black,
-                  //           radius: 50.0,
-                  //           child: state is ImagePickedState
-                  //               ? ClipOval(
-                  //                   child: Image.file(
-                  //                     File(state.pickedFile.path),
-                  //                     fit: BoxFit.cover,
-                  //                     width: 100,
-                  //                   ),
-                  //                 )
-                  //               : Container(
-                  //                   padding: EdgeInsets.only(top: 15),
-                  //                   child: Image.asset(
-                  //                     'images/avater.png',
-                  //                   ),
-                  //                 ),
-                  //         ),
-                  //         // Positioned(
-                  //         //   bottom: 0,
-                  //         //   right: 3,
-                  //         //   child: Icon(
-                  //         //     Icons.add_a_photo,
-                  //         //     color: Colors.black,
-                  //         //     size: 20,
-                  //         //   ),
-                  //         // ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: accountDetailsText('Full Name', 'Mr. XYZ', context),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: accountDetailsText('Email', 'stayegy@outlook.com', context),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'GENDER',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+            child: BlocBuilder<LogInBloc, LogInState>(builder: (context, state) {
+              return state is AccountDataLoadedState
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        accountDetailsText('photoChange', '', context, formBloc: formBloc),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     print('Upload Button pressed!');
+                        //     accountDetailsText('photoChange', '', context, formBloc: formBloc);
+                        //   },
+                        //   child: Container(
+                        //     ///Todo: Take photo from gallery
+                        //     child: Stack(
+                        //       children: <Widget>[
+                        //         CircleAvatar(
+                        //           backgroundColor: Colors.black,
+                        //           radius: 50.0,
+                        //           child: state is ImagePickedState
+                        //               ? ClipOval(
+                        //                   child: Image.file(
+                        //                     File(state.pickedFile.path),
+                        //                     fit: BoxFit.cover,
+                        //                     width: 100,
+                        //                   ),
+                        //                 )
+                        //               : Container(
+                        //                   padding: EdgeInsets.only(top: 15),
+                        //                   child: Image.asset(
+                        //                     'images/avater.png',
+                        //                   ),
+                        //                 ),
+                        //         ),
+                        //         // Positioned(
+                        //         //   bottom: 0,
+                        //         //   right: 3,
+                        //         //   child: Icon(
+                        //         //     Icons.add_a_photo,
+                        //         //     color: Colors.black,
+                        //         //     size: 20,
+                        //         //   ),
+                        //         // ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 50),
+                          child: accountDetailsText('Full Name', state.name != null ? state.name : 'Mr. XYZ', context),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: accountDetailsText('Email', state.email != null ? state.email : 'stayegy@outlook.com', context),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 30),
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'GENDER',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Radio(activeColor: Color(0xff191919), value: 'MALE', groupValue: state.gender, onChanged: (value) {}),
+                                    Text('MALE'),
+                                    Radio(activeColor: Color(0xff191919), value: 'FEMALE', groupValue: state.gender, onChanged: (value) {}),
+                                    Text('FEMALE'),
+                                    Radio(activeColor: Color(0xff191919), value: 'OTHER', groupValue: state.gender, onChanged: (value) {}),
+                                    Text('OTHER'),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Radio(activeColor: Color(0xff191919), value: 'MALE', groupValue: _gender, onChanged: (value) {}),
-                              Text('MALE'),
-                              Radio(activeColor: Color(0xff191919), value: 'FEMALE', groupValue: _gender, onChanged: (value) {}),
-                              Text('FEMALE'),
-                              Radio(activeColor: Color(0xff191919), value: 'OTHER', groupValue: _gender, onChanged: (value) {}),
-                              Text('OTHER'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              );
+                        ),
+                      ],
+                    )
+                  : state is LoadingState
+                      ? LoadingOverlay().buildWidget(context)
+                      : Container();
             }),
           ),
         ),

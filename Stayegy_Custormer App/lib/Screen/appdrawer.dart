@@ -5,6 +5,8 @@ import 'package:stayegy/Screen/accountDetails_Page.dart';
 import 'package:stayegy/Screen/history_save_page.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
+import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
+import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/container/drawer_Data.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/gradient_text.dart';
@@ -46,20 +48,15 @@ class appdrawer extends StatelessWidget {
                   imagePath: 'images/account_icon.png',
                   textData: 'Account',
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (_) => AccountDetailsPage()));
+                    BlocProvider.of<LogInBloc>(context).add(LoadAccountDataEvent());
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => AccountDetailsPage()));
                   },
                 ),
                 drawer_data(
                   imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
                   },
                 ),
                 drawer_data(
@@ -67,10 +64,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Invite & Earn',
                   width: 10,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
                   },
                 ),
                 drawer_data(
@@ -78,10 +72,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Saved & History',
                   width: 12,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
                   },
                 ),
               ],

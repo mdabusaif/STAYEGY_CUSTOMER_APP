@@ -12,28 +12,14 @@ class UserRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  UserRepository({auth.FirebaseAuth firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
+  UserRepository({auth.FirebaseAuth firebaseAuth}) : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
-  Future<void> sendOTP(
-      String phoneNumber,
-      Duration timeOut,
-      auth.PhoneVerificationCompleted phoneVerificationCompleted,
-      auth.PhoneVerificationFailed phoneVerificationFailed,
-      auth.PhoneCodeSent phoneCodeSent,
-      auth.PhoneCodeAutoRetrievalTimeout phoneCodeAutoRetrievalTimeout) async {
-    _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: phoneVerificationCompleted,
-        verificationFailed: phoneVerificationFailed,
-        codeSent: phoneCodeSent,
-        codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
+  Future<void> sendOTP(String phoneNumber, Duration timeOut, auth.PhoneVerificationCompleted phoneVerificationCompleted, auth.PhoneVerificationFailed phoneVerificationFailed, auth.PhoneCodeSent phoneCodeSent, auth.PhoneCodeAutoRetrievalTimeout phoneCodeAutoRetrievalTimeout) async {
+    _firebaseAuth.verifyPhoneNumber(phoneNumber: phoneNumber, verificationCompleted: phoneVerificationCompleted, verificationFailed: phoneVerificationFailed, codeSent: phoneCodeSent, codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
   }
 
-  Future<auth.UserCredential> verifyAndLogin(
-      String verificationId, String smsCode) async {
-    auth.AuthCredential authCredential = auth.PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: smsCode);
+  Future<auth.UserCredential> verifyAndLogin(String verificationId, String smsCode) async {
+    auth.AuthCredential authCredential = auth.PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
 
     return _firebaseAuth.signInWithCredential(authCredential);
   }
@@ -57,13 +43,15 @@ class UserRepository {
     }
   }
 
-  Future<void> uploadUserDetails(
-      {UserDetails user,
-      String name,
-      String email,
-      String phoneNumber,
-      String gender,
-      File image}) async {
+  Future<UserDetails> loadUserDetails(String uid) async {
+    final documentReference = await db.collection("users").doc(uid).get();
+
+    UserDetails userDetails = UserDetails.fromMap(documentReference.data());
+
+    return userDetails;
+  }
+
+  Future<void> uploadUserDetails({UserDetails user, String name, String email, String phoneNumber, String gender, File image}) async {
     String picUrl;
 
     if (image != null) {
@@ -72,22 +60,14 @@ class UserRepository {
       picUrl = "";
     }
 
-    user.valueSetter(
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-        gender: gender,
-        picUrl: picUrl);
+    user.valueSetter(name: name, email: email, phoneNumber: phoneNumber, gender: gender, picUrl: picUrl);
 
     final documentReference = await db.collection("users").doc(user.uid).get();
     await documentReference.reference.set(user.toJason());
   }
 
   Future<String> uploadPictureAndGetUrl(File image) async {
-    var snapshot = await storage
-        .ref()
-        .child('userPhotos/${basename(image.path)}}')
-        .putFile(image);
+    var snapshot = await storage.ref().child('userPhotos/${basename(image.path)}}').putFile(image);
     return await snapshot.ref.getDownloadURL();
   }
 

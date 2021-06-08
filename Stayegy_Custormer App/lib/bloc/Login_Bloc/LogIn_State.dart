@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -70,4 +72,21 @@ class OtpExceptionState extends LogInState {
 
   @override
   List<Object> get props => [message];
+}
+
+class AccountDataLoadedState extends LogInState {
+  final String image;
+  final String name;
+  final String email;
+  final String gender;
+
+  AccountDataLoadedState({
+    this.image,
+    this.name,
+    this.email,
+    this.gender,
+  });
+
+  @override
+  List<Object> get props => [image, name, email, gender];
 }

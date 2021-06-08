@@ -10,7 +10,7 @@ import '../Repository/User/User_Details.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final UserRepository _userRepository;
-  final UserDetails _userDetails;
+  UserDetails _userDetails;
   StreamSubscription subscription;
   UserCredential _userCredential;
 
@@ -39,13 +39,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     } else if (event is VerifyOtpEvent) {
       yield LoadingState();
       try {
-        _userCredential =
-            await _userRepository.verifyAndLogin(verID, event.otp);
-        final bool isRegistered = await _userRepository.checkForRegistration(
-            _userDetails, _userCredential.user.uid);
+        _userCredential = await _userRepository.verifyAndLogin(verID, event.otp);
+        final bool isRegistered = await _userRepository.checkForRegistration(_userDetails, _userCredential.user.uid);
         if (_userCredential.user != null && !isRegistered) {
           yield RegistrationNeededState();
         } else if (_userCredential.user != null && isRegistered) {
+          _userDetails = await _userRepository.loadUserDetails(_userCredential.user.uid);
           yield LogInCompleteState(_userCredential.user);
         } else {
           yield OtpExceptionState(message: "Invalid otp!");
@@ -56,14 +55,17 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       }
     } else if (event is UploadDetailsEvent) {
       yield LoadingState();
-      await _userRepository.uploadUserDetails(
-          user: _userDetails,
-          name: event.name,
-          email: event.email,
-          phoneNumber: _userCredential.user.phoneNumber,
-          gender: event.gender,
-          image: event.image);
+      await _userRepository.uploadUserDetails(user: _userDetails, name: event.name, email: event.email, phoneNumber: _userCredential.user.phoneNumber, gender: event.gender, image: event.image);
+      _userDetails = await _userRepository.loadUserDetails(_userCredential.user.uid);
       yield RegistrationCompleteState(_userCredential.user);
+    } else if (event is LoadAccountDataEvent) {
+      yield LoadingState();
+      yield AccountDataLoadedState(
+        image: _userDetails.picURL,
+        name: _userDetails.name,
+        email: _userDetails.email,
+        gender: _userDetails.gender,
+      );
     }
   }
 
@@ -96,8 +98,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         eventStream.close();
       });
     };
-    final PhoneVerificationFailed =
-        (FirebaseAuthException firebaseAuthException) {
+    final PhoneVerificationFailed = (FirebaseAuthException firebaseAuthException) {
       print(firebaseAuthException.message);
       eventStream.add(LogInExceptionEvent(onError.toString()));
       eventStream.close();
@@ -113,13 +114,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       eventStream.close();
     };
 
-    await _userRepository.sendOTP(
-        phoNo,
-        Duration(seconds: 1),
-        PhoneVerificationCompleted,
-        PhoneVerificationFailed,
-        PhoneCodeSent,
-        PhoneCodeAutoRetrievalTimeout);
+    await _userRepository.sendOTP(phoNo, Duration(seconds: 1), PhoneVerificationCompleted, PhoneVerificationFailed, PhoneCodeSent, PhoneCodeAutoRetrievalTimeout);
     yield* eventStream.stream;
   }
 }

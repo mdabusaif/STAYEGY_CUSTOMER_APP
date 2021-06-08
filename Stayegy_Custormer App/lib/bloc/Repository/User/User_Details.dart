@@ -6,12 +6,7 @@ class UserDetails {
   String gender;
   String picURL;
 
-  void valueSetter(
-      {String name,
-      String email,
-      String phoneNumber,
-      String gender,
-      String picUrl}) {
+  void valueSetter({String name, String email, String phoneNumber, String gender, String picUrl}) {
     this.name = name;
     this.email = email;
     this.phoneNumber = phoneNumber;
@@ -19,12 +14,7 @@ class UserDetails {
     this.picURL = picUrl;
   }
 
-  UserDetails(
-      {this.name = "",
-      this.phoneNumber = "",
-      this.gender = "",
-      this.picURL = "",
-      this.email = ""});
+  UserDetails({this.name = "", this.phoneNumber = "", this.gender = "", this.picURL = "", this.email = ""});
 
   Map<String, dynamic> toJason() => {
         'uid': uid,
@@ -34,4 +24,13 @@ class UserDetails {
         'avatarPicURL': picURL,
         'email': email,
       };
+
+  UserDetails.fromMap(Map<String, dynamic> userDetails) {
+    uid = userDetails["uid"];
+    name = userDetails["name"];
+    phoneNumber = userDetails["phoneNumber"];
+    gender = userDetails["gender"];
+    picURL = userDetails["avatarPicURL"];
+    email = userDetails["email"];
+  }
 }

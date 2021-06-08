@@ -43,3 +43,5 @@ class UploadDetailsEvent extends LogInEvent {
 
   UploadDetailsEvent({this.name, this.email, this.gender, this.image});
 }
+
+class LoadAccountDataEvent extends LogInEvent {}
