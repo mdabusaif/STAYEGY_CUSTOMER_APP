@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import '../Repository/User/UserRepository.dart';
 import '../Repository/User/User_Details.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository _userRepository;
 
   AuthenticationBloc({UserRepository userRepository, UserDetails userDetails})
@@ -14,11 +15,14 @@ class AuthenticationBloc
         super(InitialAuthenticationState());
 
   @override
-  Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event) async* {
+  Stream<AuthenticationState> mapEventToState(AuthenticationEvent event) async* {
     if (event is AppStarted) {
-      final bool hasToken = await _userRepository.getUser() != null;
+      yield Uninitialized();
+      auth.User user = await _userRepository.getUser();
+      // final bool hasToken = await _userRepository.getUser() != null;
+      final bool hasToken = user != null;
       if (hasToken) {
+        userDetailsGlobal = await _userRepository.loadUserDetails(user.uid);
         yield Authenticated();
       } else {
         yield Unauthenticated();

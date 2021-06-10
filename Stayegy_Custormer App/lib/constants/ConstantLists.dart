@@ -1,3 +1,5 @@
+import 'package:stayegy/bloc/Repository/User/User_Details.dart';
+
 List<String> cityList = [
   "Dhaka",
   "Faridpur",
@@ -29,3 +31,5 @@ List<int> noOfRoomList = [
   2,
   3,
 ];
+
+UserDetails userDetailsGlobal;

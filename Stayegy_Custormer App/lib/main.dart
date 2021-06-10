@@ -26,17 +26,10 @@ void main() async {
       value: userRepository,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthenticationBloc>(
-              create: (context) =>
-                  AuthenticationBloc(userRepository: userRepository)
-                    ..add(AppStarted())),
+          BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
-          BlocProvider<LogInBloc>(
-              create: (context) => LogInBloc(
-                  userRepository: userRepository, userDetails: userDetails)),
-          BlocProvider<LoadingblocBloc>(
-              create: (context) =>
-                  LoadingblocBloc(hotelRepository: hotelRepository)),
+          BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
+          BlocProvider<LoadingblocBloc>(create: (context) => LoadingblocBloc(hotelRepository: hotelRepository)),
         ],
         child: MyApp(),
       ),
@@ -60,7 +53,6 @@ class MyApp extends StatelessWidget {
             return SplashPage();
           } else if (state is Unauthenticated) {
             return login_page();
-            // return login_cprofile();
           } else if (state is Authenticated) {
             return home_page();
           } else {

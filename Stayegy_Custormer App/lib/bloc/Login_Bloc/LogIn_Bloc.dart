@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 
 import '../Repository/User/UserRepository.dart';
 import '../Repository/User/User_Details.dart';
@@ -45,6 +46,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
           yield RegistrationNeededState();
         } else if (_userCredential.user != null && isRegistered) {
           _userDetails = await _userRepository.loadUserDetails(_userCredential.user.uid);
+          userDetailsGlobal = _userDetails;
           yield LogInCompleteState(_userCredential.user);
         } else {
           yield OtpExceptionState(message: "Invalid otp!");
@@ -57,15 +59,30 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       yield LoadingState();
       await _userRepository.uploadUserDetails(user: _userDetails, name: event.name, email: event.email, phoneNumber: _userCredential.user.phoneNumber, gender: event.gender, image: event.image);
       _userDetails = await _userRepository.loadUserDetails(_userCredential.user.uid);
+      userDetailsGlobal = _userDetails;
       yield RegistrationCompleteState(_userCredential.user);
-    } else if (event is LoadAccountDataEvent) {
-      yield LoadingState();
-      yield AccountDataLoadedState(
-        image: _userDetails.picURL,
-        name: _userDetails.name,
-        email: _userDetails.email,
-        gender: _userDetails.gender,
-      );
+    } else if (event is UpdateUserDetailsEvent) {
+      bool complete;
+      switch (event.operationType) {
+        case 'name':
+          await _userRepository.updateUserInfo(operationType: 'name', uid: _userCredential.user.uid, name: event.name);
+          complete = true;
+          break;
+        case 'email':
+          await _userRepository.updateUserInfo(operationType: 'email', uid: _userCredential.user.uid, email: event.email);
+          complete = true;
+          break;
+        case 'photo':
+          await _userRepository.updateUserInfo(operationType: 'photo', uid: _userCredential.user.uid, imageFile: event.image, currentImageURL: userDetailsGlobal.picURL);
+          complete = true;
+          break;
+      }
+
+      if (complete) {
+        yield UpdateUserDetailsCompleteState();
+      } else {
+        yield ExceptionState(message: 'Update Failed!');
+      }
     }
   }
 

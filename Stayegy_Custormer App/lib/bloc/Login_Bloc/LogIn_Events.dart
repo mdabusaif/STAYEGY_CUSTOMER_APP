@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/cupertino.dart';
 
 abstract class LogInEvent extends Equatable {
   @override
@@ -44,4 +45,11 @@ class UploadDetailsEvent extends LogInEvent {
   UploadDetailsEvent({this.name, this.email, this.gender, this.image});
 }
 
-class LoadAccountDataEvent extends LogInEvent {}
+class UpdateUserDetailsEvent extends LogInEvent {
+  final String name;
+  final String email;
+  final File image;
+  final String operationType;
+
+  UpdateUserDetailsEvent({this.name, this.email, this.image, @required this.operationType});
+}

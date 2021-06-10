@@ -74,19 +74,4 @@ class OtpExceptionState extends LogInState {
   List<Object> get props => [message];
 }
 
-class AccountDataLoadedState extends LogInState {
-  final String image;
-  final String name;
-  final String email;
-  final String gender;
-
-  AccountDataLoadedState({
-    this.image,
-    this.name,
-    this.email,
-    this.gender,
-  });
-
-  @override
-  List<Object> get props => [image, name, email, gender];
-}
+class UpdateUserDetailsCompleteState extends LogInState {}

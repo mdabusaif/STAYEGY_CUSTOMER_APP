@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 
 import 'User_Details.dart';
@@ -69,6 +70,10 @@ class UserRepository {
   Future<String> uploadPictureAndGetUrl(File image) async {
     var snapshot = await storage.ref().child('userPhotos/${basename(image.path)}}').putFile(image);
     return await snapshot.ref.getDownloadURL();
+  }
+
+  Future updateUserInfo({String name, String email, File imageFile, @required String operationType, @required String uid}) async {
+    final documentReference = await db.collection("users").doc(uid).get();
   }
 
   Future<void> logOut() async {

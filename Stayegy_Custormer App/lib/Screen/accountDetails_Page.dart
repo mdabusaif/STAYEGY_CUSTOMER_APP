@@ -10,18 +10,24 @@ import 'package:stayegy/bloc/FormBloc/Form_Events.dart';
 import 'package:stayegy/bloc/FormBloc/Form_States.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:stayegy/container/bottom_button.dart';
-import 'package:stayegy/container/loading_Overlay.dart';
 
-class AccountDetailsPage extends StatelessWidget {
+class AccountDetailsPage extends StatefulWidget {
+  AccountDetailsPage({Key key}) : super(key: key);
+
+  @override
+  _AccountDetailsPageState createState() => _AccountDetailsPageState();
+}
+
+class _AccountDetailsPageState extends State<AccountDetailsPage> {
   String _name = "";
   String _email = "";
-  String _gender = "MALE";
-  File _image;
 
   @override
   Widget build(BuildContext context) {
     final FormBloc formBloc = BlocProvider.of<FormBloc>(context);
+    final LogInBloc logInBloc = BlocProvider.of<LogInBloc>(context);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -55,55 +61,51 @@ class AccountDetailsPage extends StatelessWidget {
           padding: EdgeInsets.only(left: 15, right: 15),
           child: SingleChildScrollView(
             child: BlocBuilder<LogInBloc, LogInState>(builder: (context, state) {
-              return state is AccountDataLoadedState
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        accountDetailsText('photoChange', '', context, formBloc: formBloc, imageFile: state.image),
-                        Padding(
-                          padding: EdgeInsets.only(top: 50),
-                          child: accountDetailsText('Full Name', state.name != null ? state.name : 'Mr. XYZ', context),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: accountDetailsText('Email', state.email != null ? state.email : 'stayegy@outlook.com', context),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 30),
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'GENDER',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Radio(activeColor: Color(0xff191919), value: 'MALE', groupValue: state.gender, onChanged: (value) {}),
-                                    Text('MALE'),
-                                    Radio(activeColor: Color(0xff191919), value: 'FEMALE', groupValue: state.gender, onChanged: (value) {}),
-                                    Text('FEMALE'),
-                                    Radio(activeColor: Color(0xff191919), value: 'OTHER', groupValue: state.gender, onChanged: (value) {}),
-                                    Text('OTHER'),
-                                  ],
-                                ),
-                              ],
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  accountDetailsText('photoChange', '', context, formBloc: formBloc, logInBloc: logInBloc, imageURL: userDetailsGlobal.picURL),
+                  Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: accountDetailsText('Full Name', userDetailsGlobal.name != null ? userDetailsGlobal.name : 'Mr. XYZ', context),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: accountDetailsText('Email', userDetailsGlobal.email != null ? userDetailsGlobal.email : 'stayegy@outlook.com', context),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 30),
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'GENDER',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  : state is LoadingState
-                      ? LoadingOverlay().buildWidget(context)
-                      : Container();
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Radio(activeColor: Color(0xff191919), value: 'MALE', groupValue: userDetailsGlobal.gender, onChanged: (value) {}),
+                              Text('MALE'),
+                              Radio(activeColor: Color(0xff191919), value: 'FEMALE', groupValue: userDetailsGlobal.gender, onChanged: (value) {}),
+                              Text('FEMALE'),
+                              Radio(activeColor: Color(0xff191919), value: 'OTHER', groupValue: userDetailsGlobal.gender, onChanged: (value) {}),
+                              Text('OTHER'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
             }),
           ),
         ),
@@ -111,7 +113,7 @@ class AccountDetailsPage extends StatelessWidget {
     );
   }
 
-  Column accountDetailsText(String titletxt, String fieldtxt, BuildContext context, {FormBloc formBloc = null, String imageFile = null}) {
+  Column accountDetailsText(String titletxt, String fieldtxt, BuildContext context, {FormBloc formBloc = null, LogInBloc logInBloc, String imageURL = null}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -262,10 +264,10 @@ class AccountDetailsPage extends StatelessWidget {
                       CircleAvatar(
                         backgroundColor: Colors.black,
                         radius: 50.0,
-                        child: imageFile != null
+                        child: imageURL != null
                             ? ClipOval(
                                 child: Image.network(
-                                  imageFile,
+                                  imageURL,
                                   fit: BoxFit.cover,
                                   width: 100,
                                 ),

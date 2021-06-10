@@ -48,7 +48,6 @@ class appdrawer extends StatelessWidget {
                   imagePath: 'images/account_icon.png',
                   textData: 'Account',
                   onTap: () {
-                    BlocProvider.of<LogInBloc>(context).add(LoadAccountDataEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => AccountDetailsPage()));
                   },
                 ),
