@@ -9,6 +9,7 @@ import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Events.dart';
 import 'package:stayegy/bloc/FormBloc/Form_States.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
+import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:stayegy/container/bottom_button.dart';
@@ -71,11 +72,11 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
                   accountDetailsText('photoChange', '', context, formBloc: formBloc, logInBloc: logInBloc, imageURL: userDetailsGlobal.picURL),
                   Padding(
                     padding: EdgeInsets.only(top: 50),
-                    child: accountDetailsText('Full Name', userDetailsGlobal.name != null ? userDetailsGlobal.name : 'Mr. XYZ', context),
+                    child: accountDetailsText('Full Name', userDetailsGlobal.name != null ? userDetailsGlobal.name : 'Mr. XYZ', context, logInBloc: logInBloc),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: accountDetailsText('Email', userDetailsGlobal.email != null ? userDetailsGlobal.email : 'stayegy@outlook.com', context),
+                    child: accountDetailsText('Email', userDetailsGlobal.email != null ? userDetailsGlobal.email : 'stayegy@outlook.com', context, logInBloc: logInBloc),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 30),
@@ -247,6 +248,10 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
                                 print("Pressed");
                                 print(_name);
                                 print(_email);
+                                switch (titletxt) {
+                                  case 'Full Name':
+                                    logInBloc.add(UpdateUserDetailsEvent(operationType: 'name', name: _name));
+                                }
                               })
                         ],
                       ),
