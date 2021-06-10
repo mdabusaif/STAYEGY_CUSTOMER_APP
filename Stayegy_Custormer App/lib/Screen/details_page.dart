@@ -147,44 +147,45 @@ class _DetailsPageState extends State<DetailsPage> {
                               height: 10,
                             ),
                             Container(
-                                color: Colors.black,
-                                height: 50,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        dateTimeRangePicker();
-                                      },
-                                      child: Text(
-                                        // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
-                                        timeRange == null ? '${DateFormat('dd-MM-yy').format(DateTime.now())}  -  ${DateFormat('dd-MM-yy').format(DateTime.now().add(Duration(days: 1)))}' : '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                        ),
+                              color: Colors.black,
+                              height: 50,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      dateTimeRangePicker();
+                                    },
+                                    child: Text(
+                                      // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
+                                      timeRange == null ? '${DateFormat('dd-MM-yy').format(DateTime.now())}  -  ${DateFormat('dd-MM-yy').format(DateTime.now().add(Duration(days: 1)))}' : '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
                                       ),
                                     ),
-                                    VerticalDivider(
-                                      color: Color(0xffd7d7d7),
-                                      thickness: 1,
-                                      indent: 10,
-                                      endIndent: 15,
-                                    ),
-                                    GestureDetector(
-                                      child: Text(
-                                        "Room",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                        ),
+                                  ),
+                                  VerticalDivider(
+                                    color: Color(0xffd7d7d7),
+                                    thickness: 1,
+                                    indent: 10,
+                                    endIndent: 15,
+                                  ),
+                                  GestureDetector(
+                                    child: Text(
+                                      "Room",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
                                       ),
-                                      onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return StatefulBuilder(builder: (context, setState) {
+                                    ),
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return StatefulBuilder(
+                                              builder: (context, setState) {
                                                 return AlertDialog(
                                                   buttonPadding: EdgeInsets.only(left: 0),
                                                   scrollable: true,
@@ -439,15 +440,19 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     )
                                                   ],
                                                 );
-                                              });
-                                            }).then((_) => setState(() {
-                                              totalDiscountedPrice = totalDiscountedPrice;
-                                              totalPrice = totalPrice;
-                                            }));
-                                      },
-                                    ),
-                                  ],
-                                )),
+                                              },
+                                            );
+                                          }).then(
+                                        (_) => setState(() {
+                                          totalDiscountedPrice = totalDiscountedPrice;
+                                          totalPrice = totalPrice;
+                                        }),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
