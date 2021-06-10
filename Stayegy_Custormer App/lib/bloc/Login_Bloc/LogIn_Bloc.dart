@@ -62,23 +62,25 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       userDetailsGlobal = _userDetails;
       yield RegistrationCompleteState(_userCredential.user);
     } else if (event is UpdateUserDetailsEvent) {
-      bool complete;
+      yield LoadingState();
+      bool complete = false;
       switch (event.operationType) {
         case 'name':
-          await _userRepository.updateUserInfo(operationType: 'name', uid: _userCredential.user.uid, name: event.name);
+          await _userRepository.updateUserInfo(operationType: 'name', uid: userDetailsGlobal.uid, name: event.name);
           complete = true;
           break;
         case 'email':
-          await _userRepository.updateUserInfo(operationType: 'email', uid: _userCredential.user.uid, email: event.email);
+          await _userRepository.updateUserInfo(operationType: 'email', uid: userDetailsGlobal.uid, email: event.email);
           complete = true;
           break;
         case 'photo':
-          await _userRepository.updateUserInfo(operationType: 'photo', uid: _userCredential.user.uid, imageFile: event.image, currentImageURL: userDetailsGlobal.picURL);
+          await _userRepository.updateUserInfo(operationType: 'photo', uid: userDetailsGlobal.uid, imageFile: event.image, currentImageURL: userDetailsGlobal.picURL);
           complete = true;
           break;
       }
 
       if (complete) {
+        userDetailsGlobal = await _userRepository.loadUserDetails(userDetailsGlobal.uid);
         yield UpdateUserDetailsCompleteState();
       } else {
         yield ExceptionState(message: 'Update Failed!');

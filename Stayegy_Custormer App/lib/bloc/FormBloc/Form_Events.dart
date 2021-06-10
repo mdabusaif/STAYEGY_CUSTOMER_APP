@@ -22,13 +22,13 @@ class NameAndEmailValidationCheckEvent extends FormEvents {
 class NameValidationCheckEvent extends FormEvents {
   final String name;
 
-  NameValidationCheckEvent({@required this.name});
+  NameValidationCheckEvent({this.name});
 }
 
 class EmailValidationCheckEvent extends FormEvents {
   final String email;
 
-  EmailValidationCheckEvent({@required this.email});
+  EmailValidationCheckEvent({this.email});
 }
 
 class GetImageEvent extends FormEvents {}

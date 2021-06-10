@@ -77,15 +77,17 @@ class UserRepository {
 
     switch (operationType) {
       case 'name':
-        await documentReference.reference.set({'name': name});
+        await documentReference.reference.update({'name': name});
         break;
       case 'email':
-        await documentReference.reference.set({'email': email});
+        await documentReference.reference.update({'email': email});
         break;
       case 'photo':
-        await storage.refFromURL(currentImageURL).delete();
+        if (currentImageURL.isNotEmpty) {
+          await storage.refFromURL(currentImageURL).delete();
+        }
         String picURL = await uploadPictureAndGetUrl(imageFile);
-        await documentReference.reference.set({'avatarPicURL': picURL});
+        await documentReference.reference.update({'avatarPicURL': picURL});
         break;
     }
   }
