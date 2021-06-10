@@ -72,8 +72,22 @@ class UserRepository {
     return await snapshot.ref.getDownloadURL();
   }
 
-  Future updateUserInfo({String name, String email, File imageFile, @required String operationType, @required String uid}) async {
+  Future<void> updateUserInfo({String name, String email, File imageFile, String currentImageURL, @required String operationType, @required String uid}) async {
     final documentReference = await db.collection("users").doc(uid).get();
+
+    switch (operationType) {
+      case 'name':
+        await documentReference.reference.set({'name': name});
+        break;
+      case 'email':
+        await documentReference.reference.set({'email': email});
+        break;
+      case 'photo':
+        await storage.refFromURL(currentImageURL).delete();
+        String picURL = await uploadPictureAndGetUrl(imageFile);
+        await documentReference.reference.set({'avatarPicURL': picURL});
+        break;
+    }
   }
 
   Future<void> logOut() async {
