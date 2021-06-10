@@ -615,7 +615,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                             BookingDetails bookingDetails = BookingDetails(
                                               hid: hotel.hid,
                                               hotelName: hotel.name,
-                                              userName: "Mr XYZ",
+                                              userName: userDetailsGlobal.name,
                                               roomsDiscountedPrice: roomsDiscountedPrice,
                                               roomsPrice: roomsPrice,
                                               totalDiscountedPrice: totalDiscountedPrice,
