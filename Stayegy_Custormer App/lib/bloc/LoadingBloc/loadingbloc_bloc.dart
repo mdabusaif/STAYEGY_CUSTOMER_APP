@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
@@ -12,7 +13,7 @@ import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 part 'loadingbloc_event.dart';
 part 'loadingbloc_state.dart';
 
-class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
+class LoadingblocBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
   final HotelRepository _hotelRepository;
   final BookingRepository _bookingRepository;
 
@@ -24,14 +25,14 @@ class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
         super(LoadingblocInitial());
 
   @override
-  Stream<LoadingblocState> mapEventToState(LoadingblocEvent event) async* {
+  Stream<LoadingBlocState> mapEventToState(LoadingBlocEvent event) async* {
     if (event is SearchStartEvent) {
       yield* _mapSearchStartEventToState(event, event.cityName);
     }
   }
 
   @override
-  void onEvent(LoadingblocEvent event) {
+  void onEvent(LoadingBlocEvent event) {
     super.onEvent(event);
     print(event);
   }
@@ -48,7 +49,7 @@ class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
     return super.close();
   }
 
-  Stream<LoadingblocState> _mapSearchStartEventToState(LoadingblocEvent event, String cityName) async* {
+  Stream<LoadingBlocState> _mapSearchStartEventToState(LoadingBlocEvent event, String cityName) async* {
     List<Hotel> _loadedHotels;
     _loadedHotels = null;
     _loadedHotels = await _hotelRepository.getSearchedList(cityName: cityName);

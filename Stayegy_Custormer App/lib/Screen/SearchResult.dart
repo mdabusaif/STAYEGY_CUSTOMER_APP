@@ -20,17 +20,16 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
 
   @override
   Widget build(BuildContext context) {
-    final LoadingblocBloc loadingblocBloc =
-        BlocProvider.of<LoadingblocBloc>(context);
+    final LoadingblocBloc loadingblocBloc = BlocProvider.of<LoadingblocBloc>(context);
 
     return Scaffold(
-      body: BlocListener<LoadingblocBloc, LoadingblocState>(
+      body: BlocListener<LoadingblocBloc, LoadingBlocState>(
         listener: (context, state) {
           if (state is SearchCompleteState) {
             _hotelList = state.loadedHotels;
           }
         },
-        child: BlocBuilder<LoadingblocBloc, LoadingblocState>(
+        child: BlocBuilder<LoadingblocBloc, LoadingBlocState>(
           builder: (context, state) {
             if (state is SearchCompleteState) {
               return CustomScrollView(
@@ -55,10 +54,7 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                     ),
                     title: GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (_) => SearchCity()),
-                            (route) => route.isFirst);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => SearchCity()), (route) => route.isFirst);
                       },
                       child: Center(
                         child: Container(
