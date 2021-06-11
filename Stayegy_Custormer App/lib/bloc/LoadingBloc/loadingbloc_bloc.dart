@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 
@@ -13,10 +14,13 @@ part 'loadingbloc_state.dart';
 
 class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
   final HotelRepository _hotelRepository;
+  final BookingRepository _bookingRepository;
 
-  LoadingblocBloc({@required HotelRepository hotelRepository})
+  LoadingblocBloc({@required HotelRepository hotelRepository, @required BookingRepository bookingRepository})
       : assert(hotelRepository != null),
+        assert(bookingRepository != null),
         _hotelRepository = hotelRepository,
+        _bookingRepository = bookingRepository,
         super(LoadingblocInitial());
 
   @override
@@ -44,8 +48,7 @@ class LoadingblocBloc extends Bloc<LoadingblocEvent, LoadingblocState> {
     return super.close();
   }
 
-  Stream<LoadingblocState> _mapSearchStartEventToState(
-      LoadingblocEvent event, String cityName) async* {
+  Stream<LoadingblocState> _mapSearchStartEventToState(LoadingblocEvent event, String cityName) async* {
     List<Hotel> _loadedHotels;
     _loadedHotels = null;
     _loadedHotels = await _hotelRepository.getSearchedList(cityName: cityName);

@@ -2,10 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stayegy/container/bottom_button.dart';
+
 import 'package:stayegy/container/custom_bottom_button.dart';
 import 'package:stayegy/container/gradient_creation.dart';
-import 'package:stayegy/container/gradient_text.dart';
 
 class ThankYouPage extends StatelessWidget {
   const ThankYouPage({Key key}) : super(key: key);
@@ -13,88 +12,75 @@ class ThankYouPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF191919),
       resizeToAvoidBottomInset: false,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            Container(
-              color: Color(0xFF191919),
-              height: MediaQuery.of(context).size.height,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Image.asset(
-                      'images/left gradient.png',
-                      scale: 13,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
+            Align(
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                'images/left gradient.png',
+                scale: 13,
+                fit: BoxFit.fill,
               ),
             ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'images/thank you.png',
-                    scale: 14,
-                    fit: BoxFit.fill,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'images/thank you.png',
+                  scale: 14,
+                  fit: BoxFit.fill,
+                ),
+                Text(
+                  'Your order has been placed',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    height: 8,
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
-                  Text(
-                    'Your order has been placed',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      height: 8,
-                      color: Colors.white,
-                      fontSize: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Booking ID:', textAlign: TextAlign.center, style: TextStyle(height: 1, color: Colors.white)),
+                    GradientCreate(
+                      child: Text('#FFCSO4', textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Booking ID:', textAlign: TextAlign.center, style: TextStyle(height: 1, color: Colors.white)),
-                      GradientCreate(
-                        child: Text('#FFCSO4', textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
-            SafeArea(
-              child: Positioned(
-                bottom: 10,
-                left: 0,
-                right: 0,
-                child: Align(
-                  alignment: FractionalOffset.bottomRight,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    child: GradientCreate(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                        ),
-                        child: CustomBottomButton(
-                            fontSize: 18,
-                            height: 40,
-                            text: 'Back To Home',
-                            disabled: false,
-                            activeColor: Colors.transparent,
-                            textActiveColor: Colors.white,
-                            onTap: () {
-                              Navigator.popUntil(context, (route) => route.isFirst);
-                            }),
+            Positioned(
+              bottom: 10,
+              left: 0,
+              right: 0,
+              child: Align(
+                alignment: FractionalOffset.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: GradientCreate(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
                       ),
+                      child: CustomBottomButton(
+                          fontSize: 18,
+                          height: 40,
+                          text: 'Back To Home',
+                          disabled: false,
+                          activeColor: Colors.transparent,
+                          textActiveColor: Colors.white,
+                          onTap: () {
+                            Navigator.popUntil(context, (route) => route.isFirst);
+                          }),
                     ),
                   ),
                 ),

@@ -8,6 +8,7 @@ import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
@@ -21,6 +22,7 @@ void main() async {
   final UserRepository userRepository = UserRepository();
   final UserDetails userDetails = UserDetails();
   final HotelRepository hotelRepository = HotelRepository();
+  final BookingRepository bookingRepository = BookingRepository();
   runApp(
     RepositoryProvider.value(
       value: userRepository,
@@ -29,7 +31,7 @@ void main() async {
           BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
           BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
-          BlocProvider<LoadingblocBloc>(create: (context) => LoadingblocBloc(hotelRepository: hotelRepository)),
+          BlocProvider<LoadingblocBloc>(create: (context) => LoadingblocBloc(hotelRepository: hotelRepository, bookingRepository: bookingRepository)),
         ],
         child: MyApp(),
       ),

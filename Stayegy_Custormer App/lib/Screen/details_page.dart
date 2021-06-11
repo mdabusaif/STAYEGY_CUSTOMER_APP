@@ -622,6 +622,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                               totalPrice: totalPrice,
                                               dateRange: selectedDate,
                                               selectedRooms: selectedRooms,
+                                              uid: userDetailsGlobal.uid,
+                                              isAccepted: false,
                                             );
 
                                             Navigator.push(
