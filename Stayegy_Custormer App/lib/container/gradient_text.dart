@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class GradientText extends StatelessWidget {
-  GradientText(this.data,
-      {@required this.gradient, this.style, this.textAlign = TextAlign.left});
+  GradientText(this.data, {@required this.gradient, this.style, this.textAlign = TextAlign.left});
 
   final String data;
-  final Gradient gradient;
+  Gradient gradient;
   final TextStyle style;
   final TextAlign textAlign;
 
@@ -18,9 +17,7 @@ class GradientText extends StatelessWidget {
       child: Text(
         data,
         textAlign: textAlign,
-        style: (style == null)
-            ? TextStyle(color: Colors.white)
-            : style.copyWith(color: Colors.white),
+        style: (style == null) ? TextStyle(color: Colors.white) : style.copyWith(color: Colors.white),
       ),
     );
   }
