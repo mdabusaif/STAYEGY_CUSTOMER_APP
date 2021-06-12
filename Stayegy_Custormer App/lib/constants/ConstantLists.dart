@@ -26,6 +26,11 @@ List<String> cityList = [
   "Sirajgonj",
 ];
 
+List<String> offerImage = [
+  'images/offer 1.png'
+      'images/offer 2.png'
+];
+
 List<int> noOfRoomList = [
   1,
   2,

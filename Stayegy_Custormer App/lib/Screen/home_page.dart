@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/Models/card_model.dart';
 import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
 import 'package:stayegy/Screen/appdrawer.dart';
 import 'package:stayegy/Screen/notification_page.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
 
 class home_page extends StatefulWidget {
@@ -14,6 +16,7 @@ class home_page extends StatefulWidget {
 }
 
 class _home_pageState extends State<home_page> {
+  Hotel demoHotelDetails = Hotel(name: "Redwan & Co.", hid: "STAYEGY 7584", address: "Lakhsmi Bazar,Dhaka", discountedPrice: {"Single | Non AC": 520}, price: {"Single | Non AC": 700});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +87,7 @@ class _home_pageState extends State<home_page> {
                   // height: MediaQuery.of(context).size.height,
                   height: 90,
                   width: MediaQuery.of(context).size.width,
-                  //color: Colors.red,
+                  // color: Colors.red,
                   child: Column(
                     children: [
                       Expanded(
@@ -126,18 +129,146 @@ class _home_pageState extends State<home_page> {
                     ],
                   ),
                 ),
+                SizedBox(height: 10),
                 Container(
-                  height: MediaQuery.of(context).size.height,
-                  //color: Colors.green,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Welcome To Stayegy!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 50,
-                    ),
+                  height: 180,
+                  width: double.maxFinite,
+                  color: Color(0xfff2f2f2),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        child: Text(
+                          'Offers',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff191919),
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: 2,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 1,
+                              margin: EdgeInsets.fromLTRB(20, 5, index == 1 ? 20 : 0, 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image.asset("images/offer ${index + 1}.png"),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 280,
+                  width: double.maxFinite,
+                  color: Color(0xfff2f2f2),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        child: Text(
+                          'Stayegy Collections',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff191919),
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: 7,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 1,
+                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  width: 180,
+                                  child: Icon(
+                                    Icons.ac_unit,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 240,
+                  width: double.maxFinite,
+                  color: Color(0xfff2f2f2),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        child: Text(
+                          'Concerning',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff191919),
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: 7,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 1,
+                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  width: 200,
+                                  child: Icon(
+                                    Icons.add_moderator,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
