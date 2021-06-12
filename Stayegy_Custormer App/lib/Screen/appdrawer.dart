@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy/Screen/accountDetails_Page.dart';
-import 'package:stayegy/Screen/history_save_page.dart';
+import 'package:stayegy/Screen/bookingStatusPage.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
@@ -55,7 +55,7 @@ class appdrawer extends StatelessWidget {
                   imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
                   },
                 ),
                 drawer_data(
@@ -63,7 +63,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Invite & Earn',
                   width: 10,
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
                   },
                 ),
                 drawer_data(
@@ -71,7 +71,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Saved & History',
                   width: 12,
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => history_save_page()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
                   },
                 ),
               ],
