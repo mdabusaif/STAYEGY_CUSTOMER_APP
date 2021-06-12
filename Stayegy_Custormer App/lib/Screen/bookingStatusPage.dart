@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class history_save_page extends StatefulWidget {
+class BookingStatusPage extends StatefulWidget {
   @override
-  _history_save_pageState createState() => _history_save_pageState();
+  _BookingStatusPageState createState() => _BookingStatusPageState();
 }
 
-class _history_save_pageState extends State<history_save_page> {
+class _BookingStatusPageState extends State<BookingStatusPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -35,7 +35,7 @@ class _history_save_pageState extends State<history_save_page> {
             tabs: [
               Tab(
                 child: Text(
-                  'HISTORY',
+                  'BOOKED',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -43,7 +43,7 @@ class _history_save_pageState extends State<history_save_page> {
               ),
               Tab(
                 child: Text(
-                  'SAVED',
+                  'HISTORY',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -56,12 +56,12 @@ class _history_save_pageState extends State<history_save_page> {
           Container(
             color: Colors.white,
             alignment: Alignment.center,
-            child: Text('History!'),
+            child: Text('NO BOOKINGS ACTIVE!'),
           ),
           Container(
             color: Colors.white,
             alignment: Alignment.center,
-            child: Text('Saved!'),
+            child: Text('NO BOOKING HISTORY!'),
           ),
         ]),
       ),
