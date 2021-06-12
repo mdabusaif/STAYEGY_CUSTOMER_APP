@@ -624,6 +624,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               selectedRooms: selectedRooms,
                                               uid: userDetailsGlobal.uid,
                                               isAccepted: false,
+                                              userPhoneNumber: userDetailsGlobal.phoneNumber,
                                             );
 
                                             Navigator.push(

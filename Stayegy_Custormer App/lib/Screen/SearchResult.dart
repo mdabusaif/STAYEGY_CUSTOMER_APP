@@ -20,16 +20,16 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
 
   @override
   Widget build(BuildContext context) {
-    final LoadingblocBloc loadingblocBloc = BlocProvider.of<LoadingblocBloc>(context);
+    final LoadingBloc loadingblocBloc = BlocProvider.of<LoadingBloc>(context);
 
     return Scaffold(
-      body: BlocListener<LoadingblocBloc, LoadingBlocState>(
+      body: BlocListener<LoadingBloc, LoadingBlocState>(
         listener: (context, state) {
           if (state is SearchCompleteState) {
             _hotelList = state.loadedHotels;
           }
         },
-        child: BlocBuilder<LoadingblocBloc, LoadingBlocState>(
+        child: BlocBuilder<LoadingBloc, LoadingBlocState>(
           builder: (context, state) {
             if (state is SearchCompleteState) {
               return CustomScrollView(

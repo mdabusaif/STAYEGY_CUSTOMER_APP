@@ -94,7 +94,7 @@ class _home_pageState extends State<home_page> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                BlocProvider.of<LoadingblocBloc>(context).add(SearchStartEvent(cityName: cityList[index].toString().toLowerCase()));
+                                BlocProvider.of<LoadingBloc>(context).add(SearchStartEvent(cityName: cityList[index].toString().toLowerCase()));
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => ShowSearchResult()));
                               },
                               child: Padding(

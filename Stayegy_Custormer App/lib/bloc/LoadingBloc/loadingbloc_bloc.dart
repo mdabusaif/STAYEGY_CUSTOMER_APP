@@ -13,11 +13,11 @@ import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
 part 'loadingbloc_event.dart';
 part 'loadingbloc_state.dart';
 
-class LoadingblocBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
+class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
   final HotelRepository _hotelRepository;
   final BookingRepository _bookingRepository;
 
-  LoadingblocBloc({@required HotelRepository hotelRepository, @required BookingRepository bookingRepository})
+  LoadingBloc({@required HotelRepository hotelRepository, @required BookingRepository bookingRepository})
       : assert(hotelRepository != null),
         assert(bookingRepository != null),
         _hotelRepository = hotelRepository,
@@ -28,6 +28,11 @@ class LoadingblocBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
   Stream<LoadingBlocState> mapEventToState(LoadingBlocEvent event) async* {
     if (event is SearchStartEvent) {
       yield* _mapSearchStartEventToState(event, event.cityName);
+    } else if (event is SendBookingRequestEvent) {
+      yield ProcessingState();
+
+      String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails);
+      yield BookingRequestPlacedState(bookingID: bookingId);
     }
   }
 

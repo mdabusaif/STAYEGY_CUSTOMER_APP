@@ -7,7 +7,10 @@ import 'package:stayegy/container/custom_bottom_button.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 
 class ThankYouPage extends StatelessWidget {
-  const ThankYouPage({Key key}) : super(key: key);
+  final String bookingId;
+
+  // const ThankYouPage({Key key}) : super(key: key);
+  ThankYouPage({@required this.bookingId});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class ThankYouPage extends StatelessWidget {
                   children: [
                     Text('Booking ID:', textAlign: TextAlign.center, style: TextStyle(height: 1, color: Colors.white)),
                     GradientCreate(
-                      child: Text('#FFCSO4', textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                      child: Text('#$bookingId', textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),

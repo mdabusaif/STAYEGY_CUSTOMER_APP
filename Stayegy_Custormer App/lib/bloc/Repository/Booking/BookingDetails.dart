@@ -12,22 +12,9 @@ class BookingDetails {
   String hid;
   String uid;
   bool isAccepted;
+  String bid;
 
-  BookingDetails({
-    this.hotelName,
-    this.dateRange,
-    this.userName,
-    this.hid,
-    this.promoAmount,
-    this.roomsDiscountedPrice,
-    this.roomsPrice,
-    this.totalDiscountedPrice,
-    this.totalPrice,
-    this.userPhoneNumber,
-    this.selectedRooms,
-    this.uid,
-    this.isAccepted,
-  });
+  BookingDetails({this.hotelName, this.dateRange, this.userName, this.hid, this.promoAmount, this.roomsDiscountedPrice, this.roomsPrice, this.totalDiscountedPrice, this.totalPrice, this.userPhoneNumber, this.selectedRooms, this.uid, this.isAccepted, this.bid});
 
   Map<String, dynamic> toJason() => {
         'hotelName': hotelName,
@@ -43,6 +30,7 @@ class BookingDetails {
         'selectedRooms': selectedRooms,
         'uid': uid,
         'isAccepted': isAccepted,
+        'bid': bid,
       };
 
   BookingDetails.fromMap(Map<String, dynamic> bookingMap) {
@@ -55,5 +43,6 @@ class BookingDetails {
     selectedRooms = bookingMap["selectedRooms"];
     uid = bookingMap["uid"];
     isAccepted = bookingMap["isAccepted"];
+    bid = bookingMap["bid"];
   }
 }

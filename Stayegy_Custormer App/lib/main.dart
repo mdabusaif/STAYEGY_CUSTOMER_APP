@@ -31,7 +31,7 @@ void main() async {
           BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
           BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
-          BlocProvider<LoadingblocBloc>(create: (context) => LoadingblocBloc(hotelRepository: hotelRepository, bookingRepository: bookingRepository)),
+          BlocProvider<LoadingBloc>(create: (context) => LoadingBloc(hotelRepository: hotelRepository, bookingRepository: bookingRepository)),
         ],
         child: MyApp(),
       ),

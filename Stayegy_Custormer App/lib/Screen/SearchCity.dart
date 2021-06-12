@@ -46,12 +46,8 @@ class _SearchCityState extends State<SearchCity> {
                   onItemFound: (String text, int index) {
                     return GestureDetector(
                       onTap: () async {
-                        BlocProvider.of<LoadingblocBloc>(context).add(
-                            SearchStartEvent(cityName: text.toLowerCase()));
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => ShowSearchResult()));
+                        BlocProvider.of<LoadingBloc>(context).add(SearchStartEvent(cityName: text.toLowerCase()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ShowSearchResult()));
                       },
                       child: Container(
                         //height: 50,
