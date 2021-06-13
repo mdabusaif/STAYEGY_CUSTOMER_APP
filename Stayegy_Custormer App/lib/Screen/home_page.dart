@@ -85,14 +85,14 @@ class _home_pageState extends State<home_page> {
               children: [
                 Container(
                   // height: MediaQuery.of(context).size.height,
-                  height: 90,
+                  height: 100,
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.red,
                   child: Column(
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: 9,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return GestureDetector(
@@ -106,8 +106,8 @@ class _home_pageState extends State<home_page> {
                                   children: [
                                     Container(
                                       child: CircleAvatar(
-                                        radius: 25,
-                                        backgroundImage: AssetImage('images/Notification bell.png'),
+                                        radius: 30,
+                                        backgroundImage: AssetImage('${cityImageList[index]}'),
                                       ),
                                     ),
                                     Container(
@@ -131,7 +131,7 @@ class _home_pageState extends State<home_page> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 180,
+                  height: 200,
                   width: double.maxFinite,
                   color: Color(0xfff2f2f2),
                   child: Column(
@@ -200,7 +200,7 @@ class _home_pageState extends State<home_page> {
                           itemBuilder: (context, index) {
                             return Card(
                               elevation: 1,
-                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 15),
+                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -208,8 +208,9 @@ class _home_pageState extends State<home_page> {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
                                   width: 180,
-                                  child: Icon(
-                                    Icons.ac_unit,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("${offerImage1[0]}"),
                                   ),
                                 ),
                               ),
