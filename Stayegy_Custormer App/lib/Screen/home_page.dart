@@ -5,7 +5,10 @@ import 'package:stayegy/Models/card_model.dart';
 import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
 import 'package:stayegy/Screen/appdrawer.dart';
+import 'package:stayegy/Screen/contact.dart';
+import 'package:stayegy/Screen/greetings.dart';
 import 'package:stayegy/Screen/notification_page.dart';
+import 'package:stayegy/Screen/t&c.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
@@ -210,7 +213,10 @@ class _home_pageState extends State<home_page> {
                                   width: 180,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset("${offerImage1[0]}"),
+                                    child: Image.asset(
+                                      "${offerImage1[0]}",
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -245,24 +251,36 @@ class _home_pageState extends State<home_page> {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: 7,
+                          itemCount: 3,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Card(
-                              elevation: 1,
-                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  width: 200,
-                                  child: Icon(
-                                    Icons.add_moderator,
+                            return GestureDetector(
+                              child: Card(
+                                elevation: 1,
+                                margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 12, 0, 0, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.zero,
+                                  child: Container(
+                                    width: 200,
+                                    child: Image.asset(
+                                      '${concerning[index]}',
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                               ),
+                              onTap: () {
+                                if (index == 0) {
+                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => GreetingsPage()));
+                                } else if (index == 1) {
+                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => TearmsAndConditionPage()));
+                                } else if (index == 2) {
+                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => ContactPage()));
+                                }
+                              },
                             );
                           },
                         ),

@@ -47,6 +47,11 @@ List<String> offerImage = [
 List<String> offerImage1 = [
   'images/collection 1.png',
 ];
+List<String> concerning = [
+  'images/Greetings.png',
+  'images/T&C.png',
+  'images/Contact.png',
+];
 List<int> noOfRoomList = [
   1,
   2,
