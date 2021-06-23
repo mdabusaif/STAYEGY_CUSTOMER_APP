@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stayegy/container/bookedtile.dart';
+import 'package:stayegy/container/historytile.dart';
 
 class BookingStatusPage extends StatefulWidget {
   @override
@@ -53,16 +55,8 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
           ),
         ),
         body: TabBarView(children: [
-          Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text('NO BOOKINGS ACTIVE!'),
-          ),
-          Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text('NO BOOKING HISTORY!'),
-          ),
+          BookedTile(),
+          HistoryTile(),
         ]),
       ),
     );
