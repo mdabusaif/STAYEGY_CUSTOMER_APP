@@ -623,7 +623,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               dateRange: selectedDate,
                                               selectedRooms: selectedRooms,
                                               uid: userDetailsGlobal.uid,
-                                              isAccepted: false,
+                                              status: 'pending',
                                               userPhoneNumber: userDetailsGlobal.phoneNumber,
                                             );
 
