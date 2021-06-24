@@ -25,6 +25,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   int totalPrice;
   int totalDiscountedPrice;
+  int days = 1;
 
   bool isConfirmed = false;
 
@@ -42,7 +43,11 @@ class _DetailsPageState extends State<DetailsPage> {
     DateTimeRange picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
-      lastDate: DateTime(DateTime.now().year + 1),
+      lastDate: DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day + 30,
+      ),
       initialDateRange: DateTimeRange(
         end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
         start: DateTime.now(),
@@ -50,6 +55,9 @@ class _DetailsPageState extends State<DetailsPage> {
     );
     setState(() {
       timeRange = picked;
+      if (picked != null)
+        days = picked.duration.inDays;
+      else if (picked == null) days = 1;
     });
     print(picked);
   }
@@ -534,14 +542,14 @@ class _DetailsPageState extends State<DetailsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    totalDiscountedPrice == null || totalDiscountedPrice == 0 ? '৳${hotel.discountedPrice["Single | Non AC"]} ' : '৳$totalDiscountedPrice ',
+                                    totalDiscountedPrice == null || totalDiscountedPrice == 0 ? '৳${hotel.discountedPrice["Single | Non AC"]} ' : '৳${totalDiscountedPrice * days} ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    totalPrice == null || totalPrice == 0 ? '৳${hotel.price["Single | Non AC"]}' : '৳$totalPrice ',
+                                    totalPrice == null || totalPrice == 0 ? '৳${hotel.price["Single | Non AC"]}' : '৳${totalPrice * days} ',
                                     style: TextStyle(
                                       fontSize: 20,
                                       decoration: TextDecoration.lineThrough,
@@ -618,8 +626,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                               userName: userDetailsGlobal.name,
                                               roomsDiscountedPrice: roomsDiscountedPrice,
                                               roomsPrice: roomsPrice,
-                                              totalDiscountedPrice: totalDiscountedPrice,
-                                              totalPrice: totalPrice,
+                                              totalDiscountedPrice: totalDiscountedPrice * days,
+                                              totalPrice: totalPrice * days,
                                               dateRange: selectedDate,
                                               selectedRooms: selectedRooms,
                                               uid: userDetailsGlobal.uid,
