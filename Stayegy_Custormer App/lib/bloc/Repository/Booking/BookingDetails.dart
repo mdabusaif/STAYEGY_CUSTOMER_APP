@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class BookingDetails {
   String userName;
   String hotelName;
-  Map<String, DateTime> dateRange;
+  Timestamp startDate;
+  Timestamp endDate;
   List<int> roomsPrice;
   List<int> roomsDiscountedPrice;
   List<String> selectedRooms;
@@ -13,12 +16,31 @@ class BookingDetails {
   String uid;
   String status;
   String bid;
+  List bookedRooms;
 
-  BookingDetails({this.hotelName, this.dateRange, this.userName, this.hid, this.promoAmount, this.roomsDiscountedPrice, this.roomsPrice, this.totalDiscountedPrice, this.totalPrice, this.userPhoneNumber, this.selectedRooms, this.uid, this.status, this.bid});
+  BookingDetails({
+    this.hotelName,
+    this.startDate,
+    this.endDate,
+    this.userName,
+    this.hid,
+    this.promoAmount,
+    this.roomsDiscountedPrice,
+    this.roomsPrice,
+    this.totalDiscountedPrice,
+    this.totalPrice,
+    this.userPhoneNumber,
+    this.selectedRooms,
+    this.uid,
+    this.status,
+    this.bid,
+    this.bookedRooms,
+  });
 
   Map<String, dynamic> toJason() => {
         'hotelName': hotelName,
-        'dateRange': dateRange,
+        'startDate': startDate,
+        'endDate': endDate,
         'userName': userName,
         'hid': hid,
         'promoAmount': promoAmount,
@@ -31,18 +53,21 @@ class BookingDetails {
         'uid': uid,
         'status': status,
         'bid': bid,
+        'bookedRooms': bookedRooms,
       };
 
   BookingDetails.fromMap(Map<String, dynamic> bookingMap) {
     hotelName = bookingMap["hotelName"];
-    dateRange = bookingMap["hotelName"];
-    promoAmount = bookingMap["hotelName"];
-    roomsDiscountedPrice = bookingMap[""];
-    totalDiscountedPrice = bookingMap["hotelName"];
-    totalPrice = bookingMap["hotelName"];
+    startDate = bookingMap["startDate"];
+    endDate = bookingMap["endDate"];
+    promoAmount = bookingMap["promoAmount"];
+    roomsDiscountedPrice = bookingMap["roomsDiscountedPrice"];
+    totalDiscountedPrice = bookingMap["totalDiscountedPrice"];
+    totalPrice = bookingMap["totalPrice"];
     selectedRooms = bookingMap["selectedRooms"];
     uid = bookingMap["uid"];
     status = bookingMap["status"];
     bid = bookingMap["bid"];
+    bookedRooms = bookingMap["bookedRooms"];
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -610,15 +611,19 @@ class _DetailsPageState extends State<DetailsPage> {
                                             ),
                                           ),
                                           onTap: () {
-                                            Map<String, DateTime> selectedDate;
+                                            Timestamp selectedStartDate;
+                                            Timestamp selectedEndDate;
 
                                             if (timeRange == null) {
-                                              selectedDate = {"startDate": DateTime.now(), "endDate": DateTime.now().add(Duration(days: 1))};
+                                              selectedStartDate = Timestamp.fromDate(DateTime.now());
+                                              selectedEndDate = Timestamp.fromDate(DateTime.now().add(Duration(days: 1)));
                                             } else {
-                                              selectedDate = {"startDate": timeRange.start, "endDate": timeRange.end};
+                                              selectedStartDate = Timestamp.fromDate(timeRange.start);
+                                              selectedEndDate = Timestamp.fromDate(timeRange.end);
                                             }
 
-                                            print(selectedDate);
+                                            print(selectedStartDate);
+                                            print(selectedEndDate);
 
                                             BookingDetails bookingDetails = BookingDetails(
                                               hid: hotel.hid,
@@ -628,11 +633,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                               roomsPrice: roomsPrice,
                                               totalDiscountedPrice: totalDiscountedPrice * days,
                                               totalPrice: totalPrice * days,
-                                              dateRange: selectedDate,
+                                              startDate: selectedStartDate,
+                                              endDate: selectedEndDate,
                                               selectedRooms: selectedRooms,
                                               uid: userDetailsGlobal.uid,
                                               status: 'pending',
                                               userPhoneNumber: userDetailsGlobal.phoneNumber,
+                                              bookedRooms: [],
                                             );
 
                                             Navigator.push(

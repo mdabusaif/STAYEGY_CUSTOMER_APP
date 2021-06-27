@@ -136,7 +136,7 @@ class BookingConfirmPage extends StatelessWidget {
                                   children: [
                                     Text(
                                       'Check In Date   ${DateFormat.yMMMMd().format(
-                                        bookingDetails.dateRange['startDate'],
+                                        bookingDetails.startDate.toDate(),
                                       )}',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -147,7 +147,7 @@ class BookingConfirmPage extends StatelessWidget {
                                     ),
                                     Text(
                                       'Check Out Date   ${DateFormat.yMMMMd().format(
-                                        bookingDetails.dateRange['endDate'],
+                                        bookingDetails.endDate.toDate(),
                                       )}',
                                       style: TextStyle(
                                         fontSize: 12,
