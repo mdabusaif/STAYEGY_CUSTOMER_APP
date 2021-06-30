@@ -17,6 +17,7 @@ class BookingDetails {
   String status;
   String bid;
   List bookedRooms;
+  bool isCheckedIn;
 
   BookingDetails({
     this.hotelName,
@@ -35,6 +36,7 @@ class BookingDetails {
     this.status,
     this.bid,
     this.bookedRooms,
+    this.isCheckedIn,
   });
 
   Map<String, dynamic> toJason() => {
@@ -54,6 +56,7 @@ class BookingDetails {
         'status': status,
         'bid': bid,
         'bookedRooms': bookedRooms,
+        'isCheckedIn': isCheckedIn,
       };
 
   BookingDetails.fromMap(Map<String, dynamic> bookingMap) {
@@ -69,5 +72,6 @@ class BookingDetails {
     status = bookingMap["status"];
     bid = bookingMap["bid"];
     bookedRooms = bookingMap["bookedRooms"];
+    isCheckedIn = bookingMap["isCheckedIn"];
   }
 }

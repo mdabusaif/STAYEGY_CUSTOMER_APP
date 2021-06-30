@@ -640,6 +640,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               status: 'pending',
                                               userPhoneNumber: userDetailsGlobal.phoneNumber,
                                               bookedRooms: [],
+                                              isCheckedIn: false,
                                             );
 
                                             Navigator.push(
