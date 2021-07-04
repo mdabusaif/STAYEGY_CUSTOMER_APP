@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class BookedTile extends StatefulWidget {
   @override
@@ -57,9 +57,39 @@ class _BookedTileState extends State<BookedTile> {
             SizedBox(
               height: 30,
             ),
-            Image.asset(
-              'images/book page vector.png',
-              scale: 2.5,
+            Stack(
+              children: [
+                Container(
+                  child: Image.asset(
+                    'images/book page vector.png',
+                    scale: 2.5,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 30, right: 25),
+                  alignment: Alignment.center,
+                  height: 240,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Status',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        'Pending...',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
