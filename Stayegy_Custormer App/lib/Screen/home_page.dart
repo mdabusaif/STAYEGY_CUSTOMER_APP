@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Models/card_model.dart';
 import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
 import 'package:stayegy/Screen/appdrawer.dart';
 import 'package:stayegy/Screen/contact.dart';
+import 'package:stayegy/Screen/details_page.dart';
 import 'package:stayegy/Screen/greetings.dart';
 import 'package:stayegy/Screen/notification_page.dart';
 import 'package:stayegy/Screen/t&c.dart';
@@ -178,7 +180,7 @@ class _home_pageState extends State<home_page> {
                   height: 20,
                 ),
                 Container(
-                  height: 280,
+                  height: 250,
                   width: double.maxFinite,
                   color: Color(0xfff2f2f2),
                   child: Column(
@@ -198,24 +200,76 @@ class _home_pageState extends State<home_page> {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: 7,
+                          itemCount: homePageHotels.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Card(
-                              elevation: 1,
-                              margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  width: 180,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      "${offerImage1[0]}",
-                                      fit: BoxFit.fill,
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (context) => DetailsPage(
+                                              hotelInt: homePageHotels[index],
+                                            )));
+                              },
+                              child: Card(
+                                elevation: 1,
+                                margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 10, 5, 0, 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    width: 180,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            color: Colors.grey,
+                                            height: 120,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  homePageHotels[index].hid,
+                                                  style: GoogleFonts.staatliches(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  homePageHotels[index].name,
+                                                  style: GoogleFonts.staatliches(
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Text(
+                                                  '${(((homePageHotels[index].price["Single | Non AC"] - homePageHotels[index].discountedPrice["Single | Non AC"]) / homePageHotels[index].price["Single | Non AC"]) * 100).toInt()}% OFF',
+                                                  style: GoogleFonts.staatliches(
+                                                    fontSize: 20,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      // child: Image.asset(
+                                      //   "${offerImage1[0]}",
+                                      //   fit: BoxFit.fill,
+                                      // ),
                                     ),
                                   ),
                                 ),

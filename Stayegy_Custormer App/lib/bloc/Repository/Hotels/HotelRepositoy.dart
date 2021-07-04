@@ -9,14 +9,11 @@ class HotelRepository {
   Future getSearchedList({@required String cityName}) async {
     List<Hotel> searchedList = [];
 
-    QuerySnapshot querySnapshot = await db
-        .collection("hotels")
-        .where("tags", arrayContainsAny: [cityName]).get();
+    QuerySnapshot querySnapshot = await db.collection("hotels").where("tags", arrayContainsAny: [cityName]).get();
     print(querySnapshot.docs.length);
     for (int i = 0; i < querySnapshot.docs.length; i++) {
       searchedList.add(Hotel.fromMap(querySnapshot.docs[i].data()));
-      print(
-          "${querySnapshot.docs.first.toString()} ++++ has been added to searched list!");
+      print("${querySnapshot.docs.first.toString()} ++++ has been added to searched list!");
     }
 
     return searchedList;
@@ -27,9 +24,7 @@ class HotelRepository {
 
     if (text.length == 2) return cityList;
 
-    filteredCityList = cityList
-        .where((city) => city.toLowerCase().contains(text.toLowerCase()))
-        .toList();
+    filteredCityList = cityList.where((city) => city.toLowerCase().contains(text.toLowerCase())).toList();
 
     return filteredCityList;
   }

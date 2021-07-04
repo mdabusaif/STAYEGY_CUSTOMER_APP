@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
@@ -23,6 +24,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       final bool hasToken = user != null;
       if (hasToken) {
         userDetailsGlobal = await _userRepository.loadUserDetails(user.uid);
+        homePageHotels = [];
+        homePageHotels = await _userRepository.getHomePageHotels();
+        homePageHotels.shuffle();
         yield Authenticated();
       } else {
         yield Unauthenticated();
@@ -30,6 +34,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
     if (event is LoggedIn) {
       yield Loading();
+      homePageHotels = [];
+      homePageHotels = await _userRepository.getHomePageHotels();
+      homePageHotels.shuffle();
       yield Authenticated();
     }
     if (event is LoggedOut) {

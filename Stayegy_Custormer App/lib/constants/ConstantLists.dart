@@ -1,3 +1,4 @@
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/User/User_Details.dart';
 
 List<String> cityList = [
@@ -59,3 +60,5 @@ List<int> noOfRoomList = [
 ];
 
 UserDetails userDetailsGlobal;
+
+List<Hotel> homePageHotels;

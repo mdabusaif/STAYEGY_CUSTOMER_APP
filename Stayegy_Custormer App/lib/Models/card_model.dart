@@ -22,12 +22,11 @@ class CardModel extends StatelessWidget {
         onTap: () {
           print('Card Pressed!');
           Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (context) => DetailsPage(
-                      hotelInt: hotel,
-                    )),
-          );
+              context,
+              CupertinoPageRoute(
+                  builder: (context) => DetailsPage(
+                        hotelInt: hotel,
+                      )));
         },
         child: Container(
           height: 350,

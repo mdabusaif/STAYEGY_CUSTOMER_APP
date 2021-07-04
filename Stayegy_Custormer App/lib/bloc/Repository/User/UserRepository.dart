@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 
 import 'User_Details.dart';
 
@@ -90,6 +91,19 @@ class UserRepository {
         await documentReference.reference.update({'avatarPicURL': picURL});
         break;
     }
+  }
+
+  Future<List<Hotel>> getHomePageHotels() async {
+    List<Hotel> searchedList = [];
+
+    QuerySnapshot querySnapshot = await db.collection("hotels").limit(3).get();
+    print(querySnapshot.docs.length);
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      searchedList.add(Hotel.fromMap(querySnapshot.docs[i].data()));
+      print("${querySnapshot.docs.first.toString()} ++++ has been added to searched list!");
+    }
+
+    return searchedList;
   }
 
   Future<void> logOut() async {
