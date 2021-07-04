@@ -31,7 +31,7 @@ class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
     } else if (event is SendBookingRequestEvent) {
       yield ProcessingState();
 
-      String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails);
+      String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails, hotelID: event.hotelId);
       yield BookingRequestPlacedState(bookingID: bookingId);
     }
   }

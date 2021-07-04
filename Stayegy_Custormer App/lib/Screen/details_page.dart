@@ -648,6 +648,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                 CupertinoPageRoute(
                                                     builder: (_) => BookingConfirmPage(
                                                           bookingDetails: bookingDetails,
+                                                          hotelId: hotel.id,
                                                         )));
                                             // your code
                                           }),

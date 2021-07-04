@@ -1,4 +1,5 @@
 class Hotel {
+  String id;
   String hid;
   String name;
   String address;
@@ -28,6 +29,7 @@ class Hotel {
       };
 
   Hotel.fromMap(Map<String, dynamic> hotelMap) {
+    id = hotelMap["id"];
     hid = hotelMap["hid"];
     name = hotelMap["name"];
     address = hotelMap["address"];

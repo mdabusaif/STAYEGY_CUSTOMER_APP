@@ -14,9 +14,11 @@ import 'package:stayegy/container/loading_Overlay.dart';
 class BookingConfirmPage extends StatelessWidget {
   BookingConfirmPage({
     @required this.bookingDetails,
+    @required this.hotelId,
   });
 
   final BookingDetails bookingDetails;
+  final String hotelId;
 
   @override
   Widget build(BuildContext context) {
@@ -452,7 +454,7 @@ class BookingConfirmPage extends StatelessWidget {
                     disabled: false,
                     onTap: () {
                       BlocProvider.of<LoadingBloc>(context).add(
-                        SendBookingRequestEvent(bookingDetails: bookingDetails),
+                        SendBookingRequestEvent(bookingDetails: bookingDetails, hotelId: hotelId),
                       );
                     },
                   ),
