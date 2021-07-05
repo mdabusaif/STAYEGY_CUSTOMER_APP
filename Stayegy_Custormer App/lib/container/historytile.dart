@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
+import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
+import 'package:intl/intl.dart';
 
-class HistoryTile extends StatefulWidget {
-  @override
-  _HistoryTileState createState() => _HistoryTileState();
-}
+class HistoryTile extends StatelessWidget {
+  final BookingDetails bookingDetails;
 
-class _HistoryTileState extends State<HistoryTile> {
+  HistoryTile({@required this.bookingDetails});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 60,
+        height: 130,
         color: Color(0xffefefef),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
@@ -26,12 +28,12 @@ class _HistoryTileState extends State<HistoryTile> {
                     height: 20,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: Color(0xFFEEA41A),
+                      color: bookingDetails.status == "cancelled" ? Colors.red : Color(0xFFEEA41A),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Center(
                       child: Text(
-                        "C0MPLETED",
+                        bookingDetails.status == "cancelled" ? "Cancelled" : "Completed",
                         style: GoogleFonts.roboto(
                           fontSize: 12,
                           color: Colors.white,
@@ -40,7 +42,7 @@ class _HistoryTileState extends State<HistoryTile> {
                     ),
                   )),
               Text(
-                'STAYEGY 2483 Hotel White House',
+                '${bookingDetails.hid} ${bookingDetails.hotelName}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, height: 2),
               ),
               SizedBox(
@@ -64,7 +66,7 @@ class _HistoryTileState extends State<HistoryTile> {
                             width: 10,
                           ),
                           Text(
-                            '10 July, 2021 - 12 July, 2021',
+                            '${DateFormat.yMMMMd().format(DateTime.parse(bookingDetails.startDate.toDate().toString()))}  -  ${DateFormat.yMMMMd().format(DateTime.parse(bookingDetails.endDate.toDate().toString()))}',
                             style: TextStyle(
                               fontSize: 12,
                             ),
@@ -72,7 +74,7 @@ class _HistoryTileState extends State<HistoryTile> {
                         ],
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +92,7 @@ class _HistoryTileState extends State<HistoryTile> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '2 Rooms',
+                                  '${bookingDetails.selectedRooms.length} Rooms',
                                   style: TextStyle(
                                     fontSize: 12,
                                   ),
@@ -103,7 +105,7 @@ class _HistoryTileState extends State<HistoryTile> {
                     ],
                   ),
                   Text(
-                    '৳ 2000',
+                    '৳ ${bookingDetails.totalDiscountedPrice}',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.red,

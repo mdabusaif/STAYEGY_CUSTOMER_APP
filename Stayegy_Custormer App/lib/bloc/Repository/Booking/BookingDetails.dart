@@ -5,9 +5,9 @@ class BookingDetails {
   String hotelName;
   Timestamp startDate;
   Timestamp endDate;
-  List<int> roomsPrice;
-  List<int> roomsDiscountedPrice;
-  List<String> selectedRooms;
+  List roomsPrice;
+  List roomsDiscountedPrice;
+  List selectedRooms;
   int totalPrice;
   int totalDiscountedPrice;
   int promoAmount;
@@ -18,6 +18,7 @@ class BookingDetails {
   String bid;
   List bookedRooms;
   bool isCheckedIn;
+  String hotelAddress;
 
   BookingDetails({
     this.hotelName,
@@ -37,6 +38,7 @@ class BookingDetails {
     this.bid,
     this.bookedRooms,
     this.isCheckedIn,
+    this.hotelAddress,
   });
 
   Map<String, dynamic> toJason() => {
@@ -57,6 +59,7 @@ class BookingDetails {
         'bid': bid,
         'bookedRooms': bookedRooms,
         'isCheckedIn': isCheckedIn,
+        'hotelAddress': hotelAddress,
       };
 
   BookingDetails.fromMap(Map<String, dynamic> bookingMap) {
@@ -71,7 +74,9 @@ class BookingDetails {
     uid = bookingMap["uid"];
     status = bookingMap["status"];
     bid = bookingMap["bid"];
+    hid = bookingMap["hid"];
     bookedRooms = bookingMap["bookedRooms"];
     isCheckedIn = bookingMap["isCheckedIn"];
+    hotelAddress = bookingMap["hotelAddress"];
   }
 }

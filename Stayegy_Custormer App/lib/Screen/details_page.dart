@@ -641,6 +641,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               userPhoneNumber: userDetailsGlobal.phoneNumber,
                                               bookedRooms: [],
                                               isCheckedIn: false,
+                                              hotelAddress: hotel.address,
                                             );
 
                                             Navigator.push(

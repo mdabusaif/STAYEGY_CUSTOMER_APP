@@ -5,6 +5,7 @@ import 'package:stayegy/Screen/accountDetails_Page.dart';
 import 'package:stayegy/Screen/bookingStatusPage.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy/container/drawer_Data.dart';
@@ -55,6 +56,7 @@ class appdrawer extends StatelessWidget {
                   imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
                   onTap: () {
+                    BlocProvider.of<LoadingBloc>(context).add(LoadBookStatusEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
                   },
                 ),

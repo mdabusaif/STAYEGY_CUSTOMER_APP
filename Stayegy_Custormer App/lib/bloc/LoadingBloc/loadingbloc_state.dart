@@ -34,3 +34,15 @@ class BookingRequestPlacedState extends LoadingBlocState {
   @override
   List<Object> get props => [bookingID];
 }
+
+class BookingExistsState extends LoadingBlocState {}
+
+class LoadedBookingStatusState extends LoadingBlocState {
+  final List historyList;
+  final BookingDetails bookingDetails;
+
+  LoadedBookingStatusState({@required this.bookingDetails, @required this.historyList});
+
+  @override
+  List<Object> get props => [historyList, bookingDetails];
+}

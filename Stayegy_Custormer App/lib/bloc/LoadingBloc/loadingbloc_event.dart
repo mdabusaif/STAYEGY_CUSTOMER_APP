@@ -23,3 +23,5 @@ class SendBookingRequestEvent extends LoadingBlocEvent {
   @override
   List<Object> get props => [bookingDetails, hotelId];
 }
+
+class LoadBookStatusEvent extends LoadingBlocEvent {}

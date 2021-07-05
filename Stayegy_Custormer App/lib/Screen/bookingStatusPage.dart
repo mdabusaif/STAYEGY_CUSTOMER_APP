@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/container/bookedtile.dart';
 import 'package:stayegy/container/historytile.dart';
+import 'package:stayegy/container/loading_Overlay.dart';
 
 class BookingStatusPage extends StatefulWidget {
   @override
@@ -54,10 +57,30 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
             ],
           ),
         ),
-        body: TabBarView(children: [
-          BookedTile(),
-          HistoryTile(),
-        ]),
+        body: BlocBuilder<LoadingBloc, LoadingBlocState>(
+          builder: (context, state) {
+            return TabBarView(children: [
+              state is ProcessingState
+                  ? LoadingOverlay().buildWidget(context)
+                  : state is LoadedBookingStatusState && state.bookingDetails != null
+                      ? BookedTile(
+                          bookingDetails: state.bookingDetails,
+                        )
+                      : Container(
+                          child: Text("No Bookings Active!"),
+                        ),
+              state is ProcessingState
+                  ? LoadingOverlay().buildWidget(context)
+                  : state is LoadedBookingStatusState
+                      ? ListView.builder(
+                          itemCount: state.historyList.length,
+                          itemBuilder: (context, index) {
+                            return HistoryTile(bookingDetails: state.historyList[index]);
+                          })
+                      : Container(),
+            ]);
+          },
+        ),
       ),
     );
   }

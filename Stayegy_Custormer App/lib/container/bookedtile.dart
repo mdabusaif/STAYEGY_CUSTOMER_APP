@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
+import 'package:intl/intl.dart';
 
-class BookedTile extends StatefulWidget {
-  @override
-  _BookedTileState createState() => _BookedTileState();
-}
+class BookedTile extends StatelessWidget {
+  final BookingDetails bookingDetails;
 
-class _BookedTileState extends State<BookedTile> {
+  BookedTile({@required this.bookingDetails});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,12 +18,23 @@ class _BookedTileState extends State<BookedTile> {
               height: 30,
             ),
             Text(
-              'STAYEGY 2483 Hotel White House',
+              'Order No: #${bookingDetails.bid}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.green,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              '${bookingDetails.hid} ${bookingDetails.hotelName}',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             Text(
-              'New Bus Stand,Goalchamot,Faridpur',
-              style: TextStyle(fontSize: 12, height: 1),
+              bookingDetails.hotelAddress,
+              style: TextStyle(fontSize: 12, height: 2),
             ),
             SizedBox(
               height: 30,
@@ -32,11 +44,11 @@ class _BookedTileState extends State<BookedTile> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             Text(
-              'Check in   :  10 July,2021 (12:00 PM)',
+              'Check in   :  ${DateFormat.yMMMMd().format(DateTime.parse(bookingDetails.startDate.toDate().toString()))} (12:00 PM)',
               style: TextStyle(fontSize: 12, height: 2),
             ),
             Text(
-              'Check out   :  12 July,2021 (11:59 PM)',
+              'Check out   :  ${DateFormat.yMMMMd().format(DateTime.parse(bookingDetails.endDate.toDate().toString()))} (11:59 AM)',
               style: TextStyle(fontSize: 12, height: 2),
             ),
             SizedBox(
@@ -46,13 +58,23 @@ class _BookedTileState extends State<BookedTile> {
               'Rooms & Types',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            Text(
-              '1 Single Room(AC)',
-              style: TextStyle(fontSize: 12, height: 3),
+            SizedBox(
+              height: 10,
             ),
-            Text(
-              '1 Semi-Double Room(Non-Ac)',
-              style: TextStyle(fontSize: 12, height: 2),
+            LimitedBox(
+              maxHeight: 150,
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: bookingDetails.selectedRooms.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: Text(
+                        '1 ${bookingDetails.selectedRooms[index]}',
+                        style: TextStyle(fontSize: 13, height: 2),
+                      ),
+                    );
+                  }),
             ),
             SizedBox(
               height: 30,
@@ -80,7 +102,7 @@ class _BookedTileState extends State<BookedTile> {
                         ),
                       ),
                       Text(
-                        'Pending...',
+                        bookingDetails.status == 'pending' ? 'Pending...' : 'Booked',
                         style: TextStyle(
                           fontSize: 11,
                           color: Colors.red,

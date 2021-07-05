@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/thankyou_page.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
+import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:intl/intl.dart';
 import 'package:stayegy/container/gradient_creation.dart';
@@ -52,6 +53,15 @@ class BookingConfirmPage extends StatelessWidget {
                           )));
             } else if (state is ProcessingState) {
               LoadingOverlay().buildOverlay(context);
+            } else if (state is BookingExistsState) {
+              Navigator.pop(context);
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "You have an existing Booking.",
+                color: Colors.red,
+                textColor: Colors.white,
+              );
+              Navigator.popUntil(context, (route) => route.isFirst);
             }
           },
           child: Stack(
@@ -169,6 +179,7 @@ class BookingConfirmPage extends StatelessWidget {
                               maxHeight: 150,
                               maxWidth: double.maxFinite,
                               child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: bookingDetails.selectedRooms.length,
                                 itemBuilder: (context, index) {

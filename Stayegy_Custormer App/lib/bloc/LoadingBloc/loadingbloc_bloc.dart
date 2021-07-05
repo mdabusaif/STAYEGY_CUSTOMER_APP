@@ -31,8 +31,19 @@ class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
     } else if (event is SendBookingRequestEvent) {
       yield ProcessingState();
 
-      String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails, hotelID: event.hotelId);
-      yield BookingRequestPlacedState(bookingID: bookingId);
+      if (await _bookingRepository.checkIfBookingExists()) {
+        yield BookingExistsState();
+      } else {
+        String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails, hotelID: event.hotelId);
+        yield BookingRequestPlacedState(bookingID: bookingId);
+      }
+    } else if (event is LoadBookStatusEvent) {
+      yield ProcessingState();
+
+      BookingDetails bookingDetails = await _bookingRepository.getBookingStatus();
+      List historyList = await _bookingRepository.getBookingHistory();
+
+      yield LoadedBookingStatusState(bookingDetails: bookingDetails, historyList: historyList);
     }
   }
 
