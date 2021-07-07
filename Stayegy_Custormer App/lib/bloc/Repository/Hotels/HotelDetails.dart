@@ -6,7 +6,7 @@ class Hotel {
   Map price;
   Map discountedPrice;
   List facilities;
-  Map images;
+  List images;
 
   Hotel({
     this.hid,

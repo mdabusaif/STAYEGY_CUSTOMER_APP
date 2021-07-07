@@ -88,7 +88,7 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                         ),
                       ),
                       childCount: _hotelList.length,
-                      addAutomaticKeepAlives: false,
+                      addAutomaticKeepAlives: true,
                       addRepaintBoundaries: false,
                     ),
                   ),

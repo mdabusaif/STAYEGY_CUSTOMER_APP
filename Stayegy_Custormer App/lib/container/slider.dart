@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 List imgList = [];
 
 class ImageSliderDemo extends StatelessWidget {
-  ImageSliderDemo(
-      {@required this.fit, @required this.aspectRatio, @required this.images}) {
+  ImageSliderDemo({@required this.fit, @required this.aspectRatio, @required this.images}) {
     imgList = images;
   }
 
@@ -57,16 +56,12 @@ final List<Widget> imageSliders = imgList
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(0, 0, 0, 0)
-                            ],
+                            colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20.0),
+                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
                         child: Text(
                           'No. ${imgList.indexOf(item)} image',
                           style: TextStyle(

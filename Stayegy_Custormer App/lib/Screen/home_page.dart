@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,6 +98,7 @@ class _home_pageState extends State<home_page> {
                     children: [
                       Expanded(
                         child: ListView.builder(
+                          addAutomaticKeepAlives: true,
                           itemCount: 9,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -156,6 +158,7 @@ class _home_pageState extends State<home_page> {
                       ),
                       Expanded(
                         child: ListView.builder(
+                          addAutomaticKeepAlives: true,
                           itemCount: 2,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -200,6 +203,7 @@ class _home_pageState extends State<home_page> {
                       ),
                       Expanded(
                         child: ListView.builder(
+                          addAutomaticKeepAlives: true,
                           itemCount: homePageHotels.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -230,6 +234,22 @@ class _home_pageState extends State<home_page> {
                                           Container(
                                             color: Colors.grey,
                                             height: 120,
+                                            child: ExtendedImage.network(
+                                              homePageHotels[index].images[0],
+                                              fit: BoxFit.cover,
+                                              // mode: ExtendedImageMode.gesture,
+                                              cache: true,
+                                              // initGestureConfigHandler: (ExtendedImageState state) {
+                                              //   return GestureConfig(
+                                              //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                                              //     inPageView: true,
+                                              //     initialScale: 1.0,
+                                              //     maxScale: 5.0,
+                                              //     animationMaxScale: 6.0,
+                                              //     initialAlignment: InitialAlignment.center,
+                                              //   );
+                                              // },
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 10,
@@ -305,6 +325,7 @@ class _home_pageState extends State<home_page> {
                       ),
                       Expanded(
                         child: ListView.builder(
+                          addAutomaticKeepAlives: true,
                           itemCount: 3,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {

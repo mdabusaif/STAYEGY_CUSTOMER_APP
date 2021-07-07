@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/Screen/details_page.dart';
@@ -42,8 +43,11 @@ class CardModel extends StatelessWidget {
                   //   aspectRatio: 16 / 9,
                   //   images: hotel.images.values.toList(),
                   // ),
-                  child: Container(
-                    color: Colors.grey,
+
+                  child: ExtendedImage.network(
+                    hotel.images[0],
+                    fit: BoxFit.cover,
+                    cache: true,
                   ),
                 ),
               ),

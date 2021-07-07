@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/slider.dart';
+import 'package:extended_image/extended_image.dart';
 
 class DetailsPage extends StatefulWidget {
   final Hotel hotelInt;
@@ -23,6 +24,8 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   int noOfRooms;
   String roomType1, roomType2, roomType3;
+
+  int currentIndex;
 
   int totalPrice;
   int totalDiscountedPrice;
@@ -75,14 +78,36 @@ class _DetailsPageState extends State<DetailsPage> {
                 pinned: false,
                 expandedHeight: 350,
                 flexibleSpace: Container(
-                  color: Colors.grey,
+                  color: Colors.white,
                   height: 500,
                   width: double.infinity,
                   //todo: Imageslider for showing images
-                  // child: ImageSliderDemo(
-                  //     fit: BoxFit.cover,
-                  //     aspectRatio: 1,
-                  //     images: hotel.images.values.toList()),
+                  // child: ImageSliderDemo(fit: BoxFit.cover, aspectRatio: 1, images: hotel.images),
+                  child: ExtendedImageGesturePageView.builder(
+                    controller: PageController(
+                      initialPage: 0,
+                    ),
+                    itemCount: hotel.images.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ExtendedImage.network(
+                        hotel.images[index],
+                        fit: BoxFit.cover,
+                        // mode: ExtendedImageMode.gesture,
+                        cache: true,
+                        clearMemoryCacheWhenDispose: true,
+                        // initGestureConfigHandler: (ExtendedImageState state) {
+                        //   return GestureConfig(
+                        //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                        //     inPageView: true,
+                        //     initialScale: 1.0,
+                        //     maxScale: 5.0,
+                        //     animationMaxScale: 6.0,
+                        //     initialAlignment: InitialAlignment.center,
+                        //   );
+                        // },
+                      );
+                    },
+                  ),
                 ),
                 leading: IconButton(
                   padding: EdgeInsets.only(right: 10),
