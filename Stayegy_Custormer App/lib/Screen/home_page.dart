@@ -339,12 +339,14 @@ class _home_pageState extends State<home_page> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.zero,
                                   child: Container(
-                                    width: 200,
-                                    child: Image.asset(
-                                      '${concerning[index]}',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
+                                      width: 200,
+                                      child: Hero(
+                                        tag: 'image',
+                                        child: Image.asset(
+                                          '${concerning[index]}',
+                                          fit: BoxFit.fill,
+                                        ),
+                                      )),
                                 ),
                               ),
                               onTap: () {
