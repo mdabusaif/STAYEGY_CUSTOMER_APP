@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy/Screen/accountDetails_Page.dart';
 import 'package:stayegy/Screen/bookingStatusPage.dart';
+import 'package:stayegy/Screen/contact.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
@@ -74,6 +75,14 @@ class appdrawer extends StatelessWidget {
                   width: 12,
                   onTap: () {
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
+                  },
+                ),
+                drawer_data(
+                  imagePath: 'images/contact icon.png',
+                  textData: 'Contact',
+                  width: 12,
+                  onTap: () {
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => ContactPage()));
                   },
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/container/gradient_text.dart';
 
 class TearmsAndConditionPage extends StatefulWidget {
@@ -11,54 +12,47 @@ class _TearmsAndConditionPageState extends State<TearmsAndConditionPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: <Widget>[
-        Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 250,
-                color: Colors.white,
-                child: Hero(
-                  tag: 'image',
-                  child: Image.asset(
-                    'images/T&C.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          bottom: 10.0,
-          right: 10,
-          left: 10,
-          child: Container(
-            height: 30,
-            width: 370,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Color(0xff191919)),
-            child: Align(
-              alignment: Alignment.center,
-              child: GradientText(
-                'BACK TO HOME',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.none,
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xffb88746),
-                    Color(0xfffdf5a6),
-                  ],
+      children: [
+        CustomScrollView(slivers: [
+          SliverAppBar(
+            floating: false,
+            pinned: false,
+            expandedHeight: 250,
+            flexibleSpace: Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Hero(
+                tag: 'image',
+                child: Image.asset(
+                  'images/T&C.png',
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
+            leading: IconButton(
+              padding: EdgeInsets.only(right: 10),
+              iconSize: 5,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                CupertinoIcons.back,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
           ),
-        ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height,
+                )
+              ],
+            ),
+          ),
+        ]),
       ],
     );
   }

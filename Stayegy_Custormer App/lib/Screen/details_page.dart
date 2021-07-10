@@ -74,53 +74,54 @@ class _DetailsPageState extends State<DetailsPage> {
         children: [
           CustomScrollView(slivers: [
             SliverAppBar(
-                floating: false,
-                pinned: false,
-                expandedHeight: 350,
-                flexibleSpace: Container(
-                  color: Colors.white,
-                  height: 500,
-                  width: double.infinity,
-                  //todo: Imageslider for showing images
-                  // child: ImageSliderDemo(fit: BoxFit.cover, aspectRatio: 1, images: hotel.images),
-                  child: ExtendedImageGesturePageView.builder(
-                    controller: PageController(
-                      initialPage: 0,
-                    ),
-                    itemCount: hotel.images.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ExtendedImage.network(
-                        hotel.images[index],
-                        fit: BoxFit.cover,
-                        // mode: ExtendedImageMode.gesture,
-                        cache: true,
-                        clearMemoryCacheWhenDispose: true,
-                        // initGestureConfigHandler: (ExtendedImageState state) {
-                        //   return GestureConfig(
-                        //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
-                        //     inPageView: true,
-                        //     initialScale: 1.0,
-                        //     maxScale: 5.0,
-                        //     animationMaxScale: 6.0,
-                        //     initialAlignment: InitialAlignment.center,
-                        //   );
-                        // },
-                      );
-                    },
+              floating: false,
+              pinned: false,
+              expandedHeight: 350,
+              flexibleSpace: Container(
+                color: Colors.white,
+                height: 500,
+                width: double.infinity,
+                //todo: Imageslider for showing images
+                // child: ImageSliderDemo(fit: BoxFit.cover, aspectRatio: 1, images: hotel.images),
+                child: ExtendedImageGesturePageView.builder(
+                  controller: PageController(
+                    initialPage: 0,
                   ),
-                ),
-                leading: IconButton(
-                  padding: EdgeInsets.only(right: 10),
-                  iconSize: 5,
-                  onPressed: () {
-                    Navigator.pop(context);
+                  itemCount: hotel.images.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ExtendedImage.network(
+                      hotel.images[index],
+                      fit: BoxFit.cover,
+                      // mode: ExtendedImageMode.gesture,
+                      cache: true,
+                      clearMemoryCacheWhenDispose: true,
+                      // initGestureConfigHandler: (ExtendedImageState state) {
+                      //   return GestureConfig(
+                      //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                      //     inPageView: true,
+                      //     initialScale: 1.0,
+                      //     maxScale: 5.0,
+                      //     animationMaxScale: 6.0,
+                      //     initialAlignment: InitialAlignment.center,
+                      //   );
+                      // },
+                    );
                   },
-                  icon: Icon(
-                    CupertinoIcons.back,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                )),
+                ),
+              ),
+              leading: IconButton(
+                padding: EdgeInsets.only(right: 10),
+                iconSize: 5,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  CupertinoIcons.back,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
             SliverList(
               delegate: SliverChildListDelegate(
                 [

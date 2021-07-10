@@ -49,7 +49,7 @@ List<String> offerImage1 = [
   'images/collection 1.png',
 ];
 List<String> concerning = [
-  'images/Greetings.png',
+  'images/grettings.png',
   'images/T&C.png',
   'images/Contact.png',
 ];
