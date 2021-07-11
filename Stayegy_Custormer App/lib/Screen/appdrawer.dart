@@ -62,22 +62,6 @@ class appdrawer extends StatelessWidget {
                   },
                 ),
                 drawer_data(
-                  imagePath: 'images/invite_icon.png',
-                  textData: 'Invite & Earn',
-                  width: 10,
-                  onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
-                  },
-                ),
-                drawer_data(
-                  imagePath: 'images/save_icon.png',
-                  textData: 'Saved & History',
-                  width: 12,
-                  onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
-                  },
-                ),
-                drawer_data(
                   imagePath: 'images/contact icon.png',
                   textData: 'Contact',
                   width: 12,

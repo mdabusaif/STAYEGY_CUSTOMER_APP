@@ -267,6 +267,9 @@ class _home_pageState extends State<home_page> {
                                                 ),
                                                 Text(
                                                   homePageHotels[index].name,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  overflow: TextOverflow.fade,
                                                   style: GoogleFonts.staatliches(
                                                     fontSize: 16,
                                                   ),
@@ -305,7 +308,7 @@ class _home_pageState extends State<home_page> {
                   height: 20,
                 ),
                 Container(
-                  height: 240,
+                  height: 220,
                   width: double.maxFinite,
                   color: Color(0xfff2f2f2),
                   child: Column(
@@ -332,20 +335,17 @@ class _home_pageState extends State<home_page> {
                             return GestureDetector(
                               child: Card(
                                 elevation: 1,
-                                margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 12, 0, 0, 50),
+                                margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 12, 10, 0, 20),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.zero,
+                                  borderRadius: BorderRadius.circular(10),
                                   child: Container(
                                       width: 200,
-                                      child: Hero(
-                                        tag: 'image',
-                                        child: Image.asset(
-                                          '${concerning[index]}',
-                                          fit: BoxFit.fill,
-                                        ),
+                                      child: Image.asset(
+                                        '${concerning[index]}',
+                                        fit: BoxFit.fill,
                                       )),
                                 ),
                               ),

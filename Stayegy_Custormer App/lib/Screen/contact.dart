@@ -20,12 +20,9 @@ class _ContactPageState extends State<ContactPage> {
             flexibleSpace: Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
-              child: Hero(
-                tag: 'image',
-                child: Image.asset(
-                  'images/Contact.png',
-                  fit: BoxFit.fill,
-                ),
+              child: Image.asset(
+                'images/Contact.png',
+                fit: BoxFit.fill,
               ),
             ),
             leading: IconButton(
