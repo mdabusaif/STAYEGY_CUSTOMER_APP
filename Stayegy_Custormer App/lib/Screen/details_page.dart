@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/slider.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatefulWidget {
   final Hotel hotelInt;
@@ -129,35 +132,64 @@ class _DetailsPageState extends State<DetailsPage> {
                     children: [
                       Container(
                         height: 80,
+                        width: double.maxFinite,
                         color: Colors.white,
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Text(
-                                // 'STAYEGY 2483 HOTEL RADISSON',
-                                '${hotel.hid} ${hotel.name}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Text(
+                                      // 'STAYEGY 2483 HOTEL RADISSON',
+                                      '${hotel.hid} ${hotel.name}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      '${hotel.address}',
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '${hotel.address}',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 13,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                print("Location Tapped");
+                                final url = 'https://www.google.com/maps/place/Hotel+Rajsthan/@23.5968883,89.8278393,16.75z/data=!4m5!3m4!1s0x39fe3aeb7193cefd:0x6250767badcd303f!8m2!3d23.5988178!4d89.8279746';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                              child: Container(
+                                width: 50,
+                                margin: EdgeInsets.only(right: 15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.location_on_outlined),
+                                    Text("Locate"),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ),
                       Container(
