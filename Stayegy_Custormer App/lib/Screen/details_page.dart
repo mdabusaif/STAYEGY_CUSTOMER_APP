@@ -179,27 +179,25 @@ class _DetailsPageState extends State<DetailsPage> {
                               },
                               child: Container(
                                 width: 60,
-
                                 // color: Colors.amber,
                                 margin: EdgeInsets.only(right: 15, top: 10, bottom: 10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.black87,
-                                ),
+
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
-                                      Icons.location_on_outlined,
-                                      size: 25,
-                                      color: Colors.white,
+                                      // Icons.location_on_outlined,
+                                      // Icons.location_on_sharp,
+                                      CupertinoIcons.location_solid,
+                                      size: 30,
+                                      color: Colors.red,
                                     ),
                                     Text(
                                       "MAP",
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: Colors.red,
                                       ),
                                     ),
                                   ],

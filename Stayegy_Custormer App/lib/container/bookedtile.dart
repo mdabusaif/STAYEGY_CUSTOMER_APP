@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookedTile extends StatelessWidget {
   final BookingDetails bookingDetails;
@@ -17,13 +19,21 @@ class BookedTile extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Text(
-              'Order No: #${bookingDetails.bid}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.green,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Order No: #${bookingDetails.bid}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.green,
+                  ),
+                ),
+                SizedBox(
+                  width: 00,
+                ),
+              ],
             ),
             SizedBox(
               height: 30,
@@ -36,8 +46,47 @@ class BookedTile extends StatelessWidget {
               bookingDetails.hotelAddress,
               style: TextStyle(fontSize: 12, height: 2),
             ),
+            GestureDetector(
+              onTap: () async {
+                print("Location Tapped");
+                final url = 'https://www.google.com/maps/place/Hotel+Rajsthan/@23.5968883,89.8278393,16.75z/data=!4m5!3m4!1s0x39fe3aeb7193cefd:0x6250767badcd303f!8m2!3d23.5988178!4d89.8279746';
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: Container(
+                width: 60,
+                // color: Colors.amber,
+                margin: EdgeInsets.only(
+                  top: 5,
+                ),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      // Icons.location_on_outlined,
+                      // Icons.location_on_sharp,
+                      CupertinoIcons.location_solid,
+                      size: 30,
+                      color: Colors.red,
+                    ),
+                    Text(
+                      "MAP",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             Text(
               'Date of Travell',
