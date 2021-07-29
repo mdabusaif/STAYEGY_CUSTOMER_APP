@@ -178,13 +178,30 @@ class _DetailsPageState extends State<DetailsPage> {
                                 }
                               },
                               child: Container(
-                                width: 50,
-                                margin: EdgeInsets.only(right: 15),
+                                width: 60,
+
+                                // color: Colors.amber,
+                                margin: EdgeInsets.only(right: 15, top: 10, bottom: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.black87,
+                                ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.location_on_outlined),
-                                    Text("Locate"),
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      "MAP",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -214,8 +231,11 @@ class _DetailsPageState extends State<DetailsPage> {
                               height: 10,
                             ),
                             Container(
-                              color: Colors.black,
                               height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.black,
+                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
