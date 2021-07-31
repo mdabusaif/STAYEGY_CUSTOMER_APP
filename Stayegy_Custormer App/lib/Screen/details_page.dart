@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/bookingConfirm_page.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
@@ -668,6 +670,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                   content: Container(
                                     height: MediaQuery.of(context).size.height,
                                     width: MediaQuery.of(context).size.width,
+                                    child: FutureBuilder(
+                                      future: rootBundle.loadString("assets/rules_to_maintain.md"),
+                                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Markdown(data: snapshot.data);
+                                        } else {
+                                          return Container();
+                                        }
+                                      },
+                                    ),
                                   ),
                                   actions: [
                                     Padding(

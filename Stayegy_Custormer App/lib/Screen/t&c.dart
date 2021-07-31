@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:stayegy/container/gradient_text.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class TearmsAndConditionPage extends StatefulWidget {
   @override
@@ -44,7 +44,20 @@ class _TearmsAndConditionPageState extends State<TearmsAndConditionPage> {
               [
                 Container(
                   color: Colors.white,
-                  height: MediaQuery.of(context).size.height,
+                  height: 2200,
+                  child: FutureBuilder(
+                    future: rootBundle.loadString("assets/terms_conditions.md"),
+                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        return Markdown(
+                          data: snapshot.data,
+                          physics: NeverScrollableScrollPhysics(),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
                 )
               ],
             ),
