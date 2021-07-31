@@ -1,70 +1,45 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class notification_page extends StatefulWidget {
+class NotificationPage extends StatefulWidget {
   @override
-  _notification_pageState createState() => _notification_pageState();
+  _NotificationPageState createState() => _NotificationPageState();
 }
 
-class _notification_pageState extends State<notification_page> {
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 1.0,
-          leading: IconButton(
-            padding: EdgeInsets.only(right: 20),
-            iconSize: 5,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              CupertinoIcons.back,
-              color: Color(0xff191919),
-              size: 30,
-            ),
-          ),
-          bottom: TabBar(
-            indicatorColor: Color(0xff191919),
-            unselectedLabelColor: Color(0xffa2a2a2),
-            labelColor: Color(0xff191919),
-            onTap: (index) {},
-            tabs: [
-              Tab(
-                child: Text(
-                  'OFFERS',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'NOTIFICATIONS',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1.0,
+        leading: IconButton(
+          padding: EdgeInsets.only(right: 20),
+          iconSize: 5,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Color(0xff191919),
+            size: 30,
           ),
         ),
-        body: TabBarView(children: [
-          Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text('Offers!'),
+        title: Text(
+          'Notifications',
+          style: GoogleFonts.staatliches(
+            color: Colors.black,
+            fontSize: 30,
           ),
-          Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Text('Notifications!'),
-          ),
-        ]),
+        ),
+        centerTitle: true,
       ),
+      body: ListView.builder(
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return ListTile(title: Text("notification $index"));
+          }),
     );
   }
 }

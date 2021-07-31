@@ -170,7 +170,8 @@ class _DetailsPageState extends State<DetailsPage> {
                             GestureDetector(
                               onTap: () async {
                                 print("Location Tapped");
-                                final url = 'https://www.google.com/maps/place/Hotel+Rajsthan/@23.5968883,89.8278393,16.75z/data=!4m5!3m4!1s0x39fe3aeb7193cefd:0x6250767badcd303f!8m2!3d23.5988178!4d89.8279746';
+                                // final url = 'https://www.google.com/maps/place/Hotel+Rajsthan/@23.5968883,89.8278393,16.75z/data=!4m5!3m4!1s0x39fe3aeb7193cefd:0x6250767badcd303f!8m2!3d23.5988178!4d89.8279746';
+                                final url = hotel.mapUrl;
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -718,6 +719,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               bookedRooms: [],
                                               isCheckedIn: false,
                                               hotelAddress: hotel.address,
+                                              mapUrl: hotel.mapUrl,
                                             );
 
                                             Navigator.push(

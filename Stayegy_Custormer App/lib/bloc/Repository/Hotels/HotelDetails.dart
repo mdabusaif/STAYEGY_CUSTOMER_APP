@@ -7,6 +7,7 @@ class Hotel {
   Map discountedPrice;
   List facilities;
   List images;
+  String mapUrl;
 
   Hotel({
     this.hid,
@@ -16,6 +17,8 @@ class Hotel {
     this.discountedPrice,
     this.facilities,
     this.images,
+    this.mapUrl,
+    this.id,
   });
 
   Map<String, dynamic> toJason() => {
@@ -26,6 +29,7 @@ class Hotel {
         'discountedPrice': discountedPrice,
         'facilities': facilities,
         'images': images,
+        'mapUrl': mapUrl,
       };
 
   Hotel.fromMap(Map<String, dynamic> hotelMap) {
@@ -37,5 +41,6 @@ class Hotel {
     discountedPrice = hotelMap["discountedPrice"];
     facilities = hotelMap["facilities"];
     images = hotelMap["images"];
+    mapUrl = hotelMap["mapUrl"];
   }
 }

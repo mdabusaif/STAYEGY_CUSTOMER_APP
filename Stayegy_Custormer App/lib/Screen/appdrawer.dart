@@ -9,11 +9,12 @@ import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy/bloc/Login_Bloc/LogIn_Events.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:stayegy/container/drawer_Data.dart';
 import 'package:stayegy/container/gradient_creation.dart';
 import 'package:stayegy/container/gradient_text.dart';
 
-class appdrawer extends StatelessWidget {
+class Appdrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,8 +27,9 @@ class appdrawer extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 190, 10),
+                  alignment: Alignment.centerLeft,
                   child: GradientText(
-                    'Mr. XYZ',
+                    'Mr. ${userDetailsGlobal.name}',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

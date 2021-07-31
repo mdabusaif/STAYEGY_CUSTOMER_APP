@@ -26,8 +26,6 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   @override
   Stream<LogInState> mapEventToState(LogInEvent event) async* {
     if (event is SendOtpEvent) {
-      yield LoadingState();
-
       subscription = sendOtp(event.phoNo).listen((event) {
         add(event);
       });

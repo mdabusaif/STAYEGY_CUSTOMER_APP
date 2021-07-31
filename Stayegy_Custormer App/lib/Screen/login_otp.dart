@@ -23,8 +23,7 @@ class _login_otpState extends State<login_otp> {
   @override
   Widget build(BuildContext context) {
     final LogInBloc _loginBloc = BlocProvider.of<LogInBloc>(context);
-    final AuthenticationBloc _authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
+    final AuthenticationBloc _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -56,14 +55,13 @@ class _login_otpState extends State<login_otp> {
                 _message = state.message;
               }
               Navigator.pop(context);
-              SnackBarBuilder()
-                  .buildSnackBar(context, message: _message, color: Colors.red);
+              print(_message);
+              SnackBarBuilder().buildSnackBar(context, message: _message, color: Colors.red);
             } else if (state is LogInCompleteState) {
               _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
               Navigator.popUntil(context, (route) => route.isFirst);
             } else if (state is RegistrationNeededState) {
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (_) => login_cprofile()));
+              Navigator.push(context, CupertinoPageRoute(builder: (_) => login_cprofile()));
             } else if (state is LoadingState) {
               LoadingOverlay().buildOverlay(context);
             }
@@ -86,9 +84,7 @@ class _login_otpState extends State<login_otp> {
                     children: <Widget>[
                       TextField(
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                         onChanged: (value) => _otpCode = value,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(

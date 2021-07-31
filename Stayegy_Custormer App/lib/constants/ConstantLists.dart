@@ -1,32 +1,6 @@
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/User/User_Details.dart';
 
-List<String> cityList = [
-  "Dhaka",
-  "Faridpur",
-  "Magura",
-  "Cox's Bazar",
-  "Sylhet",
-  "Dinajpur",
-  "Rangpur",
-  "Jassore",
-  "Khulna",
-  "Barishal",
-  "Noakhali",
-  "Rajbari",
-  "Kushtia",
-  "Kishorgonj",
-  "Thakurga",
-  "Gopalganj",
-  "Rajshahi",
-  "Chittagong",
-  "Bandarban",
-  "Chandpur",
-  "Moimonshingh",
-  "Narayangonj",
-  "Sirajgonj",
-];
-
 List<String> cityImageList = [
   'images/cityImages/dhaka.jpeg',
   'images/cityImages/kustia.jpg',
@@ -62,3 +36,29 @@ List<int> noOfRoomList = [
 UserDetails userDetailsGlobal;
 
 List<Hotel> homePageHotels;
+
+List<String> cityList = [
+  "Dhaka",
+  "Faridpur",
+  "Magura",
+  "Cox's Bazar",
+  "Sylhet",
+  "Dinajpur",
+  "Rangpur",
+  "Jassore",
+  "Khulna",
+  "Barishal",
+  "Noakhali",
+  "Rajbari",
+  "Kushtia",
+  "Kishorgonj",
+  "Thakurga",
+  "Gopalganj",
+  "Rajshahi",
+  "Chittagong",
+  "Bandarban",
+  "Chandpur",
+  "Moimonshingh",
+  "Narayangonj",
+  "Sirajgonj",
+];

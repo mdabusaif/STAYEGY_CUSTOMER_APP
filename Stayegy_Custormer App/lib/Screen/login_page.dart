@@ -17,7 +17,7 @@ class login_page extends StatefulWidget {
 }
 
 class _login_pageState extends State<login_page> {
-  String _counntryCode, _phoneNumber;
+  String _counntryCode = "+880", _phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,7 @@ class _login_pageState extends State<login_page> {
             ),
             SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height / 2),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
                 height: 350,
                 padding: EdgeInsets.fromLTRB(30, 150, 30, 150),
                 child: Container(
@@ -58,20 +57,9 @@ class _login_pageState extends State<login_page> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: CountryCodePicker(
-                            onChanged: (code) {
-                              _counntryCode = code.dialCode;
-                              print(_counntryCode);
-                            },
-                            onInit: (code) {
-                              _counntryCode = code.dialCode;
-                              print(_counntryCode);
-                            },
-                            initialSelection: 'BD',
-                            //padding: EdgeInsets.only(left: 5, right: 5),
-                          ),
+                        child: Image.asset(
+                          "images/BD Flag.png",
+                          scale: 140,
                         ),
                       ),
                       Expanded(
@@ -81,12 +69,9 @@ class _login_pageState extends State<login_page> {
                           padding: EdgeInsets.only(left: 10),
                           child: TextField(
                             keyboardType: TextInputType.phone,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                             onChanged: (value) {
-                              formBloc.add(
-                                  PhoneNumberCheckEvent(phoneNumber: value));
+                              formBloc.add(PhoneNumberCheckEvent(phoneNumber: value));
                               _phoneNumber = value;
                             },
 
@@ -118,18 +103,13 @@ class _login_pageState extends State<login_page> {
                                   print('Pressed!');
                                   if (state is PhoneNumberCheckedState) {
                                     logInBloc.add(
-                                      SendOtpEvent(
-                                          phoNo: _counntryCode + _phoneNumber),
+                                      SendOtpEvent(phoNo: _counntryCode + _phoneNumber),
                                     );
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => login_otp()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => login_otp()));
                                   }
                                 },
                                 child: Image(
-                                  image: AssetImage(state
-                                          is PhoneNumberNotCheckedState
+                                  image: AssetImage(state is PhoneNumberNotCheckedState
                                       ? 'images/arrow button default.png'
                                       : state is PhoneNumberCheckedState
                                           ? 'images/arrow button submit.png'

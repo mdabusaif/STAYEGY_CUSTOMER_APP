@@ -47,13 +47,13 @@ class _home_pageState extends State<home_page> {
           FlatButton(
             padding: EdgeInsets.all(17),
             minWidth: 1,
-            onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => notification_page())),
+            onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => NotificationPage())),
             child: Image.asset('images/Notification bell.png'),
           ),
         ],
       ),
       drawerEdgeDragWidth: 0,
-      drawer: appdrawer(),
+      drawer: Appdrawer(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
