@@ -31,94 +31,89 @@ class CardModel extends StatelessWidget {
         },
         child: Container(
           height: 350,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-                  //todo: imageslider to show images
-                  // child: ImageSliderDemo(
-                  //   fit: BoxFit.cover,
-                  //   aspectRatio: 16 / 9,
-                  //   images: hotel.images.values.toList(),
-                  // ),
-
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 250,
                   child: ExtendedImage.network(
                     hotel.images[0],
                     fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
                     cache: true,
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        // 'STAYEGY 7350 Hotel Rajsthan',
-                        '${hotel.hid} ${hotel.name}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Text(
+                          // 'STAYEGY 7350 Hotel Rajsthan',
+                          '${hotel.hid} ${hotel.name}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        // 'Puraton Bus Stand, Faridpur',
-                        '${hotel.address}',
-                        style: TextStyle(
-                          color: Colors.black54,
+                        SizedBox(
+                          height: 5,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        //crossAxisAlignment: CrossAxisAlignment.baseline,
-                        children: <Widget>[
-                          Text(
-                            // '৳ 400',
-                            '৳ ${hotel.discountedPrice["Single | Non AC"]}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                        Text(
+                          // 'Puraton Bus Stand, Faridpur',
+                          '${hotel.address}',
+                          style: TextStyle(
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          //crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: <Widget>[
+                            Text(
+                              // '৳ 400',
+                              '৳ ${hotel.discountedPrice["Single | Non AC"]}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '৳ ${hotel.price["Single | Non AC"]}',
-                            style: TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                              color: Colors.grey,
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '${(((hotel.price["Single | Non AC"] - hotel.discountedPrice["Single | Non AC"]) / hotel.price["Single | Non AC"]) * 100).toInt()}% OFF',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
+                            Text(
+                              '৳ ${hotel.price["Single | Non AC"]}',
+                              style: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '${(((hotel.price["Single | Non AC"] - hotel.discountedPrice["Single | Non AC"]) / hotel.price["Single | Non AC"]) * 100).toInt()}% OFF',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -26,7 +26,6 @@ class Appdrawer extends StatelessWidget {
             Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 190, 10),
                   alignment: Alignment.centerLeft,
                   child: GradientText(
                     'Mr. ${userDetailsGlobal.name}',

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stayegy/Models/card_model.dart';
+
 import 'package:stayegy/Screen/SearchCity.dart';
 import 'package:stayegy/Screen/SearchResult.dart';
 import 'package:stayegy/Screen/appdrawer.dart';
@@ -183,7 +183,7 @@ class _home_pageState extends State<home_page> {
                   height: 20,
                 ),
                 Container(
-                  height: 250,
+                  height: 200,
                   width: double.maxFinite,
                   color: Color(0xfff2f2f2),
                   child: Column(
@@ -225,7 +225,7 @@ class _home_pageState extends State<home_page> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    width: 180,
+                                    width: 150,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Column(
@@ -233,10 +233,12 @@ class _home_pageState extends State<home_page> {
                                         children: [
                                           Container(
                                             color: Colors.grey,
-                                            height: 120,
+                                            height: 80,
                                             child: ExtendedImage.network(
                                               homePageHotels[index].images[0],
                                               fit: BoxFit.cover,
+                                              height: double.infinity,
+                                              width: double.infinity,
                                               // mode: ExtendedImageMode.gesture,
                                               cache: true,
                                               // initGestureConfigHandler: (ExtendedImageState state) {
@@ -252,7 +254,7 @@ class _home_pageState extends State<home_page> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 5,
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 10),
@@ -262,25 +264,25 @@ class _home_pageState extends State<home_page> {
                                                 Text(
                                                   homePageHotels[index].hid,
                                                   style: GoogleFonts.staatliches(
-                                                    fontSize: 12,
+                                                    fontSize: 10,
                                                   ),
                                                 ),
                                                 Text(
                                                   homePageHotels[index].name,
                                                   maxLines: 1,
                                                   softWrap: false,
-                                                  overflow: TextOverflow.fade,
+                                                  overflow: TextOverflow.ellipsis,
                                                   style: GoogleFonts.staatliches(
-                                                    fontSize: 16,
+                                                    fontSize: 14,
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  height: 4,
+                                                  height: 2,
                                                 ),
                                                 Text(
                                                   '${(((homePageHotels[index].price["Single | Non AC"] - homePageHotels[index].discountedPrice["Single | Non AC"]) / homePageHotels[index].price["Single | Non AC"]) * 100).toInt()}% OFF',
                                                   style: GoogleFonts.staatliches(
-                                                    fontSize: 20,
+                                                    fontSize: 16,
                                                     color: Colors.red,
                                                   ),
                                                 ),
@@ -308,7 +310,7 @@ class _home_pageState extends State<home_page> {
                   height: 20,
                 ),
                 Container(
-                  height: 220,
+                  height: 190,
                   width: double.maxFinite,
                   color: Color(0xfff2f2f2),
                   child: Column(
@@ -342,7 +344,7 @@ class _home_pageState extends State<home_page> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                      width: 200,
+                                      width: 170,
                                       child: Image.asset(
                                         '${concerning[index]}',
                                         fit: BoxFit.fill,

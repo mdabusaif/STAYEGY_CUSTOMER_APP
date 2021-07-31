@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +138,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               child: Container(
                                 alignment: Alignment.centerLeft,
                                 margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                padding: EdgeInsets.only(left: 10, right: 10),
+                                padding: EdgeInsets.only(left: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -148,6 +146,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                     Text(
                                       // 'STAYEGY 2483 HOTEL RADISSON',
                                       '${hotel.hid} ${hotel.name}',
+                                      maxLines: 1,
+                                      softWrap: false,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
