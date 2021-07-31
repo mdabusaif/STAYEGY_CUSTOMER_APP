@@ -47,7 +47,10 @@ class _home_pageState extends State<home_page> {
           FlatButton(
             padding: EdgeInsets.all(17),
             minWidth: 1,
-            onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => NotificationPage())),
+            onPressed: () {
+              BlocProvider.of<LoadingBloc>(context).add(LoadNotificationEvent());
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => NotificationPage()));
+            },
             child: Image.asset('images/Notification bell.png'),
           ),
         ],

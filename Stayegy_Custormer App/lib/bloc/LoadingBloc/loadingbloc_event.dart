@@ -25,3 +25,5 @@ class SendBookingRequestEvent extends LoadingBlocEvent {
 }
 
 class LoadBookStatusEvent extends LoadingBlocEvent {}
+
+class LoadNotificationEvent extends LoadingBlocEvent {}

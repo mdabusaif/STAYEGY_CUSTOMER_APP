@@ -9,6 +9,7 @@ import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
+import 'package:stayegy/bloc/Repository/Notificaions/NotificationRepository.dart';
 
 part 'loadingbloc_event.dart';
 part 'loadingbloc_state.dart';
@@ -16,12 +17,15 @@ part 'loadingbloc_state.dart';
 class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
   final HotelRepository _hotelRepository;
   final BookingRepository _bookingRepository;
+  final NotificationRepository _notificationRepository;
 
-  LoadingBloc({@required HotelRepository hotelRepository, @required BookingRepository bookingRepository})
+  LoadingBloc({@required HotelRepository hotelRepository, @required BookingRepository bookingRepository, @required NotificationRepository notificationRepository})
       : assert(hotelRepository != null),
         assert(bookingRepository != null),
+        assert(notificationRepository != null),
         _hotelRepository = hotelRepository,
         _bookingRepository = bookingRepository,
+        _notificationRepository = notificationRepository,
         super(LoadingblocInitial());
 
   @override
@@ -44,6 +48,12 @@ class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
       List historyList = await _bookingRepository.getBookingHistory();
 
       yield LoadedBookingStatusState(bookingDetails: bookingDetails, historyList: historyList);
+    } else if (event is LoadNotificationEvent) {
+      yield ProcessingState();
+
+      List notificationList = await _notificationRepository.getNotifications();
+
+      yield LoadedNotificationState(notificationList: notificationList);
     }
   }
 

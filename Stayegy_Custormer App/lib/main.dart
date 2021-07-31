@@ -10,6 +10,7 @@ import 'package:stayegy/bloc/FormBloc/Form_Bloc.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
+import 'package:stayegy/bloc/Repository/Notificaions/NotificationRepository.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
@@ -23,6 +24,7 @@ void main() async {
   final UserDetails userDetails = UserDetails();
   final HotelRepository hotelRepository = HotelRepository();
   final BookingRepository bookingRepository = BookingRepository();
+  final NotificationRepository notificationRepository = NotificationRepository();
   runApp(
     RepositoryProvider.value(
       value: userRepository,
@@ -31,7 +33,7 @@ void main() async {
           BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
           BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
-          BlocProvider<LoadingBloc>(create: (context) => LoadingBloc(hotelRepository: hotelRepository, bookingRepository: bookingRepository)),
+          BlocProvider<LoadingBloc>(create: (context) => LoadingBloc(hotelRepository: hotelRepository, bookingRepository: bookingRepository, notificationRepository: notificationRepository)),
         ],
         child: MyApp(),
       ),

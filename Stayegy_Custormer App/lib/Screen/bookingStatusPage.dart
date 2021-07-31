@@ -24,7 +24,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
             padding: EdgeInsets.only(right: 20),
             iconSize: 5,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
             icon: Icon(
               CupertinoIcons.back,

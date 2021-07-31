@@ -46,3 +46,12 @@ class LoadedBookingStatusState extends LoadingBlocState {
   @override
   List<Object> get props => [historyList, bookingDetails];
 }
+
+class LoadedNotificationState extends LoadingBlocState {
+  final List notificationList;
+
+  LoadedNotificationState({@required this.notificationList});
+
+  @override
+  List<Object> get props => [notificationList];
+}

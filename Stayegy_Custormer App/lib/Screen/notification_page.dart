@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
+import 'package:stayegy/container/loading_Overlay.dart';
+import 'package:stayegy/container/notificationTile.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -30,91 +35,23 @@ class _NotificationPageState extends State<NotificationPage> {
             'Notifications',
             style: GoogleFonts.staatliches(
               color: Colors.black,
-              fontSize: 30,
+              fontSize: 22,
             ),
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 80,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color(0xFF191919),
-                  width: 0.5,
-                )),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'images/booked.png',
-                        scale: 12,
-                        fit: BoxFit.fill,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      VerticalDivider(
-                        thickness: 0.5,
-                        color: Color(0xff191919),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Booked Placed',
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Your booking has beddn placed at',
-                                style: TextStyle(fontSize: 10, color: Color(0xff191919), fontWeight: FontWeight.w300),
-                              ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'STAYEGY 142 Hotel Mirpur ',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Color(0xff191919),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      '1 hour ago',
-                      style: TextStyle(fontSize: 10, color: Color(0xff191919), fontWeight: FontWeight.w200),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ));
+        body: BlocBuilder<LoadingBloc, LoadingBlocState>(builder: (context, state) {
+          return state is ProcessingState
+              ? LoadingOverlay().buildWidget(context)
+              : state is LoadedNotificationState
+                  ? ListView.builder(
+                      itemCount: state.notificationList.length,
+                      itemBuilder: (context, index) {
+                        return NotificationTile(
+                          notificationDetails: state.notificationList[index],
+                        );
+                      })
+                  : Container();
+        }));
   }
 }
