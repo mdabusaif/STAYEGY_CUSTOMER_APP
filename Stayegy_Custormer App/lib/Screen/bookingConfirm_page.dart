@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/thankyou_page.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
+import 'package:stayegy/bloc/Repository/Notificaions/Notification.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:intl/intl.dart';
@@ -464,8 +467,17 @@ class BookingConfirmPage extends StatelessWidget {
                     text: 'CONFIRM',
                     disabled: false,
                     onTap: () {
+                      NotificationDetails notification = NotificationDetails();
+
+                      notification.hotel = bookingDetails.hid + " " + bookingDetails.hotelName;
+                      notification.notificationType = "bookingPlaced";
+                      notification.receiverId = userDetailsGlobal.uid;
+                      notification.senderId = userDetailsGlobal.uid;
+                      notification.seen = false;
+                      notification.time = Timestamp.fromDate(DateTime.now());
+
                       BlocProvider.of<LoadingBloc>(context).add(
-                        SendBookingRequestEvent(bookingDetails: bookingDetails, hotelId: hotelId),
+                        SendBookingRequestEvent(bookingDetails: bookingDetails, hotelId: hotelId, notification: notification),
                       );
                     },
                   ),

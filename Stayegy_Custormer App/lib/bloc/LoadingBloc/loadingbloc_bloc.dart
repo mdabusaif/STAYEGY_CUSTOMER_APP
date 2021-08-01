@@ -9,6 +9,7 @@ import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingRepository.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelRepositoy.dart';
+import 'package:stayegy/bloc/Repository/Notificaions/Notification.dart';
 import 'package:stayegy/bloc/Repository/Notificaions/NotificationRepository.dart';
 
 part 'loadingbloc_event.dart';
@@ -39,6 +40,7 @@ class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
         yield BookingExistsState();
       } else {
         String bookingId = await _bookingRepository.placeBooking(bookingDetails: event.bookingDetails, hotelID: event.hotelId);
+        await _notificationRepository.placeNotification(event.notification);
         yield BookingRequestPlacedState(bookingID: bookingId);
       }
     } else if (event is LoadBookStatusEvent) {
@@ -54,6 +56,8 @@ class LoadingBloc extends Bloc<LoadingBlocEvent, LoadingBlocState> {
       List notificationList = await _notificationRepository.getNotifications();
 
       yield LoadedNotificationState(notificationList: notificationList);
+    } else if (event is DeleteSeenNotificationsEvent) {
+      await _notificationRepository.deleteSeenNotifications(event.notificatons);
     }
   }
 

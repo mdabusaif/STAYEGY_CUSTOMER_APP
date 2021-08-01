@@ -55,3 +55,5 @@ class LoadedNotificationState extends LoadingBlocState {
   @override
   List<Object> get props => [notificationList];
 }
+
+class SeenDeleteNotificationsCompleteState extends LoadingBlocState {}
