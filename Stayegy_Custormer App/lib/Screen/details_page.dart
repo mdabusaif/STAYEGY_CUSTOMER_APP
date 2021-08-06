@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/Screen/bookingConfirm_page.dart';
+import 'package:stayegy/Screen/t&c.dart';
 import 'package:stayegy/bloc/Repository/Booking/BookingDetails.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 import 'package:stayegy/constants/ConstantLists.dart';
@@ -239,19 +241,49 @@ class _DetailsPageState extends State<DetailsPage> {
                                 color: Colors.black,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      dateTimeRangePicker();
-                                    },
-                                    child: Text(
-                                      // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
-                                      timeRange == null ? '${DateFormat('dd-MM-yy').format(DateTime.now())}  -  ${DateFormat('dd-MM-yy').format(DateTime.now().add(Duration(days: 1)))}' : '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
+                                  Expanded(
+                                    flex: 5,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        dateTimeRangePicker();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'images/Calander.png',
+                                            scale: 2.8,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                // '${timeRange.start.day.toString()}-${timeRange.end.day.toString()}',
+                                                timeRange == null ? '${DateFormat('dd-MM-yy').format(DateTime.now())}  -  ${DateFormat('dd-MM-yy').format(DateTime.now().add(Duration(days: 1)))}' : '${DateFormat('dd-MM-yy').format(timeRange.start)}  -  ${DateFormat('dd-MM-yy').format(timeRange.end)}',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 3,
+                                              ),
+                                              Text(
+                                                '12PM - 11.59AM',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -261,283 +293,302 @@ class _DetailsPageState extends State<DetailsPage> {
                                     indent: 10,
                                     endIndent: 15,
                                   ),
-                                  GestureDetector(
-                                    child: Text(
-                                      "Room",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
+                                  Expanded(
+                                    flex: 2,
+                                    child: GestureDetector(
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        height: double.maxFinite,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              'images/Room.png',
+                                              scale: 3,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Room",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return StatefulBuilder(
-                                              builder: (context, setState) {
-                                                return AlertDialog(
-                                                  buttonPadding: EdgeInsets.only(left: 0),
-                                                  scrollable: true,
-                                                  title: Center(
-                                                    child: Text(
-                                                      'ROOM SELECTION',
-                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return StatefulBuilder(
+                                                builder: (context, setState) {
+                                                  return AlertDialog(
+                                                    buttonPadding: EdgeInsets.only(left: 0),
+                                                    scrollable: true,
+                                                    title: Center(
+                                                      child: Text(
+                                                        'ROOM SELECTION',
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  content: Form(
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-                                                          width: double.infinity,
-                                                          color: Color(0xffefefef),
-                                                          child: DropdownButtonHideUnderline(
-                                                            child: DropdownButton(
-                                                              hint: Padding(
-                                                                padding: const EdgeInsets.all(8.0),
-                                                                child: Text(
-                                                                  'Number of Rooms',
-                                                                  style: GoogleFonts.roboto(
-                                                                    fontSize: 15,
-                                                                    color: Colors.black54,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              dropdownColor: Color(0xffefefef),
-                                                              isExpanded: false,
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 22,
-                                                              ),
-                                                              value: noOfRooms,
-                                                              onChanged: (newValue) {
-                                                                setState(() {
-                                                                  noOfRooms = newValue;
-                                                                });
-                                                              },
-                                                              items: noOfRoomList.map((valueItem) {
-                                                                return DropdownMenuItem(
-                                                                  value: valueItem,
-                                                                  child: Container(
-                                                                    alignment: Alignment.centerRight,
-                                                                    width: 150,
-                                                                    child: Text(
-                                                                      valueItem.toString(),
-                                                                      textAlign: TextAlign.center,
-                                                                      style: GoogleFonts.roboto(
-                                                                        fontSize: 17,
-                                                                        fontWeight: FontWeight.normal,
-                                                                        color: Colors.black54,
-                                                                      ),
+                                                    content: Form(
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: <Widget>[
+                                                          Container(
+                                                            width: double.infinity,
+                                                            color: Color(0xffefefef),
+                                                            child: DropdownButtonHideUnderline(
+                                                              child: DropdownButton(
+                                                                hint: Padding(
+                                                                  padding: const EdgeInsets.all(8.0),
+                                                                  child: Text(
+                                                                    'Number of Rooms',
+                                                                    style: GoogleFonts.roboto(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black54,
                                                                     ),
                                                                   ),
-                                                                );
-                                                              }).toList(),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Container(
-                                                          height: 200,
-                                                          width: double.maxFinite,
-                                                          alignment: Alignment.centerLeft,
-                                                          child: ListView.builder(
-                                                            shrinkWrap: true,
-                                                            itemCount: noOfRooms == null ? 0 : noOfRooms,
-                                                            itemBuilder: (context, index) {
-                                                              return ListTile(
-                                                                title: Container(
-                                                                  width: double.infinity,
-                                                                  color: Color(0xffefefef),
-                                                                  child: DropdownButtonHideUnderline(
-                                                                    child: DropdownButton(
-                                                                      hint: Padding(
-                                                                        padding: const EdgeInsets.all(8.0),
-                                                                        child: Text(
-                                                                          'Select Room Type',
-                                                                          textAlign: TextAlign.center,
-                                                                          style: GoogleFonts.roboto(fontSize: 15),
+                                                                ),
+                                                                dropdownColor: Color(0xffefefef),
+                                                                isExpanded: false,
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 22,
+                                                                ),
+                                                                value: noOfRooms,
+                                                                onChanged: (newValue) {
+                                                                  setState(() {
+                                                                    noOfRooms = newValue;
+                                                                  });
+                                                                },
+                                                                items: noOfRoomList.map((valueItem) {
+                                                                  return DropdownMenuItem(
+                                                                    value: valueItem,
+                                                                    child: Container(
+                                                                      alignment: Alignment.centerRight,
+                                                                      width: 150,
+                                                                      child: Text(
+                                                                        valueItem.toString(),
+                                                                        textAlign: TextAlign.center,
+                                                                        style: GoogleFonts.roboto(
+                                                                          fontSize: 17,
+                                                                          fontWeight: FontWeight.normal,
+                                                                          color: Colors.black54,
                                                                         ),
                                                                       ),
-                                                                      dropdownColor: Color(0xffefefef),
-                                                                      isExpanded: false,
-                                                                      style: TextStyle(
-                                                                        color: Colors.black,
-                                                                        fontSize: 22,
-                                                                      ),
-                                                                      value: index == 0
-                                                                          ? roomType1
-                                                                          : index == 1
-                                                                              ? roomType2
-                                                                              : roomType3,
-                                                                      onChanged: (newValue) {
-                                                                        setState(() {
-                                                                          if (index == 0) {
-                                                                            roomType1 = newValue;
-                                                                          } else if (index == 1) {
-                                                                            roomType2 = newValue;
-                                                                          } else if (index == 2) {
-                                                                            roomType3 = newValue;
-                                                                          }
-                                                                        });
-                                                                      },
-                                                                      items: hotel.discountedPrice.keys.map((valueItem) {
-                                                                        return DropdownMenuItem(
-                                                                          value: valueItem,
-                                                                          child: Center(
-                                                                            child: LimitedBox(
-                                                                              maxWidth: 200,
-                                                                              child: Container(
-                                                                                width: double.maxFinite,
-                                                                                alignment: Alignment.center,
-                                                                                child: Text(
-                                                                                  valueItem,
-                                                                                  textAlign: TextAlign.center,
-                                                                                  style: GoogleFonts.roboto(
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.normal,
-                                                                                    color: Colors.black54,
+                                                                    ),
+                                                                  );
+                                                                }).toList(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Container(
+                                                            height: 200,
+                                                            width: double.maxFinite,
+                                                            alignment: Alignment.centerLeft,
+                                                            child: ListView.builder(
+                                                              shrinkWrap: true,
+                                                              itemCount: noOfRooms == null ? 0 : noOfRooms,
+                                                              itemBuilder: (context, index) {
+                                                                return ListTile(
+                                                                  title: Container(
+                                                                    width: double.infinity,
+                                                                    color: Color(0xffefefef),
+                                                                    child: DropdownButtonHideUnderline(
+                                                                      child: DropdownButton(
+                                                                        hint: Padding(
+                                                                          padding: const EdgeInsets.all(8.0),
+                                                                          child: Text(
+                                                                            'Select Room Type',
+                                                                            textAlign: TextAlign.center,
+                                                                            style: GoogleFonts.roboto(fontSize: 15),
+                                                                          ),
+                                                                        ),
+                                                                        dropdownColor: Color(0xffefefef),
+                                                                        isExpanded: false,
+                                                                        style: TextStyle(
+                                                                          color: Colors.black,
+                                                                          fontSize: 22,
+                                                                        ),
+                                                                        value: index == 0
+                                                                            ? roomType1
+                                                                            : index == 1
+                                                                                ? roomType2
+                                                                                : roomType3,
+                                                                        onChanged: (newValue) {
+                                                                          setState(() {
+                                                                            if (index == 0) {
+                                                                              roomType1 = newValue;
+                                                                            } else if (index == 1) {
+                                                                              roomType2 = newValue;
+                                                                            } else if (index == 2) {
+                                                                              roomType3 = newValue;
+                                                                            }
+                                                                          });
+                                                                        },
+                                                                        items: hotel.discountedPrice.keys.map((valueItem) {
+                                                                          return DropdownMenuItem(
+                                                                            value: valueItem,
+                                                                            child: Center(
+                                                                              child: LimitedBox(
+                                                                                maxWidth: 200,
+                                                                                child: Container(
+                                                                                  width: double.maxFinite,
+                                                                                  alignment: Alignment.center,
+                                                                                  child: Text(
+                                                                                    valueItem,
+                                                                                    textAlign: TextAlign.center,
+                                                                                    style: GoogleFonts.roboto(
+                                                                                      fontSize: 15,
+                                                                                      fontWeight: FontWeight.normal,
+                                                                                      color: Colors.black54,
+                                                                                    ),
                                                                                   ),
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ),
-                                                                        );
-                                                                      }).toList(),
+                                                                          );
+                                                                        }).toList(),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Center(
-                                                          child: Text(
-                                                            'Age less than 5 will not considered as a person',
-                                                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  actions: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(left: 0, right: 0),
-                                                      child: GestureDetector(
-                                                          child: Container(
-                                                              height: 50,
-                                                              width: double.maxFinite,
-                                                              color: Colors.black,
-                                                              alignment: Alignment.center,
-                                                              child: Text(
-                                                                "CONFIRM",
-                                                                style: TextStyle(
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white,
-                                                                ),
-                                                              )),
-                                                          onTap: () {
-                                                            switch (noOfRooms) {
-                                                              case 1:
-                                                                if (roomType1 != null) {
-                                                                  selectedRooms = [];
-                                                                  roomsDiscountedPrice = [];
-                                                                  roomsPrice = [];
-                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1];
-                                                                  totalPrice = hotel.price[roomType1];
-                                                                  selectedRooms.add(roomType1);
-                                                                  roomsDiscountedPrice.add(hotel.discountedPrice[roomType1]);
-                                                                  roomsPrice.add(hotel.price[roomType1]);
-                                                                  isConfirmed = true;
-                                                                } else {
-                                                                  SnackBarBuilder().buildSnackBar(
-                                                                    context,
-                                                                    message: "Room Type Not Selected!",
-                                                                    color: Colors.red,
-                                                                  );
-                                                                }
-                                                                break;
-                                                              case 2:
-                                                                if (roomType1 != null && roomType2 != null) {
-                                                                  selectedRooms = [];
-                                                                  roomsDiscountedPrice = [];
-                                                                  roomsPrice = [];
-                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2];
-                                                                  totalPrice = hotel.price[roomType1] + hotel.price[roomType2];
-                                                                  selectedRooms.addAll([roomType1, roomType2]);
-                                                                  roomsDiscountedPrice.addAll([
-                                                                    hotel.discountedPrice[roomType1],
-                                                                    hotel.discountedPrice[roomType2],
-                                                                  ]);
-                                                                  roomsPrice.addAll([
-                                                                    hotel.price[roomType1],
-                                                                    hotel.price[roomType2],
-                                                                  ]);
-                                                                  isConfirmed = true;
-                                                                } else {
-                                                                  SnackBarBuilder().buildSnackBar(
-                                                                    context,
-                                                                    message: "Room Type Not Selected!",
-                                                                    color: Colors.red,
-                                                                  );
-                                                                }
-                                                                break;
-                                                              case 3:
-                                                                if (roomType1 != null && roomType2 != null && roomType3 != null) {
-                                                                  selectedRooms = [];
-                                                                  roomsDiscountedPrice = [];
-                                                                  roomsPrice = [];
-                                                                  totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2] + hotel.discountedPrice[roomType3];
-                                                                  totalPrice = hotel.price[roomType1] + hotel.price[roomType2] + hotel.price[roomType3];
-                                                                  selectedRooms.addAll([roomType1, roomType2, roomType3]);
-                                                                  roomsDiscountedPrice.addAll([
-                                                                    hotel.discountedPrice[roomType1],
-                                                                    hotel.discountedPrice[roomType2],
-                                                                    hotel.discountedPrice[roomType3],
-                                                                  ]);
-                                                                  roomsPrice.addAll([
-                                                                    hotel.price[roomType1],
-                                                                    hotel.price[roomType2],
-                                                                    hotel.price[roomType3],
-                                                                  ]);
-                                                                  isConfirmed = true;
-                                                                } else {
-                                                                  SnackBarBuilder().buildSnackBar(
-                                                                    context,
-                                                                    message: "Room Type Not Selected!",
-                                                                    color: Colors.red,
-                                                                  );
-                                                                }
-                                                                break;
-                                                              default:
-                                                                SnackBarBuilder().buildSnackBar(
-                                                                  context,
-                                                                  message: "Room Selection Error!",
-                                                                  color: Colors.red,
                                                                 );
-                                                            }
+                                                              },
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Center(
+                                                            child: Text(
+                                                              'Age less than 10 will not considered as a person',
+                                                              style: TextStyle(fontSize: 12, color: Colors.grey),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 0, right: 0),
+                                                        child: GestureDetector(
+                                                            child: Container(
+                                                                height: 50,
+                                                                width: double.maxFinite,
+                                                                color: Colors.black,
+                                                                alignment: Alignment.center,
+                                                                child: Text(
+                                                                  "CONFIRM",
+                                                                  style: TextStyle(
+                                                                    fontWeight: FontWeight.bold,
+                                                                    color: Colors.white,
+                                                                  ),
+                                                                )),
+                                                            onTap: () {
+                                                              switch (noOfRooms) {
+                                                                case 1:
+                                                                  if (roomType1 != null) {
+                                                                    selectedRooms = [];
+                                                                    roomsDiscountedPrice = [];
+                                                                    roomsPrice = [];
+                                                                    totalDiscountedPrice = hotel.discountedPrice[roomType1];
+                                                                    totalPrice = hotel.price[roomType1];
+                                                                    selectedRooms.add(roomType1);
+                                                                    roomsDiscountedPrice.add(hotel.discountedPrice[roomType1]);
+                                                                    roomsPrice.add(hotel.price[roomType1]);
+                                                                    isConfirmed = true;
+                                                                  } else {
+                                                                    SnackBarBuilder().buildSnackBar(
+                                                                      context,
+                                                                      message: "Room Type Not Selected!",
+                                                                      color: Colors.red,
+                                                                    );
+                                                                  }
+                                                                  break;
+                                                                case 2:
+                                                                  if (roomType1 != null && roomType2 != null) {
+                                                                    selectedRooms = [];
+                                                                    roomsDiscountedPrice = [];
+                                                                    roomsPrice = [];
+                                                                    totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2];
+                                                                    totalPrice = hotel.price[roomType1] + hotel.price[roomType2];
+                                                                    selectedRooms.addAll([roomType1, roomType2]);
+                                                                    roomsDiscountedPrice.addAll([
+                                                                      hotel.discountedPrice[roomType1],
+                                                                      hotel.discountedPrice[roomType2],
+                                                                    ]);
+                                                                    roomsPrice.addAll([
+                                                                      hotel.price[roomType1],
+                                                                      hotel.price[roomType2],
+                                                                    ]);
+                                                                    isConfirmed = true;
+                                                                  } else {
+                                                                    SnackBarBuilder().buildSnackBar(
+                                                                      context,
+                                                                      message: "Room Type Not Selected!",
+                                                                      color: Colors.red,
+                                                                    );
+                                                                  }
+                                                                  break;
+                                                                case 3:
+                                                                  if (roomType1 != null && roomType2 != null && roomType3 != null) {
+                                                                    selectedRooms = [];
+                                                                    roomsDiscountedPrice = [];
+                                                                    roomsPrice = [];
+                                                                    totalDiscountedPrice = hotel.discountedPrice[roomType1] + hotel.discountedPrice[roomType2] + hotel.discountedPrice[roomType3];
+                                                                    totalPrice = hotel.price[roomType1] + hotel.price[roomType2] + hotel.price[roomType3];
+                                                                    selectedRooms.addAll([roomType1, roomType2, roomType3]);
+                                                                    roomsDiscountedPrice.addAll([
+                                                                      hotel.discountedPrice[roomType1],
+                                                                      hotel.discountedPrice[roomType2],
+                                                                      hotel.discountedPrice[roomType3],
+                                                                    ]);
+                                                                    roomsPrice.addAll([
+                                                                      hotel.price[roomType1],
+                                                                      hotel.price[roomType2],
+                                                                      hotel.price[roomType3],
+                                                                    ]);
+                                                                    isConfirmed = true;
+                                                                  } else {
+                                                                    SnackBarBuilder().buildSnackBar(
+                                                                      context,
+                                                                      message: "Room Type Not Selected!",
+                                                                      color: Colors.red,
+                                                                    );
+                                                                  }
+                                                                  break;
+                                                                default:
+                                                                  SnackBarBuilder().buildSnackBar(
+                                                                    context,
+                                                                    message: "Room Selection Error!",
+                                                                    color: Colors.red,
+                                                                  );
+                                                              }
 
-                                                            if (isConfirmed) {
-                                                              Navigator.pop(context);
-                                                            }
-                                                          }),
-                                                    )
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          }).then(
-                                        (_) => setState(() {
-                                          totalDiscountedPrice = totalDiscountedPrice;
-                                          totalPrice = totalPrice;
-                                        }),
-                                      );
-                                    },
+                                                              if (isConfirmed) {
+                                                                Navigator.pop(context);
+                                                              }
+                                                            }),
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }).then(
+                                          (_) => setState(() {
+                                            totalDiscountedPrice = totalDiscountedPrice;
+                                            totalPrice = totalPrice;
+                                          }),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),
@@ -777,10 +828,34 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ],
                   ),
-                  Text(
-                    'By Proceeding you are accepting all our Terms and Privacy Policy',
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
-                  ),
+                  // RichText(
+                  //   textAlign: TextAlign.center,
+                  //   text: TextSpan(children: [
+                  //     TextSpan(
+                  //       text: "By Proceeding you are accepting all our Terms and",
+                  //       style: TextStyle(color: Colors.grey, fontSize: 10),
+                  //     ),
+
+                  //   ]),
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'By Proceeding you are accepting all our Terms and',
+                        style: TextStyle(color: Colors.grey, fontSize: 10),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => TearmsAndConditionPage()));
+                        },
+                        child: Text(
+                          ' Privacy Policy',
+                          style: TextStyle(color: Colors.black87, fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
