@@ -111,14 +111,14 @@ class _ContactPageState extends State<ContactPage> {
                                     ),
                                     Image.asset(
                                       'images/mess.png',
-                                      scale: 22,
+                                      scale: 3,
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     Image.asset(
                                       'images/whats.png',
-                                      scale: 180,
+                                      scale: 3,
                                     ),
                                   ],
                                 ),

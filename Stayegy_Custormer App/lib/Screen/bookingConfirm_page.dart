@@ -30,7 +30,7 @@ class BookingConfirmPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: InkWell(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.of(context).popUntil((route) => route.isFirst),
           child: Icon(
             Icons.close,
             color: Colors.black,

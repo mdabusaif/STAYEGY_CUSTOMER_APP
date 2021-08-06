@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy/constants/ConstantLists.dart';
 
 class GreetingsPage extends StatefulWidget {
   @override
@@ -62,15 +63,34 @@ class _GreetingsPageState extends State<GreetingsPage> {
                           children: [
                             Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
-                                'Hi, Mr. Ahmed',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xffa2a2a2),
-                                  decoration: TextDecoration.none,
-                                ),
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(children: <TextSpan>[
+                                  TextSpan(
+                                    text: ("Hi "),
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xff191919),
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ('${userDetailsGlobal.name}'),
+                                    style: GoogleFonts.roboto(fontSize: 12, color: Color(0xff191919), fontWeight: FontWeight.w300),
+                                  ),
+                                ]),
                               ),
+
+                              // Text(
+                              //   'Hi, ',
+                              //   style: GoogleFonts.roboto(
+                              //     fontSize: 12,
+                              //     fontWeight: FontWeight.w300,
+                              //     color: Color(0xffa2a2a2),
+                              //     decoration: TextDecoration.none,
+                              //   ),
+                              // ),
                             ),
                             SizedBox(
                               height: 10,
