@@ -108,7 +108,7 @@ class _home_pageState extends State<home_page> {
                             return GestureDetector(
                               onTap: () {
                                 BlocProvider.of<LoadingBloc>(context).add(SearchStartEvent(cityName: cityList[index].toString().toLowerCase()));
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => ShowSearchResult()));
+                                Navigator.push(context, CupertinoPageRoute(builder: (_) => ShowSearchResult()));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 15, top: 10),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:stayegy/Screen/login_cprofile.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy/bloc/Authentication_Bloc/Authentication_Events.dart';
@@ -19,6 +20,18 @@ class login_otp extends StatefulWidget {
 
 class _login_otpState extends State<login_otp> {
   String _otpCode;
+
+  @override
+  void initState() {
+    SmsAutoFill().listenForCode;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SmsAutoFill().unregisterListener();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,15 +95,35 @@ class _login_otpState extends State<login_otp> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      TextField(
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                        onChanged: (value) => _otpCode = value,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: 'ENTER OTP',
+                      // TextField(
+                      //   keyboardType: TextInputType.number,
+                      //   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                      //   onChanged: (value) => _otpCode = value,
+                      //   textAlign: TextAlign.center,
+                      //   decoration: InputDecoration(
+                      //     hintText: 'ENTER OTP',
+                      //   ),
+                      // ),
+                      PinFieldAutoFill(
+                        decoration: UnderlineDecoration(
+                          textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                          colorBuilder: FixedColorBuilder(Colors.black54),
                         ),
+                        currentCode: _otpCode,
+                        onCodeSubmitted: (code) {
+                          print(_otpCode);
+                          _loginBloc.add(VerifyOtpEvent(otp: code));
+                          FocusScope.of(context).unfocus();
+                        },
+                        onCodeChanged: (code) {
+                          _otpCode = code;
+                          if (code.length == 6) {
+                            _loginBloc.add(VerifyOtpEvent(otp: code));
+                            FocusScope.of(context).unfocus();
+                          }
+                        },
                       ),
+
                       BottomButton(
                         text: 'SUBMIT',
                         disabled: false,

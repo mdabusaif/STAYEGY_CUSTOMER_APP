@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:stayegy/Screen/bookingStatusPage.dart';
+import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
 import 'package:stayegy/bloc/Repository/Notificaions/Notification.dart';
 
 class NotificationTile extends StatelessWidget {
@@ -40,6 +42,7 @@ class NotificationTile extends StatelessWidget {
         if (notificationDetails.notificationType == 'offer') {
           Navigator.pop(context);
         } else {
+          BlocProvider.of<LoadingBloc>(context).add(LoadBookStatusEvent());
           Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingStatusPage()));
         }
       },

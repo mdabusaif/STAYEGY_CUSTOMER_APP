@@ -7,11 +7,14 @@ class LoadingOverlay {
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
-          return Container(
-            color: Colors.black.withOpacity(0.8),
-            child: SpinKitSquareCircle(
-              color: Colors.white70,
-              size: 20,
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Container(
+              color: Colors.black.withOpacity(0.8),
+              child: SpinKitSquareCircle(
+                color: Colors.white70,
+                size: 20,
+              ),
             ),
           );
         });

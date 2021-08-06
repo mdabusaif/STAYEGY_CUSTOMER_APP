@@ -9,7 +9,7 @@ class FormBloc extends Bloc<FormEvents, FormStates> {
   @override
   Stream<FormStates> mapEventToState(FormEvents event) async* {
     if (event is PhoneNumberCheckEvent) {
-      yield (event.phoneNumber.length > 9) ? PhoneNumberCheckedState() : PhoneNumberNotCheckedState();
+      yield (event.phoneNumber.length == 11) ? PhoneNumberCheckedState() : PhoneNumberNotCheckedState();
     } else if (event is GetImageEvent) {
       yield* _mapGetImageEventToState(event);
     } else if (event is NameAndEmailValidationCheckEvent) {
