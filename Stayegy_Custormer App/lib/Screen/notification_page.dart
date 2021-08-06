@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy/bloc/LoadingBloc/loadingbloc_bloc.dart';
+import 'package:stayegy/bloc/Repository/Notificaions/Notification.dart';
 import 'package:stayegy/container/loading_Overlay.dart';
 import 'package:stayegy/container/notificationTile.dart';
 
@@ -40,7 +41,14 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
           centerTitle: true,
         ),
-        body: BlocBuilder<LoadingBloc, LoadingBlocState>(builder: (context, state) {
+        body: BlocBuilder<LoadingBloc, LoadingBlocState>(buildWhen: (pstate, state) {
+          if (state is LoadedNotificationState) {
+            BlocProvider.of<LoadingBloc>(context).add(DeleteSeenNotificationsEvent(notificatons: state.notificationList));
+            return true;
+          } else {
+            return false;
+          }
+        }, builder: (context, state) {
           return state is ProcessingState
               ? LoadingOverlay().buildWidget(context)
               : state is LoadedNotificationState

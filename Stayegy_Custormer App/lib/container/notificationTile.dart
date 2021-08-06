@@ -142,7 +142,13 @@ class NotificationTile extends StatelessWidget {
                 Container(
                   alignment: Alignment.topRight,
                   child: Text(
-                    DateFormat('hh:mm a').format(notificationDetails.time.toDate()),
+                    DateTime.now().difference(notificationDetails.time.toDate()).inHours == 0
+                        ? DateFormat('hh:mm a').format(notificationDetails.time.toDate())
+                        : DateTime.now().difference(notificationDetails.time.toDate()).inHours <= 24
+                            ? DateTime.now().difference(notificationDetails.time.toDate()).inHours.toString() + " h ago"
+                            : DateTime.now().difference(notificationDetails.time.toDate()).inDays == 1
+                                ? "Yesterday"
+                                : DateTime.now().difference(notificationDetails.time.toDate()).inDays.toString() + " days ago",
                     style: TextStyle(fontSize: 10, color: Color(0xff191919), fontWeight: FontWeight.w200),
                   ),
                 ),

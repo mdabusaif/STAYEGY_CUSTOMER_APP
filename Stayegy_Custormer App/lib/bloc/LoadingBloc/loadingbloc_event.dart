@@ -17,13 +17,23 @@ class SearchStartEvent extends LoadingBlocEvent {
 class SendBookingRequestEvent extends LoadingBlocEvent {
   final BookingDetails bookingDetails;
   final String hotelId;
+  final NotificationDetails notification;
 
-  SendBookingRequestEvent({@required this.bookingDetails, @required this.hotelId});
+  SendBookingRequestEvent({@required this.bookingDetails, @required this.hotelId, @required this.notification});
 
   @override
-  List<Object> get props => [bookingDetails, hotelId];
+  List<Object> get props => [bookingDetails, hotelId, notification];
 }
 
 class LoadBookStatusEvent extends LoadingBlocEvent {}
 
 class LoadNotificationEvent extends LoadingBlocEvent {}
+
+class DeleteSeenNotificationsEvent extends LoadingBlocEvent {
+  final List notificatons;
+
+  DeleteSeenNotificationsEvent({@required this.notificatons});
+
+  @override
+  List<Object> get props => [notificatons];
+}

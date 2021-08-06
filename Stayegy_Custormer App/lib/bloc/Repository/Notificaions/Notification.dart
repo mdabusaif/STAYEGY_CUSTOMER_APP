@@ -7,6 +7,7 @@ class NotificationDetails {
   String hotel;
   Timestamp time;
   bool seen;
+  String nId;
 
   NotificationDetails({
     this.hotel,
@@ -15,6 +16,7 @@ class NotificationDetails {
     this.senderId,
     this.time,
     this.seen,
+    this.nId,
   });
 
   Map<String, dynamic> toJason() => {
