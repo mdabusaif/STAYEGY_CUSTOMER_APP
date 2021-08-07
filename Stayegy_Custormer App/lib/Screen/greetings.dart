@@ -21,9 +21,12 @@ class _GreetingsPageState extends State<GreetingsPage> {
             flexibleSpace: Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
-              child: Image.asset(
-                'images/grettings.png',
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: "greetings",
+                child: Image.asset(
+                  'images/con1.png',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             leading: IconButton(

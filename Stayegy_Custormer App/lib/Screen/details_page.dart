@@ -19,8 +19,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatefulWidget {
   final Hotel hotelInt;
+  final int rIndex;
 
-  DetailsPage({@required this.hotelInt});
+  DetailsPage({@required this.hotelInt, @required this.rIndex});
 
   @override
   _DetailsPageState createState() => _DetailsPageState(hotel: hotelInt);
@@ -94,23 +95,44 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                   itemCount: hotel.images.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ExtendedImage.network(
-                      hotel.images[index],
-                      fit: BoxFit.cover,
-                      // mode: ExtendedImageMode.gesture,
-                      cache: true,
-                      clearMemoryCacheWhenDispose: true,
-                      // initGestureConfigHandler: (ExtendedImageState state) {
-                      //   return GestureConfig(
-                      //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
-                      //     inPageView: true,
-                      //     initialScale: 1.0,
-                      //     maxScale: 5.0,
-                      //     animationMaxScale: 6.0,
-                      //     initialAlignment: InitialAlignment.center,
-                      //   );
-                      // },
-                    );
+                    return index == 0
+                        ? Hero(
+                            tag: "detailsImage" + widget.rIndex.toString(),
+                            child: ExtendedImage.network(
+                              hotel.images[index],
+                              fit: BoxFit.cover,
+                              // mode: ExtendedImageMode.gesture,
+                              cache: true,
+                              clearMemoryCacheWhenDispose: true,
+                              // initGestureConfigHandler: (ExtendedImageState state) {
+                              //   return GestureConfig(
+                              //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                              //     inPageView: true,
+                              //     initialScale: 1.0,
+                              //     maxScale: 5.0,
+                              //     animationMaxScale: 6.0,
+                              //     initialAlignment: InitialAlignment.center,
+                              //   );
+                              // },
+                            ),
+                          )
+                        : ExtendedImage.network(
+                            hotel.images[index],
+                            fit: BoxFit.cover,
+                            // mode: ExtendedImageMode.gesture,
+                            cache: true,
+                            clearMemoryCacheWhenDispose: true,
+                            // initGestureConfigHandler: (ExtendedImageState state) {
+                            //   return GestureConfig(
+                            //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                            //     inPageView: true,
+                            //     initialScale: 1.0,
+                            //     maxScale: 5.0,
+                            //     animationMaxScale: 6.0,
+                            //     initialAlignment: InitialAlignment.center,
+                            //   );
+                            // },
+                          );
                   },
                 ),
               ),

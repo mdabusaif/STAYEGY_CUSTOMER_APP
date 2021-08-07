@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:stayegy/Screen/details_page.dart';
 import 'package:stayegy/bloc/Repository/Hotels/HotelDetails.dart';
 
-import 'package:stayegy/container/slider.dart';
-
 class CardModel extends StatelessWidget {
   final Hotel hotel;
+  final int rIndex;
 
-  CardModel({@required this.hotel});
+  CardModel({@required this.hotel, @required this.rIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +26,7 @@ class CardModel extends StatelessWidget {
               CupertinoPageRoute(
                   builder: (context) => DetailsPage(
                         hotelInt: hotel,
+                        rIndex: rIndex,
                       )));
         },
         child: Container(
@@ -37,12 +37,15 @@ class CardModel extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: 250,
-                  child: ExtendedImage.network(
-                    hotel.images[0],
-                    fit: BoxFit.cover,
-                    height: double.infinity,
-                    width: double.infinity,
-                    cache: true,
+                  child: Hero(
+                    tag: "detailsImage" + rIndex.toString(),
+                    child: ExtendedImage.network(
+                      hotel.images[0],
+                      fit: BoxFit.cover,
+                      height: double.infinity,
+                      width: double.infinity,
+                      cache: true,
+                    ),
                   ),
                 ),
                 Expanded(

@@ -21,9 +21,12 @@ class _TearmsAndConditionPageState extends State<TearmsAndConditionPage> {
             flexibleSpace: Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
-              child: Image.asset(
-                'images/T&C.png',
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: "t&c",
+                child: Image.asset(
+                  'images/con2.png',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             leading: IconButton(

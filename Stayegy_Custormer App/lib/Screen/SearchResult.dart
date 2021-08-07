@@ -85,6 +85,7 @@ class _ShowSearchResultState extends State<ShowSearchResult> {
                         selected: true,
                         title: CardModel(
                           hotel: _hotelList[index],
+                          rIndex: index,
                         ),
                       ),
                       childCount: _hotelList.length,

@@ -217,6 +217,7 @@ class _home_pageState extends State<home_page> {
                                     CupertinoPageRoute(
                                         builder: (context) => DetailsPage(
                                               hotelInt: homePageHotels[index],
+                                              rIndex: index,
                                             )));
                               },
                               child: Card(
@@ -237,23 +238,26 @@ class _home_pageState extends State<home_page> {
                                           Container(
                                             color: Colors.grey,
                                             height: 80,
-                                            child: ExtendedImage.network(
-                                              homePageHotels[index].images[0],
-                                              fit: BoxFit.cover,
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                              // mode: ExtendedImageMode.gesture,
-                                              cache: true,
-                                              // initGestureConfigHandler: (ExtendedImageState state) {
-                                              //   return GestureConfig(
-                                              //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
-                                              //     inPageView: true,
-                                              //     initialScale: 1.0,
-                                              //     maxScale: 5.0,
-                                              //     animationMaxScale: 6.0,
-                                              //     initialAlignment: InitialAlignment.center,
-                                              //   );
-                                              // },
+                                            child: Hero(
+                                              tag: "detailsImage" + index.toString(),
+                                              child: ExtendedImage.network(
+                                                homePageHotels[index].images[0],
+                                                fit: BoxFit.cover,
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                                // mode: ExtendedImageMode.gesture,
+                                                cache: true,
+                                                // initGestureConfigHandler: (ExtendedImageState state) {
+                                                //   return GestureConfig(
+                                                //     //you must set inPageView true if you want to use ExtendedImageGesturePageView
+                                                //     inPageView: true,
+                                                //     initialScale: 1.0,
+                                                //     maxScale: 5.0,
+                                                //     animationMaxScale: 6.0,
+                                                //     initialAlignment: InitialAlignment.center,
+                                                //   );
+                                                // },
+                                              ),
                                             ),
                                           ),
                                           SizedBox(
@@ -348,9 +352,16 @@ class _home_pageState extends State<home_page> {
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
                                       width: 170,
-                                      child: Image.asset(
-                                        '${concerning[index]}',
-                                        fit: BoxFit.fill,
+                                      child: Hero(
+                                        tag: index == 0
+                                            ? "greetings"
+                                            : index == 1
+                                                ? "t&c"
+                                                : "contact",
+                                        child: Image.asset(
+                                          '${concerning[index]}',
+                                          fit: BoxFit.fill,
+                                        ),
                                       )),
                                 ),
                               ),
