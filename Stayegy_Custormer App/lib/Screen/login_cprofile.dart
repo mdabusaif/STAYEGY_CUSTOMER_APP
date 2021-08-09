@@ -16,12 +16,12 @@ import 'package:stayegy/container/SnackBar.dart';
 import 'package:stayegy/container/bottom_button.dart';
 import 'package:stayegy/container/loading_Overlay.dart';
 
-class login_cprofile extends StatefulWidget {
+class LoginCprofile extends StatefulWidget {
   @override
-  _login_cprofileState createState() => _login_cprofileState();
+  _LoginCprofileState createState() => _LoginCprofileState();
 }
 
-class _login_cprofileState extends State<login_cprofile> {
+class _LoginCprofileState extends State<LoginCprofile> {
   String _name = "";
   String _email = "";
   String _gender = "MALE";
@@ -31,8 +31,7 @@ class _login_cprofileState extends State<login_cprofile> {
   Widget build(BuildContext context) {
     final FormBloc formBloc = BlocProvider.of<FormBloc>(context);
     final LogInBloc logInBloc = BlocProvider.of<LogInBloc>(context);
-    final AuthenticationBloc _authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
+    final AuthenticationBloc _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -65,14 +64,9 @@ class _login_cprofileState extends State<login_cprofile> {
           listeners: [
             BlocListener<FormBloc, FormStates>(listener: (context, state) {
               if (state is RegFormCanBeSubmittedState) {
-                logInBloc.add(UploadDetailsEvent(
-                    name: _name,
-                    email: _email,
-                    gender: _gender,
-                    image: _image));
+                logInBloc.add(UploadDetailsEvent(name: _name, email: _email, gender: _gender, image: _image));
               } else if (state is ImagePickedFailedState) {
-                SnackBarBuilder().buildSnackBar(context,
-                    message: 'Failed to load image.', color: Colors.red);
+                SnackBarBuilder().buildSnackBar(context, message: 'Failed to load image.', color: Colors.red);
               } else if (state is ImagePickedState) {
                 _image = File(state.pickedFile.path);
               }
@@ -92,8 +86,7 @@ class _login_cprofileState extends State<login_cprofile> {
             child: Stack(
               children: <Widget>[
                 SingleChildScrollView(
-                  child: BlocBuilder<FormBloc, FormStates>(
-                      builder: (context, state) {
+                  child: BlocBuilder<FormBloc, FormStates>(builder: (context, state) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
@@ -151,13 +144,11 @@ class _login_cprofileState extends State<login_cprofile> {
                           padding: const EdgeInsets.only(top: 15),
                           child: TextField(
                             inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[a-zA-Z .]')),
+                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z .]')),
                             ],
                             onChanged: (value) => _name = value,
                             decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 20, 0, 10),
+                              contentPadding: EdgeInsets.fromLTRB(10, 20, 0, 10),
                               labelText: 'Name',
                               hintText: 'ENTER YOUR FULL NAME',
                               enabledBorder: OutlineInputBorder(
@@ -167,9 +158,7 @@ class _login_cprofileState extends State<login_cprofile> {
                                 ),
                               ),
                               border: OutlineInputBorder(),
-                              errorText: state is NameFieldEmptyState
-                                  ? 'This field can not be empty!'
-                                  : null,
+                              errorText: state is NameFieldEmptyState ? 'This field can not be empty!' : null,
                             ),
                           ),
                         ),
@@ -179,8 +168,7 @@ class _login_cprofileState extends State<login_cprofile> {
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) => _email = value,
                             decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 20, 0, 10),
+                              contentPadding: EdgeInsets.fromLTRB(10, 20, 0, 10),
                               labelText: 'Email',
                               hintText: 'ENTER YOUR EMAIL ADDRESS',
                               enabledBorder: OutlineInputBorder(
@@ -275,8 +263,7 @@ class _login_cprofileState extends State<login_cprofile> {
                               print("Pressed");
                               print(_name);
                               print(_email);
-                              formBloc.add(NameAndEmailValidationCheckEvent(
-                                  name: _name, email: _email));
+                              formBloc.add(NameAndEmailValidationCheckEvent(name: _name, email: _email));
                             })
                       ],
                     ),

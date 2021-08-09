@@ -74,7 +74,7 @@ class _login_otpState extends State<login_otp> {
               _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
               Navigator.popUntil(context, (route) => route.isFirst);
             } else if (state is RegistrationNeededState) {
-              Navigator.push(context, CupertinoPageRoute(builder: (_) => login_cprofile()));
+              Navigator.push(context, CupertinoPageRoute(builder: (_) => LoginCprofile()));
             } else if (state is LoadingState) {
               LoadingOverlay().buildOverlay(context);
             }

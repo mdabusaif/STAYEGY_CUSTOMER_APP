@@ -59,7 +59,7 @@ class _login_pageState extends State<login_page> {
                         flex: 1,
                         child: Image.asset(
                           "images/BD Flag.png",
-                          scale: 140,
+                          scale: 6,
                         ),
                       ),
                       Expanded(
